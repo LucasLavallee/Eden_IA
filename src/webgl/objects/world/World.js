@@ -2,6 +2,7 @@ import Ground from './ground/Ground'
 import { Object3D } from 'three'
 import Environment from './environment/Environment'
 import Carot from '../livingBeings/vegetables/Carot'
+import Banana from '../livingBeings/fruits/Banana'
 import { distance, clamp } from 'utils/basicFunction'
 import constant from 'utils/constant'
 import GeneticsManager from '../../genetics/GeneticsManager'
@@ -72,6 +73,11 @@ export default class World extends Object3D {
           switch (currentSelection) {
             case 'carot':
               this.addEntity('carot', new Carot(this.currentTime, new Genome(constant.DEFAULT_GENOME.CAROT, true)
+                , worldPosition))
+              break
+            case 'banana':
+              console.log('Banana !')
+              this.addEntity('banana', new Banana(this.currentTime, new Genome(constant.DEFAULT_GENOME.BANANA, true)
                 , worldPosition))
               break
             default:
