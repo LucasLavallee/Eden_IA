@@ -11,11 +11,17 @@ export default new Vuex.Store({
   mutations: {
     CHANGE_CURRENT_MODE (state, val) {
       state.currentMode = val
+    },
+    CHANGE_CURRENT_SELECTION (state, val) {
+      state.currentSelection = val
     }
   },
   actions: {
     changeCurrentMode: (store, mode) => {
       store.commit('CHANGE_CURRENT_MODE', mode)
+    },
+    changeCurrentSelection: (store, selection) => {
+      store.commit('CHANGE_CURRENT_SELECTION', selection)
     }
   },
   getters: {
