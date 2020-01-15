@@ -23,6 +23,7 @@ export default new Vuex.Store({
     changeCurrentSelection: (store, selection) => {
       store.commit('CHANGE_CURRENT_SELECTION', selection)
     }
+
   },
   getters: {
     getCurrentSelection: state => state.currentSelection,

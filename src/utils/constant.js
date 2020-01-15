@@ -1,15 +1,12 @@
-
 export default {
   GROUND: {
     WIDTH: 100,
     SUBDIVISIONS: 16,
     MAX: 1.5 // Variation de hauteur
   },
-
   REPRODUCTION: {
     DISTANCE: 20
   },
-
   DEFAULT_GENOME: {
     CAROT: {
       color: '#ff6600',
@@ -24,6 +21,26 @@ export default {
     BANANA: {
       color: '#EBD647',
       size: 1,
+      temperature: [5, 25],
+      pollution: 60,
+      brightness: [20, 70],
+      humidity: [10, 40],
+      lifeTime: [180, 220],
+      reproductionRate: [100, 120]
+    },
+    TOMATO: {
+      color: '#AB0000',
+      size: 2,
+      temperature: [5, 25],
+      pollution: 60,
+      brightness: [20, 70],
+      humidity: [10, 40],
+      lifeTime: [180, 220],
+      reproductionRate: [100, 120]
+    },
+    PEAR: {
+      color: '#DADC35',
+      size: 2,
       temperature: [5, 25],
       pollution: 60,
       brightness: [20, 70],
