@@ -20,6 +20,16 @@ export default {
       humidity: [10, 40],
       lifeTime: [180, 220],
       reproductionRate: [100, 120]
+    },
+    BANANA: {
+      color: '#EBD647',
+      size: 1,
+      temperature: [5, 25],
+      pollution: 60,
+      brightness: [20, 70],
+      humidity: [10, 40],
+      lifeTime: [180, 220],
+      reproductionRate: [100, 120]
     }
   },
 
