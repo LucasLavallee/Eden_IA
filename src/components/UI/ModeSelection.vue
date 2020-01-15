@@ -7,8 +7,8 @@
             <p>Add</p>
         </div>
         <div v-if="getCurrentMode === 'add'" class="items-container">
-              <div class="item" id="carot" @click="changeCurrentSelection('carot')"> Carot </div>
-              <div class="item" id="banana" @click="changeCurrentSelection('banana')"> Banana </div>
+              <div class="item" id="carot" :class="getCurrentSelection === 'carot' ? 'active': ''" @click="changeCurrentSelection('carot')"> Carot </div>
+              <div class="item" id="banana" :class="getCurrentSelection === 'banana' ? 'active': ''" @click="changeCurrentSelection('banana')"> Banana </div>
         </div>
         <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
             <p>Remove</p>
@@ -34,7 +34,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getCurrentMode'
+      'getCurrentMode',
+      'getCurrentSelection'
     ])
   }
 }
@@ -62,7 +63,11 @@ export default {
       flex-direction row
 
       .item
-        border solid black 2px
+        background-color #fff
         margin 10px
+        padding 5px
         cursor pointer
+
+        &.active
+          background-color blue
 </style>
