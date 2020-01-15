@@ -7,10 +7,9 @@
             <p>Add</p>
         </div>
         <div v-if="getCurrentMode === 'add'" class="items-container">
-              <div class="item" id="carot"> Carot </div>
-              <div class="item" id="banana"> Banana </div>
+              <div class="item" id="carot" @click="changeCurrentSelection('carot')"> Carot </div>
+              <div class="item" id="banana" @click="changeCurrentSelection('banana')"> Banana </div>
         </div>
-
         <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
             <p>Remove</p>
         </div>
