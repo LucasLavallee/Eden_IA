@@ -9,14 +9,15 @@ export default new Vuex.Store({
     currentSelection: 'carot'
   },
   mutations: {
-    CHANGE_CURRENT_MODE (state, val) {
-      state.currentMode = val
+    setCurrentSelection: (state, newSelection) => {
+      state.currentSelection = newSelection
     }
   },
   actions: {
-    changeCurrentMode: (store, mode) => {
-      store.commit('CHANGE_CURRENT_MODE', mode)
+    setCurrentSelection: ({ commit }, newSelection) => {
+      commit('setCurrentSelection', newSelection)
     }
+
   },
   getters: {
     getCurrentSelection: state => state.currentSelection,

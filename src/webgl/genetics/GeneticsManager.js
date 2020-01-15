@@ -46,6 +46,10 @@ export default class GeneticsManager {
           break
         case 'banana':
           break
+        case 'tomato':
+          break
+        case 'pear':
+          break
         default:
           break
       }
