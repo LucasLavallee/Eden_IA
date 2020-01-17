@@ -3,6 +3,9 @@ import constant from 'utils/constant'
 import { distance, randomInt, randomFloat, clamp } from 'utils/basicFunction'
 import Genome from './Genome'
 import Carot from '../objects/livingBeings/vegetables/Carot'
+import Banana from '../objects/livingBeings/fruits/Banana'
+import Tomato from '../objects/livingBeings/fruits/Tomato'
+import Pear from '../objects/livingBeings/fruits/Pear'
 
 export default class GeneticsManager {
   constructor (entities, environment, heightMap) {
@@ -45,10 +48,13 @@ export default class GeneticsManager {
           newLivingBeing = new Carot(time, child.genome, newBornPosition)
           break
         case 'banana':
+          newLivingBeing = new Banana(time, child.genome, newBornPosition)
           break
         case 'tomato':
+          newLivingBeing = new Tomato(time, child.genome, newBornPosition)
           break
         case 'pear':
+          newLivingBeing = new Pear(time, child.genome, newBornPosition)
           break
         default:
           break
@@ -147,7 +153,7 @@ export default class GeneticsManager {
         if (j === i) { continue }
         if (entitiesReady[j].type === entitiesReady[i].type) {
           const second = entitiesReady[j].livingBeing
-          if (!first.isReadyToReproduct || !second.isReadyToReproduct) {
+          if (!first.isReadyToReproduct() || !second.isReadyToReproduct()) {
             continue
           }
           if (distance(first.position.x, first.position.z, second.position.x, second.position.z) > constant.REPRODUCTION.DISTANCE) {
