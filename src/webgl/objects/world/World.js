@@ -1,7 +1,6 @@
 import Ground from './ground/Ground'
 import { Object3D } from 'three'
 import Environment from './environment/Environment'
-import PannelUI from '@/components/UI/PannelUI'
 import Carot from '@/webgl/objects/livingBeings/vegetables/Carot'
 import Banana from '@/webgl/objects/livingBeings/fruits/Banana'
 import Tomato from '@/webgl/objects/livingBeings/fruits/Tomato'
@@ -21,7 +20,6 @@ export default class World extends Object3D {
 
     this.ground = new Ground()
     this.environment = new Environment()
-    this.pannelUI = new PannelUI()
     this.geneticsManager = new GeneticsManager(this.entities, this.environment, this.ground.heightMap)
     this.raycaster = new MouseRaycaster(camera, [this.ground])
 
