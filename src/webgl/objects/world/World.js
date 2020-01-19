@@ -11,6 +11,7 @@ import Genome from '@/webgl/genetics/Genome'
 import MouseRaycaster from '@/webgl/MouseRaycaster'
 import store from '@/store'
 import { distance, clamp } from 'utils/basicFunction'
+// import carot from '../../../assets/carot.cur'
 
 export default class World extends Object3D {
   constructor (camera, controls) {
@@ -32,6 +33,7 @@ export default class World extends Object3D {
   init () {
     this.add(this.ground)
     this.initMouseClickEvent()
+    this.checkMode()
   }
 
   getEntitiesInArea (position, radius) {
@@ -152,14 +154,16 @@ export default class World extends Object3D {
 
     switch (mode) {
       case 'add':
-        console.log('Add')
-        app.style.cursor = 'default'
+        app.style.cursor = 'crosshair'
         break
       case 'navigate':
-        console.log('Navigate')
         app.style.cursor = 'move'
         break
+      case 'remove':
+        app.style.cursor = 'default'
+        break
       default:
+        app.style.cursor = 'default'
         break
     }
   }
