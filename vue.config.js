@@ -19,7 +19,7 @@ module.exports = {
   chainWebpack: config => {
     config.module
       .rule('raw')
-      .test(/\.(txt|glsl|frag|vert|fs|vs)$/)
+      .test(/\.(txt|glsl|frag|vert|fs|vs|cur)$/)
       .use('raw-loader')
       .loader('raw-loader')
       .end()
