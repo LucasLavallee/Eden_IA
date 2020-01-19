@@ -66,6 +66,7 @@ export default class World extends Object3D {
       const worldPosition = this.raycaster.getIntersectionPosition()
       switch (currentMode) {
         case 'add': {
+          this.controls.enabled = false
           const currentSelection = store.getters.getCurrentSelection
 
           if (!worldPosition) return
