@@ -142,7 +142,30 @@ export default class World extends Object3D {
       }
     }.bind(this))
   }
+
+  // Cursor
+
+  checkMode () {
+    const mode = store.getters.getCurrentMode
+    const app = document.getElementById('app')
+
+    switch (mode) {
+      case 'add':
+        console.log('Add')
+        app.style.cursor = 'default'
+        break
+      case 'navigate':
+        console.log('Navigate')
+        app.style.cursor = 'move'
+        break
+      default:
+        break
+    }
+  }
+
   update (dt) {
+    this.checkMode()
+
     this.currentTime = dt
 
     this.entities.forEach(entity => {
