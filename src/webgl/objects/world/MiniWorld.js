@@ -1,74 +1,76 @@
-import { Object3D, Vector3 } from 'three'
-import MiniWorld from './MiniWorld'
+import {
+  Object3D
+} from 'three'
+import Face from './ground/Face'
+import MouseRaycaster from '@/webgl/MouseRaycaster'
+import store from '@/store'
 
-export default class World extends Object3D {
-  constructor (camera, controls) {
+import Carot from '@/webgl/objects/livingBeings/vegetables/Carot'
+import Banana from '@/webgl/objects/livingBeings/fruits/Banana'
+import Tomato from '@/webgl/objects/livingBeings/fruits/Tomato'
+import Pear from '@/webgl/objects/livingBeings/fruits/Pear'
+import Genome from '@/webgl/genetics/Genome'
+import constant from '@/utils/constant'
+
+import { clamp } from 'utils/basicFunction'
+
+export default class MiniWorld extends Object3D {
+  constructor (position, rotation, type = 'vegGarden', camera) {
     super()
 
-    this.currentTime = 0
-    this.controls = controls
-    // this.removeRadius = 5.0
+    this.rotationValue = rotation
+    this.type = type
+    this.entities = [] // {type: 'carot', livingBeing: {Object}}
 
-    this.miniWorlds = []
-    this.miniWorlds.push(new MiniWorld(new Vector3(0, 0, 1 / 2), new Vector3(0, 0, 0), 'orchards', camera)) // front
-    this.miniWorlds.push(new MiniWorld(new Vector3(0, 0, -1 / 2), new Vector3(Math.PI, 0, 0), 'vegGarden', camera)) // back
+    this.ground = new Face(position, rotation, type)
 
-    // L & R
-    this.miniWorlds.push(new MiniWorld(new Vector3(-1 / 2, 0, 0), new Vector3(0, -Math.PI / 2, Math.PI / 2), 'vegGarden', camera))
-    this.miniWorlds.push(new MiniWorld(new Vector3(1 / 2, 0, 0), new Vector3(0, Math.PI / 2, -Math.PI / 2), 'vegGarden', camera))
-
-    // T & B
-    this.miniWorlds.push(new MiniWorld(new Vector3(0, 1 / 2, 0), new Vector3(-Math.PI / 2, 0, 0), 'vegGarden', camera))
-    this.miniWorlds.push(new MiniWorld(new Vector3(0, -1 / 2, 0), new Vector3(Math.PI / 2, 0, 0), 'orchards', camera))
-
-    // this.entities = [] // {type: 'carot', livingBeing: {Object}}
-
-    // this.environment = new Environment()
-    // this.geneticsManager = new GeneticsManager(this.entities, this.environment, this.ground.heightMap)
-    // this.raycaster = new MouseRaycaster(camera, this.ground.children)
+    this.raycaster = new MouseRaycaster(camera, [this.ground])
 
     this.init()
   }
   init () {
-    for (let i = 0; i < this.miniWorlds.length; i++) {
-      this.add(this.miniWorlds[i])
-    }
-    // this.initMouseClickEvent()
+    this.ground.init()
+    this.add(this.ground)
+    this.initMouseClickEvent()
   }
 
   getEntitiesInArea (position, radius) {
-    /* let foundEntities = []
+    let foundEntities = []
 
-    for (let entity of this.entities) {
-      let entityPosition = entity.livingBeing.position
-      if (distance(entityPosition.x, entityPosition.z, position.x, position.z) < radius) { foundEntities.push(entity) }
-    }
+    /* for (let entity of this.entities) {
+            let entityPosition = entity.livingBeing.position
+            if (distance(entityPosition.x, entityPosition.z, position.x, position.z) < radius) { foundEntities.push(entity) }
+        } */
 
-    return foundEntities */
+    return foundEntities
   }
 
   addEntity (type, livingBeing) {
-    // this.add(livingBeing)
-    /* this.entities.push({
+    livingBeing.rotation.x = this.ground.rotation.x + Math.PI / 2
+    livingBeing.rotation.z = this.ground.rotation.z
+
+    this.add(livingBeing)
+    this.entities.push({
       type: type,
       livingBeing: livingBeing
-    }) */
+    })
   }
 
   removeEntity (entity) {
-    /* const index = this.entities.indexOf(entity)
+    const index = this.entities.indexOf(entity)
     this.entities.splice(index, 1)
-    this.remove(entity.livingBeing) */
+    this.remove(entity.livingBeing)
   }
 
   initMouseClickEvent () {
-    /* window.addEventListener('click', function (e) {
+    window.addEventListener('click', function (e) {
       const currentMode = store.getters.getCurrentMode
       const worldPosition = this.raycaster.getIntersectionPosition()
+      if (!worldPosition) return
+
       switch (currentMode) {
         case 'add': {
           const currentSelection = store.getters.getCurrentSelection
-
           if (!worldPosition) return
 
           switch (currentSelection) {
@@ -98,7 +100,7 @@ export default class World extends Object3D {
           break
         }
         case 'remove': {
-          this.controls.enabled = false
+          // this.controls.enabled = false
           if (!worldPosition) return
 
           const entityToRemove = this.getEntitiesInArea(worldPosition, this.removeRadius)
@@ -109,7 +111,7 @@ export default class World extends Object3D {
           break
         }
         default: {
-          this.controls.enabled = true
+          // this.controls.enabled = true
           break
         }
       }
@@ -140,16 +142,12 @@ export default class World extends Object3D {
       } else if (delta === 1) {
         this.removeRadius = clamp(this.removeRadius + 5, 5, 40)
       }
-    }.bind(this)) */
+    }.bind(this))
   }
   update (dt) {
     this.currentTime = dt
 
-    this.miniWorlds.forEach(miniWorld => {
-      miniWorld.update(dt)
-    })
-
-    /* this.entities.forEach(entity => {
+    this.entities.forEach(entity => {
       const livingBeing = entity.livingBeing
 
       if (livingBeing.isAlive()) {
@@ -159,11 +157,11 @@ export default class World extends Object3D {
       }
     })
 
-    if (store.getters.getCurrentMode === 'remove') { this.ground.update(null, null) } */
+    if (store.getters.getCurrentMode === 'remove') { this.ground.update(null, null) }
 
     /* const newLB = this.geneticsManager.checkReproduction(dt)
-    for (const LB of newLB) {
-      this.addEntity(LB.type, LB.entity)
-    } */
+        for (const LB of newLB) {
+            this.addEntity(LB.type, LB.entity)
+        } */
   }
 }

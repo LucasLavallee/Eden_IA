@@ -14,6 +14,10 @@ export default class HeightMap {
     for (let i = 0; i < constant.GROUND.SUBDIVISIONS; i++) {
       this.height[i] = []
       for (let j = 0; j < constant.GROUND.SUBDIVISIONS; j++) {
+        if (i === 0 || j === 0) {
+          this.height[i][j] = 0
+          continue
+        }
         this.height[i][j] = randomFloat(0.0, this.max)
       }
     }

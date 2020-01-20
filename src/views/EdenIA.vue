@@ -4,6 +4,7 @@
       fallback
     </canvas>
     <ModeSelection/>
+    <MiniWorldInfos/>
   </div>
 </template>
 
@@ -12,11 +13,13 @@
 import Webgl from '../webgl/Webgl'
 import loop from 'raf-loop'
 import ModeSelection from '../components/UI/ModeSelection'
+import MiniWorldInfos from '../components/UI/MiniWorldInfos'
 
 export default {
   name: 'EdenIA',
   components: {
-    ModeSelection
+    ModeSelection,
+    MiniWorldInfos
   },
   data () {
     return {

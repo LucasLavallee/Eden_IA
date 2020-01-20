@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentMode: 'add', // 'navigate', 'add', 'remove'
-    currentSelection: 'carot'
+    currentSelection: 'carot',
+    activeWorld: 0
   },
   mutations: {
     CHANGE_CURRENT_MODE (state, val) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     CHANGE_CURRENT_SELECTION (state, val) {
       state.currentSelection = val
+    },
+    CHANGE_ACTIVE_WORLD (state, val) {
+      state.activeWorld = val
     }
   },
   actions: {
@@ -22,12 +26,16 @@ export default new Vuex.Store({
     },
     changeCurrentSelection: (store, selection) => {
       store.commit('CHANGE_CURRENT_SELECTION', selection)
+    },
+    changeActiveWorld: (store, id) => {
+      store.commit('CHANGE_ACTIVE_WORLD', id)
     }
 
   },
   getters: {
     getCurrentSelection: state => state.currentSelection,
-    getCurrentMode: state => state.currentMode
+    getCurrentMode: state => state.currentMode,
+    getActiveWorld: state => state.activeWorld
   },
   modules: {
   }
