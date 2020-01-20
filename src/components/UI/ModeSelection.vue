@@ -1,17 +1,19 @@
 <template>
   <div id="container">
-    <span>Tools</span>
+    <!-- <span>Tools</span> -->
     <div id="modeSelection">
         <div class="mode" :class="getCurrentMode === 'navigate' ? 'active': ''" @click="changeCurrentMode('navigate')">
-            <p>Navigate</p>
+            <span>Nav</span>
         </div>
         <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
-            <p>Add</p>
+            <span>Add</span>
         </div>
         <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
-            <p>Remove</p>
+            <span>Del</span>
         </div>
-        <transition
+
+    </div>
+    <!-- <transition
           name="fade"
           v-on:before-enter="beforeEnter"
           v-on:enter="enter"
@@ -22,7 +24,7 @@
           v-on:leave="leave"
           v-on:after-leave="afterLeave"
           v-on:leave-cancelled="leaveCancelled"
-        >
+        > -->
           <div v-if="getCurrentMode === 'add'" class="items-container">
             <div class="item" id="carot" :class="getCurrentSelection === 'carot' ? 'active': ''" @click="changeCurrentSelection('carot')"> C </div>
             <div class="item" id="banana" :class="getCurrentSelection === 'banana' ? 'active': ''" @click="changeCurrentSelection('banana')"> B </div>
@@ -33,8 +35,7 @@
             <div class="item"> XX </div>
             <div class="item"> XX </div>
           </div>
-        </transition>
-    </div>
+        <!-- </transition> -->
   </div>
 </template>
 
@@ -63,37 +64,43 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
   #container
+    // border solid 2px black
     position fixed
     top 20px
     left 20px
     font-size 20px
+    display flex
+    justify-content flex-start
     #modeSelection
-      // position fixed
-      // top 20px
       left 20px
       display flex
       flex-direction column
-      width 200px
       font-size 0.8em
-
+      margin-right 20px
     .mode
       margin 5px 0
-      background-color #fff
+      background-color #d1ccc0
+      border solid 1px #d1ccc0
       padding 5px
       cursor pointer
-
+      width 50px
+      height 50px
+      display flex
+      justify-content center
+      align-items center
       &.active
-        background-color red
+        border solid 1px #84817a
 
     .items-container
       display flex
       flex-direction row
-      border solid 2px yellow
+      // border solid 2px yellow
       justify-content center
-      margin-top 20px
       flex-wrap wrap
+      width 100px
+      background-color #f7f1e3
 
       .item
         background-color #fff
