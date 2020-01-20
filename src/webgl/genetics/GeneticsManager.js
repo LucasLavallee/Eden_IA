@@ -2,10 +2,16 @@
 import constant from 'utils/constant'
 import { distance, randomInt, randomFloat, clamp } from 'utils/basicFunction'
 import Genome from './Genome'
+import Beet from '../objects/livingBeings/vegetables/Beet'
 import Carot from '../objects/livingBeings/vegetables/Carot'
+import Pepper from '../objects/livingBeings/vegetables/Pepper'
+import Pumpkin from '../objects/livingBeings/vegetables/Pumpkin'
+import Zucchini from '../objects/livingBeings/vegetables/Zucchini'
 import Banana from '../objects/livingBeings/fruits/Banana'
 import Tomato from '../objects/livingBeings/fruits/Tomato'
 import Pear from '../objects/livingBeings/fruits/Pear'
+import Strawberry from '../objects/livingBeings/fruits/Strawberry'
+import Orange from '../objects/livingBeings/fruits/Orange'
 
 export default class GeneticsManager {
   constructor (entities, environment, heightMap) {
@@ -47,6 +53,18 @@ export default class GeneticsManager {
         case 'carot':
           newLivingBeing = new Carot(time, child.genome, newBornPosition)
           break
+        case 'beet':
+          newLivingBeing = new Beet(time, child.genome, newBornPosition)
+          break
+        case 'pepper':
+          newLivingBeing = new Pepper(time, child.genome, newBornPosition)
+          break
+        case 'pumpkin':
+          newLivingBeing = new Pumpkin(time, child.genome, newBornPosition)
+          break
+        case 'zucchini':
+          newLivingBeing = new Zucchini(time, child.genome, newBornPosition)
+          break
         case 'banana':
           newLivingBeing = new Banana(time, child.genome, newBornPosition)
           break
@@ -55,6 +73,12 @@ export default class GeneticsManager {
           break
         case 'pear':
           newLivingBeing = new Pear(time, child.genome, newBornPosition)
+          break
+        case 'strawberry':
+          newLivingBeing = new Strawberry(time, child.genome, newBornPosition)
+          break
+        case 'orange':
+          newLivingBeing = new Orange(time, child.genome, newBornPosition)
           break
         default:
           break

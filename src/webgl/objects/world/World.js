@@ -1,10 +1,20 @@
 import Ground from './ground/Ground'
 import { Object3D } from 'three'
 import Environment from './environment/Environment'
+import PannelUI from '@/components/UI/PannelUI'
+
 import Carot from '@/webgl/objects/livingBeings/vegetables/Carot'
+import Pumpkin from '@/webgl/objects/livingBeings/vegetables/Pumpkin'
+import Pepper from '@/webgl/objects/livingBeings/vegetables/Pepper'
+import Zucchini from '@/webgl/objects/livingBeings/vegetables/Zucchini'
+import Beet from '@/webgl/objects/livingBeings/vegetables/Beet'
+
 import Banana from '@/webgl/objects/livingBeings/fruits/Banana'
 import Tomato from '@/webgl/objects/livingBeings/fruits/Tomato'
 import Pear from '@/webgl/objects/livingBeings/fruits/Pear'
+import Strawberry from '@/webgl/objects/livingBeings/fruits/Strawberry'
+import Orange from '@/webgl/objects/livingBeings/fruits/Orange'
+
 import constant from '@/utils/constant'
 import GeneticsManager from '@/webgl/genetics/GeneticsManager'
 import Genome from '@/webgl/genetics/Genome'
@@ -25,6 +35,7 @@ export default class World extends Object3D {
 
     this.ground = new Ground()
     this.environment = new Environment()
+    this.pannelUI = new PannelUI()
     this.geneticsManager = new GeneticsManager(this.entities, this.environment, this.ground.heightMap)
     this.raycaster = new MouseRaycaster(camera, [this.ground])
 
@@ -79,6 +90,26 @@ export default class World extends Object3D {
               this.addEntity('carot', new Carot(this.currentTime, new Genome(constant.DEFAULT_GENOME.CAROT, true)
                 , worldPosition))
               break
+            case 'beet':
+              console.log('Beet !')
+              this.addEntity('beet', new Beet(this.currentTime, new Genome(constant.DEFAULT_GENOME.BEET, true)
+                , worldPosition))
+              break
+            case 'pepper':
+              console.log('Pepper !')
+              this.addEntity('pepper', new Pepper(this.currentTime, new Genome(constant.DEFAULT_GENOME.PEPPER, true)
+                , worldPosition))
+              break
+            case 'pumpkin':
+              console.log('Pumpkin !')
+              this.addEntity('pumpkin', new Pumpkin(this.currentTime, new Genome(constant.DEFAULT_GENOME.PUMPKIN, true)
+                , worldPosition))
+              break
+            case 'zucchini':
+              console.log('Zucchini !')
+              this.addEntity('zucchini', new Zucchini(this.currentTime, new Genome(constant.DEFAULT_GENOME.ZUCCHINI, true)
+                , worldPosition))
+              break
             case 'banana':
               console.log('Banana !')
               this.addEntity('banana', new Banana(this.currentTime, new Genome(constant.DEFAULT_GENOME.BANANA, true)
@@ -92,6 +123,16 @@ export default class World extends Object3D {
             case 'pear':
               console.log('Pear !')
               this.addEntity('pear', new Pear(this.currentTime, new Genome(constant.DEFAULT_GENOME.PEAR, true)
+                , worldPosition))
+              break
+            case 'strawberry':
+              console.log('Strawberry !')
+              this.addEntity('strawberry', new Strawberry(this.currentTime, new Genome(constant.DEFAULT_GENOME.STRAWBERRY, true)
+                , worldPosition))
+              break
+            case 'orange':
+              console.log('Orange !')
+              this.addEntity('orange', new Orange(this.currentTime, new Genome(constant.DEFAULT_GENOME.ORANGE, true)
                 , worldPosition))
               break
             default:
@@ -169,7 +210,6 @@ export default class World extends Object3D {
 
   update (dt) {
     this.checkMode()
-
     this.currentTime = dt
 
     this.entities.forEach(entity => {

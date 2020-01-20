@@ -8,8 +8,48 @@ export default {
     DISTANCE: 20
   },
   DEFAULT_GENOME: {
+    BEET: {
+      color: '#7F023D',
+      size: 0.5,
+      temperature: [5, 25],
+      pollution: 60,
+      brightness: [20, 70],
+      humidity: [10, 40],
+      lifeTime: [180, 220],
+      reproductionRate: [100, 120]
+    },
     CAROT: {
-      color: '#ff6600',
+      color: '#FF6600',
+      size: 1,
+      temperature: [5, 25],
+      pollution: 60,
+      brightness: [20, 70],
+      humidity: [10, 40],
+      lifeTime: [180, 220],
+      reproductionRate: [100, 120]
+    },
+    PEPPER: {
+      color: '#FFA700',
+      size: 1,
+      temperature: [5, 25],
+      pollution: 60,
+      brightness: [20, 70],
+      humidity: [10, 40],
+      lifeTime: [180, 220],
+      reproductionRate: [100, 120]
+    },
+    PUMPKIN: {
+      color: '#FF8100',
+      size: 1,
+      temperature: [5, 25],
+      pollution: 60,
+      brightness: [20, 70],
+      humidity: [10, 40],
+      lifeTime: [180, 220],
+      reproductionRate: [100, 120]
+    },
+    ZUCCHINI: {
+      color: '#356100',
       size: 1,
       temperature: [5, 25],
       pollution: 60,
@@ -30,7 +70,7 @@ export default {
     },
     TOMATO: {
       color: '#AB0000',
-      size: 2,
+      size: 1,
       temperature: [5, 25],
       pollution: 60,
       brightness: [20, 70],
@@ -40,7 +80,27 @@ export default {
     },
     PEAR: {
       color: '#DADC35',
-      size: 2,
+      size: 1,
+      temperature: [5, 25],
+      pollution: 60,
+      brightness: [20, 70],
+      humidity: [10, 40],
+      lifeTime: [180, 220],
+      reproductionRate: [100, 120]
+    },
+    STRAWBERRY: {
+      color: '#7C0000',
+      size: 0.5,
+      temperature: [5, 25],
+      pollution: 60,
+      brightness: [20, 70],
+      humidity: [10, 40],
+      lifeTime: [180, 220],
+      reproductionRate: [100, 120]
+    },
+    ORANGE: {
+      color: '#FF8B00',
+      size: 1,
       temperature: [5, 25],
       pollution: 60,
       brightness: [20, 70],

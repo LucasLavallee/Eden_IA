@@ -8,35 +8,22 @@
         <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
             <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
         </div>
+        <div v-if="getCurrentMode === 'add'" class="items-container">
+              <div class="item" id="carot" :class="getCurrentSelection === 'carot' ? 'active': ''" @click="changeCurrentSelection('carot')"> Carot </div>
+              <div class="item" id="beet" :class="getCurrentSelection === 'beet' ? 'active': ''" @click="changeCurrentSelection('beet')"> Beet </div>
+              <div class="item" id="pepper" :class="getCurrentSelection === 'pepper' ? 'active': ''" @click="changeCurrentSelection('pepper')"> Pepper </div>
+              <div class="item" id="pumpkin" :class="getCurrentSelection === 'pumpkin' ? 'active': ''" @click="changeCurrentSelection('pumpkin')"> Pumpkin </div>
+              <div class="item" id="zucchini" :class="getCurrentSelection === 'zucchini' ? 'active': ''" @click="changeCurrentSelection('zucchini')"> Zucchini </div>
+              <div class="item" id="banana" :class="getCurrentSelection === 'banana' ? 'active': ''" @click="changeCurrentSelection('banana')"> Banana </div>
+              <div class="item" id="pear" :class="getCurrentSelection === 'pear' ? 'active': ''" @click="changeCurrentSelection('pear')"> Pear </div>
+              <div class="item" id="tomato" :class="getCurrentSelection === 'tomato' ? 'active': ''" @click="changeCurrentSelection('tomato')"> Tomato </div>
+              <div class="item" id="strawberry" :class="getCurrentSelection === 'strawberry' ? 'active': ''" @click="changeCurrentSelection('strawberry')"> Strawberry </div>
+               <div class="item" id="orange" :class="getCurrentSelection === 'orange' ? 'active': ''" @click="changeCurrentSelection('orange')"> Orange </div>
+        </div>
         <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
             <font-awesome-icon :icon="['fas','trash-alt']" size="2x" />
         </div>
-
     </div>
-    <!-- <transition
-          name="fade"
-          v-on:before-enter="beforeEnter"
-          v-on:enter="enter"
-          v-on:after-enter="afterEnter"
-          v-on:enter-cancelled="enterCancelled"
-
-          v-on:before-leave="beforeLeave"
-          v-on:leave="leave"
-          v-on:after-leave="afterLeave"
-          v-on:leave-cancelled="leaveCancelled"
-        > -->
-          <div v-if="getCurrentMode === 'add'" class="items-container">
-            <div class="item" id="carot" :class="getCurrentSelection === 'carot' ? 'active': ''" @click="changeCurrentSelection('carot')"> C </div>
-            <div class="item" id="banana" :class="getCurrentSelection === 'banana' ? 'active': ''" @click="changeCurrentSelection('banana')"> B </div>
-            <div class="item" id="pear" :class="getCurrentSelection === 'pear' ? 'active': ''" @click="changeCurrentSelection('pear')"> P </div>
-            <div class="item" id="tomato" :class="getCurrentSelection === 'tomato' ? 'active': ''" @click="changeCurrentSelection('tomato')"> T </div>
-            <div class="item"> XX </div>
-            <div class="item"> XX </div>
-            <div class="item"> XX </div>
-            <div class="item"> XX </div>
-          </div>
-        <!-- </transition> -->
-  </div>
 </template>
 
 <script>
@@ -106,12 +93,11 @@ export default {
       .item
         background-color #fff
         margin 10px
-        padding 5px
+        padding 10px 30px
         cursor pointer
-        width 20px
-        height 20px
+        border-radius 8px
 
         &.active
           background-color blue
-
+          color #fff
 </style>
