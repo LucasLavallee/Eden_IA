@@ -1,39 +1,11 @@
 <template>
   <div id="container">
-    <span>Tools</span>
-    <div id="modeSelection">
-        <div class="mode" :class="getCurrentMode === 'navigate' ? 'active': ''" @click="changeCurrentMode('navigate')">
-            <p>Navigate</p>
-        </div>
-        <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
-            <p>Add</p>
-        </div>
-        <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
-            <p>Remove</p>
-        </div>
-        <!-- <transition
-          name="fade"
-          v-on:before-enter="beforeEnter"
-          v-on:enter="enter"
-          v-on:after-enter="afterEnter"
-          v-on:enter-cancelled="enterCancelled"
-
-          v-on:before-leave="beforeLeave"
-          v-on:leave="leave"
-          v-on:after-leave="afterLeave"
-          v-on:leave-cancelled="leaveCancelled"
-        > -->
-          <div v-if="getCurrentMode === 'add'" class="items-container">
-            <div class="item" id="carot" :class="getCurrentSelection === 'carot' ? 'active': ''" @click="changeCurrentSelection('carot')"> C </div>
-            <div class="item" id="banana" :class="getCurrentSelection === 'banana' ? 'active': ''" @click="changeCurrentSelection('banana')"> B </div>
-            <div class="item" id="pear" :class="getCurrentSelection === 'pear' ? 'active': ''" @click="changeCurrentSelection('pear')"> P </div>
-            <div class="item" id="tomato" :class="getCurrentSelection === 'tomato' ? 'active': ''" @click="changeCurrentSelection('tomato')"> T </div>
-            <div class="item"> XX </div>
-            <div class="item"> XX </div>
-            <div class="item"> XX </div>
-            <div class="item"> XX </div>
-          </div>
-        <!-- </transition> -->
+    <span>Environment properties</span>
+    <div id="sliders-container">
+      <div class="slidecontainer">
+        <p class="infos">Temperature</p>
+        <span>1</span><input type="range" min="1" max="100" value="50" class="slider" id="temperature-slider"><span>100</span>
+      </div>
     </div>
   </div>
 </template>
@@ -69,7 +41,7 @@ export default {
     top 20px
     right 20px
     font-size 20px
-    #modeSelection
+    #sliders-container
       left 20px
       display flex
       flex-direction column
