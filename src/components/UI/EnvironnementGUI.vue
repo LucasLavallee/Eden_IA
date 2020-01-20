@@ -6,6 +6,18 @@
         <p class="infos">Temperature</p>
         <span>1</span><input type="range" min="1" max="100" value="50" class="slider" id="temperature-slider"><span>100</span>
       </div>
+      <div class="slidecontainer">
+        <p class="infos">Brightness</p>
+        <span>1</span><input type="range" min="1" max="100" value="50" class="slider" id="brightness-slider"><span>100</span>
+      </div>
+      <div class="slidecontainer">
+        <p class="infos">Humidity</p>
+        <span>1</span><input type="range" min="1" max="100" value="50" class="slider" id="humidity-slider"><span>100</span>
+      </div>
+      <div class="slidecontainer">
+        <p class="infos">Pollution</p>
+        <span>1</span><input type="range" min="1" max="100" value="50" class="slider" id="pollution-slider"><span>100</span>
+      </div>
     </div>
   </div>
 </template>
