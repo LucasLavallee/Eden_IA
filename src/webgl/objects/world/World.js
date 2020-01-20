@@ -124,10 +124,9 @@ export default class World extends Object3D {
 
       if (currentMode === 'remove') {
         this.ground.update(worldPosition, this.removeRadius)
+      } else {
+        this.ground.update(null, 0.0)
       }
-      // else {
-      //   this.ground.update(null, 0.0)
-      // }
     }.bind(this))
 
     // SCROLL
