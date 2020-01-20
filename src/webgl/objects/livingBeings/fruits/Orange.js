@@ -11,7 +11,7 @@ import {
   DoubleSide
 } from 'three'
 
-export default class Tomato extends Fruit {
+export default class Orange extends Fruit {
   constructor (bornTime = 0, genome, position) {
     super(bornTime, genome, position)
 
@@ -23,10 +23,8 @@ export default class Tomato extends Fruit {
     const y = 0
 
     var leafShape = new Shape()
-    var leafShape2 = new Shape()
 
     leafShape.bezierCurveTo(x + this.genome.size, y + this.genome.size, x + this.genome.size, y, x, y)
-    leafShape2.bezierCurveTo(x + this.genome.size, this.genome.size, x + this.genome.size, y, x, y)
 
     // base
     const geometry = new SphereBufferGeometry(this.genome.size, 32, 32)
@@ -34,9 +32,7 @@ export default class Tomato extends Fruit {
     const geometry2 = new CylinderBufferGeometry(this.genome.size / 16, this.genome.size / 32, this.genome.size / 2, 24)
     // feuille
     const geometry3 = new ShapeBufferGeometry(leafShape)
-    const geometry4 = new ShapeBufferGeometry(leafShape2)
 
-    // materials
     const material = new MeshPhongMaterial({
       color: this.genome.color,
       emissive: this.genome.color,
@@ -51,20 +47,19 @@ export default class Tomato extends Fruit {
       side: DoubleSide
     })
 
-    const tomato = new Mesh(geometry, material)
+    const orange = new Mesh(geometry, material)
     const tige = new Mesh(geometry2, material2)
     const leaf = new Mesh(geometry3, material2)
-    const leaf2 = new Mesh(geometry4, material2)
 
     /* positionnement de la tige et de la feuille
     par rapport à la base */
     tige.position.set(0, this.genome.size, 0)
-    leaf.position.set(0, this.genome.size, (this.genome.size / 100) * 3)
-    leaf2.position.set(0, this.genome.size, (this.genome.size / 100) * 3)
-    leaf.rotation.set(30, 10, 0)
-    leaf2.rotation.set(20, 0, 0)
+    // leaf.position.set(0, size, 0.03)
+    leaf.position.set(0, this.genome.size + this.genome.size / 4, 0.03)
+    // leaf.rotation.set(30, 10, 0)
+    leaf.rotation.set(Math.PI / -2, Math.PI / 2, Math.PI)
 
-    this.add(tomato, tige, leaf, leaf2)
+    this.add(orange, tige, leaf)
   }
 
   update (dt) {
