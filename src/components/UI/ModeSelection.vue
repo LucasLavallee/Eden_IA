@@ -3,13 +3,13 @@
     <!-- <span>Tools</span> -->
     <div id="modeSelection">
         <div class="mode" :class="getCurrentMode === 'navigate' ? 'active': ''" @click="changeCurrentMode('navigate')">
-            <span>Nav</span>
+            <font-awesome-icon :icon="['fas','arrows-alt']" size="2x" />
         </div>
         <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
-            <span>Add</span>
+            <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
         </div>
         <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
-            <span>Del</span>
+            <font-awesome-icon :icon="['fas','trash-alt']" size="2x" />
         </div>
 
     </div>
@@ -83,6 +83,7 @@ export default {
       margin 5px 0
       background-color #d1ccc0
       border solid 1px #d1ccc0
+      border-radius 20px
       padding 5px
       cursor pointer
       width 50px
