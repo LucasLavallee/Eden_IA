@@ -4,19 +4,19 @@
     <div id="sliders-container">
       <div class="slidecontainer">
         <p class="infos">Temperature</p>
-        <span>1</span><input type="range" min="1" max="100" value="50" class="slider" id="temperature-slider"><span>100</span>
+        <input type="range" min="1" max="100" value="50" class="slider" id="temperature-slider" v-on:input="change"><span id="temperature-slider-value">50</span>
       </div>
       <div class="slidecontainer">
         <p class="infos">Brightness</p>
-        <span>1</span><input type="range" min="1" max="100" value="50" class="slider" id="brightness-slider"><span>100</span>
+        <input type="range" min="1" max="100" value="50" class="slider" id="brightness-slider" v-on:input="change"><span id="brightness-slider-value">50</span>
       </div>
       <div class="slidecontainer">
         <p class="infos">Humidity</p>
-        <span>1</span><input type="range" min="1" max="100" value="50" class="slider" id="humidity-slider"><span>100</span>
+        <input type="range" min="1" max="100" value="50" class="slider" id="humidity-slider" v-on:input="change"><span id="humidity-slider-value">50</span>
       </div>
       <div class="slidecontainer">
         <p class="infos">Pollution</p>
-        <span>1</span><input type="range" min="1" max="100" value="50" class="slider" id="pollution-slider"><span>100</span>
+        <input type="range" min="1" max="100" value="50" class="slider" id="pollution-slider" v-on:input="change"><span id="pollution-slider-value">50</span>
       </div>
     </div>
   </div>
@@ -36,7 +36,13 @@ export default {
     ...mapActions([
       'changeCurrentMode',
       'changeCurrentSelection'
-    ])
+    ]),
+    change (e) {
+      console.log(e.target.id)
+      console.log(e.target.value)
+      const spanId = e.target.id + '-value'
+      document.getElementById(spanId).innerText = e.target.value
+    }
   },
   computed: {
     ...mapGetters([
@@ -44,6 +50,7 @@ export default {
       'getCurrentSelection'
     ])
   }
+
 }
 </script>
 
