@@ -60,6 +60,9 @@ export default {
     top 20px
     right 20px
     font-size 20px
+    background-color #d1ccc0
+    padding 20px
+    border-radius 20px
     #sliders-container
       left 20px
       display flex
