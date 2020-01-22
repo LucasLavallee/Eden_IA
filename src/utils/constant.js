@@ -7,6 +7,9 @@ export default {
   REPRODUCTION: {
     DISTANCE: 20
   },
+  TIME_INFOS: {
+    YEAR_TIME: 500
+  },
   DEFAULT_GENOME: {
     CAROT: {
       color: '#ff6600',
@@ -47,6 +50,26 @@ export default {
       humidity: [10, 40],
       lifeTime: [180, 220],
       reproductionRate: [100, 120]
+    }
+  },
+
+  DEFAULT_BUSH_GENOME: {
+    PEAR_TREE: {
+      lifeTime: [80, 120], // year / cycle
+      nbFlowers: [15, 30],
+      size: 1.0,
+      temperature: [5, 25],
+      pollution: 30,
+      brightness: [20, 70],
+      humidity: [10, 40]
+    }
+  },
+
+  BUSHES_DATA: {
+    PEAR_TREE: {
+      startingCycle: 0.2,
+      flowerTimeFactor: 0.2,
+      fruitTimeFactor: 0.3
     }
   },
 

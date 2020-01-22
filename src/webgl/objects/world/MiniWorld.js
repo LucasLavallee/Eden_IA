@@ -5,7 +5,7 @@ import Face from './ground/Face'
 import MouseRaycaster from '@/webgl/MouseRaycaster'
 import store from '@/store'
 
-import Carot from '@/webgl/objects/livingBeings/vegetables/Carot'
+// import Carot from '@/webgl/objects/livingBeings/vegetables/Carot'
 import Banana from '@/webgl/objects/livingBeings/fruits/Banana'
 import Tomato from '@/webgl/objects/livingBeings/fruits/Tomato'
 import Pear from '@/webgl/objects/livingBeings/fruits/Pear'
@@ -13,14 +13,18 @@ import Genome from '@/webgl/genetics/Genome'
 import constant from '@/utils/constant'
 
 import { clamp } from 'utils/basicFunction'
+import Bush from '../livingBeings/bushes/Bush'
 
 export default class MiniWorld extends Object3D {
-  constructor (position, rotation, type = 'vegGarden', camera) {
+  constructor (miniWorldId, position, rotation, type = 'vegGarden', camera, controls) {
     super()
 
+    this.miniWorldId = miniWorldId
+    this.removeRadius = 5.0
     this.rotationValue = rotation
     this.type = type
-    this.entities = [] // {type: 'carot', livingBeing: {Object}}
+    this.entities = []
+    this.controls = controls
 
     this.ground = new Face(position, rotation, type)
 
@@ -75,9 +79,10 @@ export default class MiniWorld extends Object3D {
 
           switch (currentSelection) {
             case 'carot':
-              console.log('Carotte !')
-              this.addEntity('carot', new Carot(this.currentTime, new Genome(constant.DEFAULT_GENOME.CAROT, true)
-                , worldPosition))
+              // console.log('Carotte !')
+              /* this.addEntity('carot', new Carot(this.currentTime, new Genome(constant.DEFAULT_GENOME.CAROT, true)
+                , worldPosition)) */
+              this.addEntity('bush', new Bush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PEAR_TREE, true), worldPosition, 'PEAR_TREE'))
               break
             case 'banana':
               console.log('Banana !')
@@ -100,7 +105,7 @@ export default class MiniWorld extends Object3D {
           break
         }
         case 'remove': {
-          // this.controls.enabled = false
+          this.controls.enabled = false
           if (!worldPosition) return
 
           const entityToRemove = this.getEntitiesInArea(worldPosition, this.removeRadius)
@@ -111,7 +116,7 @@ export default class MiniWorld extends Object3D {
           break
         }
         default: {
-          // this.controls.enabled = true
+          this.controls.enabled = true
           break
         }
       }
@@ -120,9 +125,9 @@ export default class MiniWorld extends Object3D {
     // MOUSE MOVE
     window.addEventListener('mousemove', function (e) {
       const currentMode = store.getters.getCurrentMode
+      const currentId = store.getters.getActiveWorld
       const worldPosition = this.raycaster.getIntersectionPosition()
-
-      if (currentMode === 'remove') {
+      if (currentMode === 'remove' && this.miniWorldId === currentId) {
         this.ground.update(worldPosition, this.removeRadius)
       } else {
         this.ground.update(null, 0.0)
@@ -156,8 +161,8 @@ export default class MiniWorld extends Object3D {
         this.removeEntity(entity)
       }
     })
-
-    if (store.getters.getCurrentMode === 'remove') { this.ground.update(null, null) }
+    const currentId = store.getters.getActiveWorld
+    if (store.getters.getCurrentMode === 'remove' && this.miniWorldId === currentId) { this.ground.update(null, null) }
 
     /* const newLB = this.geneticsManager.checkReproduction(dt)
         for (const LB of newLB) {

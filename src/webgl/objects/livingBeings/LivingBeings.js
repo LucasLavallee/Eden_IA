@@ -9,8 +9,8 @@ export default class LivingBeings extends Object3D {
     this.position.set(position.x, position.y, position.z)
     this.alive = true
 
-    this.lastReproduction = bornTime
-    this.reproductionReady = false
+    // this.lastReproduction = bornTime
+    // this.reproductionReady = false
 
     if (genome === null) {
       this.genome = new Genome()
@@ -19,7 +19,6 @@ export default class LivingBeings extends Object3D {
     }
 
     this.lifeTime = this.genome.lifeTime
-    this.reproductionRate = this.genome.reproductionRate
 
     this.setScale(this.genome.size)
   }
@@ -39,20 +38,5 @@ export default class LivingBeings extends Object3D {
 
   isAlive () {
     return this.alive
-  }
-
-  isReadyToReproduct () {
-    return this.reproductionReady
-  }
-
-  updateReproduction (dt) {
-    if (dt - this.lastReproduction > this.reproductionRate) {
-      this.reproductionReady = true
-    }
-  }
-
-  reproduct (dt) {
-    this.lastReproduction = dt
-    this.reproductionReady = false
   }
 }

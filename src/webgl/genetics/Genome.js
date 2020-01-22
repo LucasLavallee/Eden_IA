@@ -11,17 +11,24 @@
 import { randomInt } from 'utils/basicFunction'
 
 class Genome {
-  constructor (options = {}/* color = 'blue', size = 1, temperature = 10, pollution = 50, brightness = 50, humidity = 50 */, withRange = false) {
-    this.color = options.color ? options.color : 'yellow'
-    this.size = options.size ? options.size : 1
+  constructor (options = {}/* color = 'blue', size = 1, temperature = 10, pollution = 50, brightness = 50, humidity = 50 */, withRange = false, type = 'tree') {
+    // this.color = options.color ? options.color : 'yellow'
+    this.size = options.size ? options.size : 1.0
 
-    this.temperature = options.temperature ? (withRange ? randomInt(options.temperature[0], options.temperature[1]) : options.temperature) : 10
-    this.pollution = options.pollution ? options.pollution : 50
-    this.brightness = options.brightness ? (withRange ? randomInt(options.brightness[0], options.brightness[1]) : options.brightness) : 50
-    this.humidity = options.humidity ? (withRange ? randomInt(options.humidity[0], options.humidity[1]) : options.humidity) : 50
+    if (type !== 'flower') {
+      this.temperature = options.temperature ? (withRange ? randomInt(options.temperature[0], options.temperature[1]) : options.temperature) : 10
+      this.pollution = options.pollution ? options.pollution : 50
+      this.brightness = options.brightness ? (withRange ? randomInt(options.brightness[0], options.brightness[1]) : options.brightness) : 50
+      this.humidity = options.humidity ? (withRange ? randomInt(options.humidity[0], options.humidity[1]) : options.humidity) : 50
+    }
 
-    this.lifeTime = options.lifeTime ? (withRange ? randomInt(options.lifeTime[0], options.lifeTime[1]) : options.lifeTime) : 200
-    this.reproductionRate = options.reproductionRate ? (withRange ? randomInt(options.reproductionRate[0], options.reproductionRate[1]) : options.reproductionRate) : 120
+    this.lifeTime = options.lifeTime ? (withRange ? randomInt(options.lifeTime[0], options.lifeTime[1]) : options.lifeTime) : 150
+
+    switch (type) {
+      default: // tree
+        this.nbFlowers = options.nbFlowers ? (withRange ? randomInt(options.nbFlowers[0], options.nbFlowers[1]) : options.nbFlowers) : 20
+        break
+    }
   }
 
   setSize (size) {

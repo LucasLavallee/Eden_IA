@@ -2,11 +2,16 @@ import {
   Object3D,
   PlaneBufferGeometry,
   MeshPhongMaterial,
-  Mesh
-  // DoubleSide
+  Mesh,
+  RawShaderMaterial,
+  Vector3,
+  Color
 } from 'three'
 import HeightMap from './HeightMap'
 import constant from 'utils/constant'
+
+import vertexShader from './shaders/face.vs'
+import fragmentShader from './shaders/face.fs'
 
 export default class Face extends Object3D {
   constructor (translation, rotation, type = 'vegGarden' /* 'vegGarden' || 'orchard' */) {
@@ -22,6 +27,20 @@ export default class Face extends Object3D {
       color: (type === 'vegGarden' ? 0x451000 : 0x93f542)
       // side: DoubleSide
     })
+
+    this.shaderMaterial = new RawShaderMaterial({
+      uniforms: {
+        uRadius: { value: 0.0 },
+        uPointerPosition: {
+          value: new Vector3()
+        },
+        uCircleColor: { value: new Color(0xff0000) }
+      },
+      transparent: true,
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader
+    })
+
     this.material.flatShading = true
   }
 
@@ -37,8 +56,27 @@ export default class Face extends Object3D {
     this.rotation.set(this.rotationValue.x, this.rotationValue.y, this.rotationValue.z)
     this.position.set(this.translationValue.x * constant.GROUND.WIDTH, this.translationValue.y * constant.GROUND.WIDTH, this.translationValue.z * constant.GROUND.WIDTH)
 
+    const planeShader = new Mesh(this.geometry, this.shaderMaterial)
+    this.rotation.set(this.rotationValue.x, this.rotationValue.y, this.rotationValue.z)
+    this.position.set(this.translationValue.x * constant.GROUND.WIDTH, this.translationValue.y * constant.GROUND.WIDTH, this.translationValue.z * constant.GROUND.WIDTH)
+
     this.add(plane)
+    this.add(planeShader)
   }
 
-  update () {}
+  getLocalPositionFromGlobal (globalPos) {
+    return new Vector3(globalPos.x - this.translationValue.x * constant.GROUND.WIDTH, globalPos.y - this.translationValue.y * constant.GROUND.WIDTH, globalPos.z - this.translationValue.z * constant.GROUND.WIDTH)
+  }
+
+  update (mousePosition, radius) {
+    if (mousePosition) {
+      mousePosition = this.getLocalPositionFromGlobal(mousePosition)
+      this.shaderMaterial.uniforms.uPointerPosition.value = mousePosition
+    }
+    if (radius != null) {
+      this.shaderMaterial.uniforms.uRadius.value = radius
+      return
+    }
+    this.shaderMaterial.uniforms.uRadius.value = this.shaderMaterial.uniforms.uRadius.value
+  }
 }
