@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <span>Environment</span>
+    <span class="title">Environment</span>
     <div id="sliders-container">
       <div class="slidecontainer">
         <div class="value-container">
@@ -68,10 +68,13 @@ export default {
     top 20px
     right 20px
     font-size 20px
-    // background-color #d1ccc0
-    border solid 2px #d1ccc0
+    background-color #212121
+    // border solid 2px #d1ccc0
     padding 20px
     border-radius 20px
+    color #F9F9F9
+    .title
+      font-weight bold
     #sliders-container
       left 20px
       display flex
@@ -127,14 +130,14 @@ export default {
     input[type=range]
       &::-webkit-slider-thumb
         -webkit-appearance none
-        border 1px solid #212121
+        // border 1px solid #212121
         height 23px
         width 23px
         border-radius 20px
-        background #212121
+        background #099622
         cursor pointer
         margin-top -8px /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-        box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d /* Add cool effects to your sliders! */
+        box-shadow 0px 0px 1px #0d0d0d /* Add cool effects to your sliders! */
       &::-webkit-slider-runnable-track
         width 100%
         height 8.4px
