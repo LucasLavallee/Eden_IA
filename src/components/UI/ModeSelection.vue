@@ -1,15 +1,14 @@
 <template>
   <div id="container">
-    <!-- <span>Tools</span> -->
     <div id="modeSelection">
         <div class="mode" :class="getCurrentMode === 'navigate' ? 'active': ''" @click="changeCurrentMode('navigate')">
             <font-awesome-icon class="icon" :icon="['fas','arrows-alt']" size="2x" />
         </div>
-        <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
-            <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
-        </div>
         <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
             <font-awesome-icon :icon="['fas','trash-alt']" size="2x" />
+        </div>
+        <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
+            <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
         </div>
     </div>
     <div v-if="getCurrentMode === 'add'" class="items-container">
@@ -56,10 +55,8 @@ export default {
 
 <style lang="stylus" scoped>
   #container
-    // border solid 2px black
     position fixed
     top 20px
-    // bottom 50%
     left 20px
     font-size 20px
     display flex
@@ -70,9 +67,7 @@ export default {
       flex-direction column
       font-size 0.6em
       margin-bottom 20px
-      // background-color #27ae60
       border-radius 0px
-      // padding 10px
     .mode
       margin 5px 0
       // background-color #27ae60
@@ -90,7 +85,7 @@ export default {
       &.active
         background-color #212121
         pointer-events none
-        color #F9F9F9
+        color #099622
         box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
       &:hover
         // background-color #27ae60
