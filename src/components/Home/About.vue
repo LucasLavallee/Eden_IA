@@ -31,6 +31,7 @@ export default {
     background-size cover
     background-repeat no-repeat
     background-position bottom right
+    font-family Raleway, Calibri, sans-serif
 
   .home .about .text
     text-align left

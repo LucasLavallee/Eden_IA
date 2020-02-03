@@ -38,17 +38,17 @@ export default {
     font-family 'Space Comics'
     src url(../../../public/Space_Comics.ttf) format('truetype')
   
-  h2
+  .home .rules h2
     margin-top 0
+    font-family 'Space Comics', Calibri, sans-serif
+    color #089622
+    text-shadow 0px 0px 15px #000
 
   .home .rules
     background-color #815B50
     padding 5%
     color #fff
-  
-  .home .rules h2
-    color #089622
-    text-shadow 0px 0px 15px #000
+    font-family Raleway, Calibri, sans-serif
 
   .home .rules .elements
     margin-top 3%
