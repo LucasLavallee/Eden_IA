@@ -20,9 +20,9 @@ export default class LivingBeings extends Object3D {
 
     this.lifeTime = this.genome.lifeTime
 
-    this.setScale(this.genome.size)
+    // this.setScale(this.genome.size)
+    this.scale.set(0, 0, 0)
   }
-
   setScale (scale) {
     this.scale.set(scale, scale, scale)
     this.genome.setSize(scale)

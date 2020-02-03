@@ -14,7 +14,8 @@ export default class Bush extends LivingBeings {
   constructor (bornTime = 0, genome, position, bushType) {
     super(bornTime, genome, position)
 
-    this.bushType = bushType
+    this.bushType = bushType + '_TREE'
+    this.fruit = bushType
     this.cycleDetails = constant.BUSHES_DATA[this.bushType]
     this.cycleStarted = false
 
@@ -24,9 +25,10 @@ export default class Bush extends LivingBeings {
     this.nbFlowers = this.genome.nbFlowers
     this.fruits = []
     this.spawnablePosition = [] // useful to add flowers adn fruits
+    this.isAdult = false
     this.readyToProduce = false
 
-    this.spawn()
+    this.lastLoopTime = 0
   }
 
   // Default Bush
@@ -79,11 +81,19 @@ export default class Bush extends LivingBeings {
 
       this.add(newFlower)
     }
+
     this.cycleStarted = true
+  }
+
+  deployFruit (time, position, genome) {
+
   }
 
   resetCycle () {
     this.cycleStarted = false
+    this.cycleStartedTime = null
+
+    this.readyToProduce = !!this.isAdult
   }
 
   getRandomSpawnablePosition () {
@@ -132,21 +142,25 @@ export default class Bush extends LivingBeings {
     this.remove(flower)
   }
 
+  removeFruit (fruit) {
+    this.fruits.splice(this.fruits.indexOf(fruit), 1)
+    this.remove(fruit)
+  }
+
   update (dt) {
     const age = dt - this.bornTime
+    const yearTime = dt % constant.TIME_INFOS.YEAR_TIME
 
     if (age < this.lifeTime) {
       if (!this.readyToProduce) { // Make bush grow
         let scale = age / constant.TIME_INFOS.YEAR_TIME
         if (scale > 1) {
-          this.readyToProduce = true
+          this.isAdult = true
           scale = 1
         }
         this.scale.set(scale, scale, scale)
       } else {
         // Starting cycle
-        const currentTime = dt
-        const yearTime = currentTime % constant.TIME_INFOS.YEAR_TIME
 
         if (yearTime > this.cycleDetails.startingCycle * constant.TIME_INFOS.YEAR_TIME) {
           if (this.cycleStarted) {
@@ -154,13 +168,17 @@ export default class Bush extends LivingBeings {
               this.updateFlowers(dt)
               return
             }
+
+            if (this.fruits.length !== 0) {
+              this.updateFruits(dt)
+              return
+            }
             return
           }
           this.deployFlowers(dt)
+
           return
         }
-
-        if (this.cycleStarted) { this.resetCycle() }
       }
       return
     }
@@ -171,12 +189,23 @@ export default class Bush extends LivingBeings {
     this.flowers.forEach(flower => {
       if (flower.isAlive()) {
         flower.update(dt)
+      } else {
+        if (flower.isFecondate) {
+          // Add fruit
+          this.deployFruit(dt, flower.position, flower.fruitGenome)
+        }
+        this.removeFlower(flower)
+      }
+    })
+  }
+
+  updateFruits (dt) {
+    this.fruits.forEach(fruit => {
+      if (fruit.isAlive()) {
+        fruit.update(dt)
         return
       }
-      if (flower.isFecondate) {
-        // Add fruit
-      }
-      this.removeFlower(flower)
+      this.removeFruit(fruit)
     })
   }
 }

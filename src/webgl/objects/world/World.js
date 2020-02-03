@@ -1,5 +1,6 @@
 import { Object3D, Vector3 } from 'three'
 import MiniWorld from './MiniWorld'
+import Environment from './environment/Environment'
 
 export default class World extends Object3D {
   constructor (camera, controls) {
@@ -8,23 +9,69 @@ export default class World extends Object3D {
     this.currentTime = 0
     this.controls = controls
 
+    this.environment = new Environment()
+
     this.miniWorlds = []
-    this.miniWorlds.push(new MiniWorld(5, new Vector3(0, 0, 1 / 2), new Vector3(0, 0, 0), 'orchards', camera, this.controls)) // front
-    this.miniWorlds.push(new MiniWorld(3, new Vector3(0, 0, -1 / 2), new Vector3(Math.PI, 0, 0), 'vegGarden', camera, this.controls)) // back
+    this.miniWorlds.push(new MiniWorld({
+      miniWorldId: 5,
+      position: new Vector3(0, 0, 1 / 2),
+      rotation: new Vector3(0, 0, 0),
+      type: 'orchards',
+      camera: camera,
+      controls: this.controls,
+      environment: this.environment
+    })) // front
+
+    this.miniWorlds.push(new MiniWorld({
+      miniWorldId: 3,
+      position: new Vector3(0, 0, -1 / 2),
+      rotation: new Vector3(Math.PI, 0, 0),
+      type: 'vegGarden',
+      camera: camera,
+      controls: this.controls,
+      environment: this.environment
+    })) // back
 
     // L & R
-    this.miniWorlds.push(new MiniWorld(2, new Vector3(-1 / 2, 0, 0), new Vector3(0, -Math.PI / 2, Math.PI / 2), 'vegGarden', camera, this.controls))
-    this.miniWorlds.push(new MiniWorld(4, new Vector3(1 / 2, 0, 0), new Vector3(0, Math.PI / 2, -Math.PI / 2), 'vegGarden', camera, this.controls))
+    this.miniWorlds.push(new MiniWorld({
+      miniWorldId: 2,
+      position: new Vector3(-1 / 2, 0, 0),
+      rotation: new Vector3(0, -Math.PI / 2, Math.PI / 2),
+      type: 'vegGarden',
+      camera: camera,
+      controls: this.controls,
+      environment: this.environment
+    }))
+
+    this.miniWorlds.push(new MiniWorld({
+      miniWorldId: 4,
+      position: new Vector3(1 / 2, 0, 0),
+      rotation: new Vector3(0, Math.PI / 2, -Math.PI / 2),
+      type: 'vegGarden',
+      camera: camera,
+      controls: this.controls,
+      environment: this.environment
+    }))
 
     // T & B
-    this.miniWorlds.push(new MiniWorld(1, new Vector3(0, 1 / 2, 0), new Vector3(-Math.PI / 2, 0, 0), 'vegGarden', camera, this.controls))
-    this.miniWorlds.push(new MiniWorld(6, new Vector3(0, -1 / 2, 0), new Vector3(Math.PI / 2, 0, 0), 'orchards', camera, this.controls))
-
-    // this.entities = [] // {type: 'carot', livingBeing: {Object}}
-
-    // this.environment = new Environment()
-    // this.geneticsManager = new GeneticsManager(this.entities, this.environment, this.ground.heightMap)
-    // this.raycaster = new MouseRaycaster(camera, this.ground.children)
+    this.miniWorlds.push(new MiniWorld({
+      miniWorldId: 1,
+      position: new Vector3(0, 1 / 2, 0),
+      rotation: new Vector3(-Math.PI / 2, 0, 0),
+      type: 'vegGarden',
+      camera: camera,
+      controls: this.controls,
+      environment: this.environment
+    }))
+    this.miniWorlds.push(new MiniWorld({
+      miniWorldId: 6,
+      position: new Vector3(0, -1 / 2, 0),
+      rotation: new Vector3(Math.PI / 2, 0, 0),
+      type: 'orchards',
+      camera: camera,
+      controls: this.controls,
+      environment: this.environment
+    }))
 
     this.init()
   }

@@ -13,22 +13,28 @@ import Genome from '@/webgl/genetics/Genome'
 import constant from '@/utils/constant'
 
 import { clamp } from 'utils/basicFunction'
-import Bush from '../livingBeings/bushes/Bush'
+import PearTree from '../livingBeings/bushes/PearTree'
+import GeneticsManager from '../../genetics/GeneticsManager'
 
 export default class MiniWorld extends Object3D {
-  constructor (miniWorldId, position, rotation, type = 'vegGarden', camera, controls) {
+  constructor (options/* miniWorldId, position, rotation, type = 'vegGarden', camera, controls */) {
     super()
 
-    this.miniWorldId = miniWorldId
+    this.lastLoopTime = 0
+
+    this.miniWorldId = options.miniWorldId
     this.removeRadius = 5.0
-    this.rotationValue = rotation
-    this.type = type
+    this.rotationValue = options.rotation
+    this.type = options.type
     this.entities = []
-    this.controls = controls
 
-    this.ground = new Face(position, rotation, type)
+    this.controls = options.controls
 
-    this.raycaster = new MouseRaycaster(camera, [this.ground])
+    this.ground = new Face(options.position, options.rotation, options.type)
+
+    this.raycaster = new MouseRaycaster(options.camera, [this.ground])
+
+    this.geneticsManager = new GeneticsManager(this.entities, options.environment)
 
     this.init()
   }
@@ -36,6 +42,17 @@ export default class MiniWorld extends Object3D {
     this.ground.init()
     this.add(this.ground)
     this.initMouseClickEvent()
+  }
+
+  resetCycle () {
+    this.geneticsManager.resetCycle()
+
+    const keys = Object.keys(this.entities)
+    keys.forEach(key => {
+      this.entities[key].forEach(entity => {
+        entity.resetCycle()
+      })
+    })
   }
 
   getEntitiesInArea (position, radius) {
@@ -53,17 +70,16 @@ export default class MiniWorld extends Object3D {
     livingBeing.rotation.x = this.ground.rotation.x + Math.PI / 2
     livingBeing.rotation.z = this.ground.rotation.z
 
+    if (!(type in this.entities)) this.entities[type] = []
+
+    this.entities[type].push(livingBeing)
     this.add(livingBeing)
-    this.entities.push({
-      type: type,
-      livingBeing: livingBeing
-    })
   }
 
-  removeEntity (entity) {
-    const index = this.entities.indexOf(entity)
-    this.entities.splice(index, 1)
-    this.remove(entity.livingBeing)
+  removeEntity (type, entity) {
+    const index = this.entities[type].indexOf(entity)
+    this.entities[type].splice(index, 1)
+    this.remove(entity)
   }
 
   initMouseClickEvent () {
@@ -79,23 +95,17 @@ export default class MiniWorld extends Object3D {
 
           switch (currentSelection) {
             case 'carot':
-              // console.log('Carotte !')
-              /* this.addEntity('carot', new Carot(this.currentTime, new Genome(constant.DEFAULT_GENOME.CAROT, true)
-                , worldPosition)) */
-              this.addEntity('bush', new Bush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PEAR_TREE, true), worldPosition, 'PEAR_TREE'))
+              this.addEntity('PEAR_TREE', new PearTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PEAR_TREE, true), worldPosition, 'PEAR'))
               break
             case 'banana':
-              console.log('Banana !')
               this.addEntity('banana', new Banana(this.currentTime, new Genome(constant.DEFAULT_GENOME.BANANA, true)
                 , worldPosition))
               break
             case 'tomato':
-              console.log('Tomato !')
               this.addEntity('tomato', new Tomato(this.currentTime, new Genome(constant.DEFAULT_GENOME.TOMATO, true)
                 , worldPosition))
               break
             case 'pear':
-              console.log('Pear !')
               this.addEntity('pear', new Pear(this.currentTime, new Genome(constant.DEFAULT_GENOME.PEAR, true)
                 , worldPosition))
               break
@@ -149,24 +159,29 @@ export default class MiniWorld extends Object3D {
       }
     }.bind(this))
   }
+
   update (dt) {
     this.currentTime = dt
 
-    this.entities.forEach(entity => {
-      const livingBeing = entity.livingBeing
+    const yearTime = dt % constant.TIME_INFOS.YEAR_TIME
+    if (this.lastLoopTime > yearTime) this.resetCycle()
+    this.lastLoopTime = yearTime
 
-      if (livingBeing.isAlive()) {
-        livingBeing.update(dt)
-      } else {
-        this.removeEntity(entity)
-      }
-    })
+    const keys = Object.keys(this.entities)
+
+    for (let i = 0; i < keys.length; i++) {
+      this.entities[keys[i]].forEach(entity => {
+        // check if entity is still alive
+        if (entity.isAlive()) {
+          entity.update(dt)
+        } else {
+          this.removeEntity(keys[i], entity)
+        }
+      })
+      this.geneticsManager.checkReproduction(dt, keys[i])
+    }
+
     const currentId = store.getters.getActiveWorld
     if (store.getters.getCurrentMode === 'remove' && this.miniWorldId === currentId) { this.ground.update(null, null) }
-
-    /* const newLB = this.geneticsManager.checkReproduction(dt)
-        for (const LB of newLB) {
-            this.addEntity(LB.type, LB.entity)
-        } */
   }
 }

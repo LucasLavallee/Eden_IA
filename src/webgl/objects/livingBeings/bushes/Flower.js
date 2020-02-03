@@ -11,7 +11,7 @@ export default class Flower extends LivingBeings {
 
     this.isFecondate = false
     this.parentGenome = treeGenome
-    this.pollinatorGenome = null // Genome from pollinator
+    this.fruitGenome = null
     this.isBorn = false
 
     if (dt <= bornTime) { this.init() }
@@ -40,6 +40,10 @@ export default class Flower extends LivingBeings {
     this.isBorn = true
   }
 
+  fecondate () {
+    this.isFecondate = true
+  }
+
   update (dt) {
     if (!this.isBorn && dt >= this.bornTime) {
       this.init()
@@ -50,6 +54,10 @@ export default class Flower extends LivingBeings {
 
     if (age > this.lifeTime) {
       this.die()
+    } else {
+      let scale = age / (this.lifeTime / 2)
+      scale = scale <= 1 ? scale : 1
+      this.scale.set(scale, scale, scale)
     }
   }
 }

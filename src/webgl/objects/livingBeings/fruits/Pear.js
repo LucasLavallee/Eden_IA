@@ -20,7 +20,7 @@ export default class Pear extends Fruit {
 
   init () {
     const x = 0; const y = 0
-    const size = 2
+    const size = 0.3
     var leafShape = new Shape()
 
     leafShape.bezierCurveTo(x + size * 2, y + size * 2, x + size * 2, y, x, y)
@@ -42,8 +42,8 @@ export default class Pear extends Fruit {
     }) */
 
     const material = new MeshPhongMaterial({
-      color: this.genome.color,
-      emissive: this.genome.color,
+      color: 0xdadc35,
+      emissive: 0xdadc35,
       emissiveIntensity: 0.3,
       side: DoubleSide
     })
@@ -73,18 +73,5 @@ export default class Pear extends Fruit {
     base.position.set(0, -size * 2.2, 0)
 
     this.add(pear, base, tige, leaf)
-  }
-
-  update (dt) {
-    const age = dt - this.bornTime
-
-    this.updateReproduction(dt)
-    if (age < this.lifeTime) {
-      let scale = age / (this.lifeTime / 2)
-      scale = scale <= 1 ? scale : 1
-      this.scale.set(scale, scale, scale)
-    } else {
-      this.die()
-    }
   }
 }
