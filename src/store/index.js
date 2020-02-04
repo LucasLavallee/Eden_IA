@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     currentMode: 'add', // 'navigate', 'add', 'remove'
     currentSelection: 'carot',
-    currentTime: ""
+    currentSpeed: 1
   },
   mutations: {
     CHANGE_CURRENT_MODE (state, val) {
@@ -16,8 +16,8 @@ export default new Vuex.Store({
     CHANGE_CURRENT_SELECTION (state, val) {
       state.currentSelection = val
     },
-    CHANGE_TIME (state, val) {
-      state.currentTime = val
+    CHANGE_CURRENT_SPEED (state, val) {
+      state.currentSpeed = val
     }
   },
   actions: {
@@ -27,15 +27,15 @@ export default new Vuex.Store({
     changeCurrentSelection: (store, selection) => {
       store.commit('CHANGE_CURRENT_SELECTION', selection)
     },
-    changeTime: (store, time) => {
-      store.commit('CHANGE_TIME', time)
+    changeCurrentSpeed: (store, speed) => {
+      store.commit('CHANGE_CURRENT_SPEED', speed)
     }
 
   },
   getters: {
     getCurrentSelection: state => state.currentSelection,
     getCurrentMode: state => state.currentMode,
-    getTime: state => state.currentTime
+    getCurrentSpeed: state => state.currentSpeed
   },
   modules: {
   }

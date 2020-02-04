@@ -15,6 +15,7 @@ import constant from 'utils/constant'
 import Stats from 'stats.js'
 
 import World from './objects/world/World'
+import store from '../store'
 
 export default class Webgl {
   constructor ($parent) {
@@ -86,7 +87,8 @@ export default class Webgl {
 
   render () {
     this.stats.begin()
-    this.currentTime++
+    this.currentTime+= 1*store.getters.getCurrentSpeed
+    console.log("CurrentSpeed : "+ store.getters.getCurrentSpeed)
 
     this.controls.update()
 

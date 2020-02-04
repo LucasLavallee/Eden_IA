@@ -11,6 +11,8 @@
 <script>
 
 import TimeManager from '../../webgl/controls/TimeManager'
+import { mapGetters, mapActions } from 'vuex'
+import store from '@/store'
 
 export default {
   name: 'Time',
@@ -22,17 +24,28 @@ export default {
     }
   },
   methods: {
+	...mapActions([
+    	'changeCurrentSpeed'
+	]),
+	computed: {
+    	...mapGetters([
+      		'getCurrentSpeed'
+    	])
+  	},
     setSpeed (el) {
       const speedText = el.target.innerText
       switch (speedText) {
         case 'x1':
-          this.speed = 1000
+		  this.speed = 1000
+		  store.dispatch('changeCurrentSpeed', 1)
           break
         case 'x2':
-          this.speed = 500
+		  this.speed = 500
+		  store.dispatch('changeCurrentSpeed', 2)
           break
         case 'x10':
-          this.speed = 100
+		  this.speed = 100
+		  store.dispatch('changeCurrentSpeed', 10)
           break
         default:
           break
@@ -49,9 +62,7 @@ export default {
     this.timeManager = new TimeManager()
     this.timerId = setInterval(() => {
       this.time = this.timeManager.print()
-      console.log('Vitesse du timeManage: ' + this.timeManager.getSpeed())
-      console.log('Vitesse du temps (affichage): ' + this.speed)
-    }, this.speed)
+    },this.speed)
   }
 }
 
