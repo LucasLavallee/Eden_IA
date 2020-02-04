@@ -35,7 +35,7 @@ export default {
   name: 'ModeSelection',
   data () {
     return {
-      currendMode: this.getCurrentMode
+      currentMode: this.getCurrentMode
     }
   },
   methods: {

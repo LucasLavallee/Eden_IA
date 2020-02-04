@@ -21,7 +21,7 @@ export default {
   @font-face
     font-family 'Space Comics'
     src url(../../../public/Space_Comics.ttf) format('truetype')
-  
+
   h2
     margin-top 0
 
@@ -85,7 +85,7 @@ export default {
   @media screen and (min-width: 641px)
     .home .about .text button
       background-color transparent
-    
+
     .home .about .text button a
       color #000
 
@@ -109,7 +109,7 @@ export default {
 
     .home .about .text button:hover
       background-color #fff
-    
+
     .home .about .text button a:hover
       color #089622
 

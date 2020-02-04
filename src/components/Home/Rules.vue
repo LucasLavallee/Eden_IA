@@ -4,7 +4,7 @@
       <h2>RÈGLES DU JEU</h2>
       <p>Fais d'EdenIA une planète riche en cultures de fruits et légumes ! Chaque face de la planète est destinée à un type de culture : un potager (où on cultive les légumes) ou un verger (où on cultive les fruits). Plus tes cultures prospèreront dans le temps, plus ce sera une garantie de survie pour les habitants à venir sur EdenIA !</p>
     </div>
-      
+
     <div class="elements">
       <div class="fruits">
         <img src="../../../public/Banana.svg" width="" height="" alt="banana">
@@ -37,7 +37,7 @@ export default {
   @font-face
     font-family 'Space Comics'
     src url(../../../public/Space_Comics.ttf) format('truetype')
-  
+
   h2
     margin-top 0
 
@@ -45,7 +45,7 @@ export default {
     background-color #815B50
     padding 5%
     color #fff
-  
+
   .home .rules h2
     color #089622
     text-shadow 0px 0px 15px #000
