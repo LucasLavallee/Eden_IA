@@ -6,8 +6,8 @@
 	<div class="button-container">
 		<button class="button" :class="currentSpeed === 1 ? 'active': ''" v-on:click="setSpeed"><span>x1</span></button>
 		<button class="button" :class="currentSpeed === 2 ? 'active': ''" v-on:click="setSpeed"><span>x2</span></button>
-		<button class="button" :class="currentSpeed === 5 ? 'active': ''" v-on:click="setSpeed"><span>x5</span></button>
 		<button class="button" :class="currentSpeed === 10 ? 'active': ''" v-on:click="setSpeed"><span>x10</span></button>
+		<button class="button" :class="currentSpeed === 100 ? 'active': ''" v-on:click="setSpeed"><span>x100</span></button>
 	</div>
   </div>
 </template>
@@ -45,15 +45,15 @@ export default {
 					store.dispatch('changeCurrentSpeed', 2)
 					this.currentSpeed = 2
 					break
-				case 'x5':
-					this.speed = 200
-					store.dispatch('changeCurrentSpeed', 5)
-					this.currentSpeed = 5
-					break
 				case 'x10':
 					this.speed = 100
 					store.dispatch('changeCurrentSpeed', 10)
 					this.currentSpeed = 10
+					break
+				case 'x100':
+					this.speed = 1
+					store.dispatch('changeCurrentSpeed', 100)
+					this.currentSpeed = 100
 					break
 				default:
 					break
