@@ -22,7 +22,6 @@ export default class Bush extends LivingBeings {
     this.lifeTime = constant.TIME_INFOS.YEAR_TIME * this.genome.lifeTime
 
     this.flowers = []
-    this.nbFlowers = this.genome.nbFlowers
     this.fruits = []
     this.spawnablePosition = [] // useful to add flowers adn fruits
     this.isAdult = false
@@ -60,7 +59,8 @@ export default class Bush extends LivingBeings {
   }
 
   deployFlowers (time) {
-    for (let i = 0; i < this.nbFlowers; i++) {
+    console.log(this.genome)
+    for (let i = 0; i < this.genome.nbFlowers; i++) {
       const spawnInfos = this.getRandomSpawnablePosition()
       const preciseLT = Math.ceil(this.cycleDetails.flowerTimeFactor * constant.TIME_INFOS.YEAR_TIME)
 
@@ -170,8 +170,7 @@ export default class Bush extends LivingBeings {
             }
 
             if (this.fruits.length !== 0) {
-              this.updateFruits(dt)
-              return
+              return this.updateFruits(dt)
             }
             return
           }
@@ -200,12 +199,27 @@ export default class Bush extends LivingBeings {
   }
 
   updateFruits (dt) {
-    this.fruits.forEach(fruit => {
-      if (fruit.isAlive()) {
-        fruit.update(dt)
-        return
+    const newBushes = []
+
+    for (let i = 0; i < this.fruits.length; i++) {
+      if (this.fruits[i].isAlive()) {
+        this.fruits[i].update(dt)
+        continue
       }
-      this.removeFruit(fruit)
-    })
+      const randTest = (randomInt(0, 100) === 1)
+
+      if (randTest) {
+        let vectorPos = new Vector3()
+        vectorPos.setFromMatrixPosition(this.fruits[i].matrixWorld)
+        newBushes.push(this.createNewBush(dt, vectorPos))
+      }
+      this.removeFruit(this.fruits[i])
+    }
+
+    return newBushes
+  }
+
+  createNewBush (dt, position) {
+
   }
 }

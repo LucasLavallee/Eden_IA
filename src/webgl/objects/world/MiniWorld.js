@@ -48,6 +48,7 @@ export default class MiniWorld extends Object3D {
     this.geneticsManager.resetCycle()
 
     const keys = Object.keys(this.entities)
+
     keys.forEach(key => {
       this.entities[key].forEach(entity => {
         entity.resetCycle()
@@ -173,7 +174,12 @@ export default class MiniWorld extends Object3D {
       this.entities[keys[i]].forEach(entity => {
         // check if entity is still alive
         if (entity.isAlive()) {
-          entity.update(dt)
+          const res = entity.update(dt)
+          if (res && res.length > 0) {
+            res.forEach(bush => {
+              this.addEntity(bush.type, bush.livingBeing)
+            })
+          }
         } else {
           this.removeEntity(keys[i], entity)
         }

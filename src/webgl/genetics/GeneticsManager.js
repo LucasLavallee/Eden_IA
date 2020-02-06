@@ -1,6 +1,6 @@
 
 import constant from 'utils/constant'
-import { distance, randomInt, randomFloat } from 'utils/basicFunction'
+import { distance, randomInt, randomFloat, clamp } from 'utils/basicFunction'
 import Genome from './Genome'
 
 export default class GeneticsManager {
@@ -19,6 +19,12 @@ export default class GeneticsManager {
 
   resetCycle () {
     this.done = []
+    const keys = Object.keys(this.entities)
+    keys.forEach(key => {
+      this.entities[key].forEach(entity => {
+        this.mutate(entity.genome, true)
+      })
+    })
   }
 
   makeGeneticsAppend (first, second) {
@@ -53,10 +59,10 @@ export default class GeneticsManager {
     return fitness
   }
 
-  mutate (genome) {
+  mutate (genome, forceMutation = false) {
     const mutate = randomInt(0, 4) === 1 // one chance in two of being greeted
 
-    if (!mutate) { return }
+    if (!mutate && !forceMutation) { return }
 
     const mutateStrength = randomFloat(0, 0.05)
 
@@ -64,6 +70,17 @@ export default class GeneticsManager {
       const gap = this.environment.properties[key] - genome[key]
       genome[key] += gap * mutateStrength
     })
+
+    if (!forceMutation) return
+
+    if (genome.nbFlowers) {
+      const fitness = this.fitness(genome)
+      if (fitness < 0.6) {
+        genome.nbFlowers = clamp(Math.floor(genome.nbFlowers * 0.8), 2, 20)
+      } else {
+        genome.nbFlowers = clamp(Math.ceil(genome.nbFlowers * 1.2), 2, 15)
+      }
+    }
   }
 
   getNewChildrens (genome, targetGenome) {
@@ -103,6 +120,11 @@ export default class GeneticsManager {
     return myChildrens[0]
   }
 
+  getPollutionRatio () {
+    const datas = this.environment.getProperties()
+    return Math.floor(clamp(datas.pollution, 10, 100) / 10) + 1
+  }
+
   // Find a partner and test reproduction
   checkReproduction (dt, entityType) {
     if (this.done.includes(entityType)) return
@@ -123,7 +145,7 @@ export default class GeneticsManager {
     for (let i = 0; i < flowers.length; i++) {
       const callingEntity = flowers[i]
 
-      const rand = randomInt(0, 4)
+      const rand = randomInt(0, this.getPollutionRatio())
       const fecondate = rand === 1
 
       if (!fecondate) continue
