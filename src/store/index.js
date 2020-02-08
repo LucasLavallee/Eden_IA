@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentMode: 'add', // 'navigate', 'add', 'remove'
-    currentSelection: 'carot',
+    currentSelection: 'carrot',
     currentSpeed: 1
   },
   mutations: {
