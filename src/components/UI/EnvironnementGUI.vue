@@ -65,8 +65,8 @@ export default {
 <style lang="stylus" scoped>
   #container
     position fixed
-    top 20px
-    right 20px
+    top 50px
+    right 30px
     font-size 20px
     background-color #212121
     // border solid 2px #d1ccc0

@@ -1,18 +1,18 @@
 <template>
   <div id="container">
     <div id="modeSelection">
-        <div class="mode" :class="getCurrentMode === 'navigate' ? 'active': ''" @click="changeCurrentMode('navigate')">
+        <div class="mode" :class="getCurrentMode === 'Navigate' ? 'active': ''" @click="changeCurrentMode('Navigate')">
             <font-awesome-icon class="icon" :icon="['fas','arrows-alt']" size="2x" />
         </div>
-        <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
+        <div class="mode" :class="getCurrentMode === 'Remove' ? 'active': ''" @click="changeCurrentMode('Remove')">
             <font-awesome-icon :icon="['fas','trash-alt']" size="2x" />
         </div>
-        <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
+        <div class="mode" :class="getCurrentMode === 'Add' ? 'active': ''" @click="changeCurrentMode('Add')">
             <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
         </div>
     </div>
     <transition name="fade">
-    <div v-if="getCurrentMode === 'add'" class="items-container">
+    <div v-if="getCurrentMode === 'Add'" class="items-container">
       <div class="item" id="carrot" :class="getCurrentSelection === 'carrot' ? 'active': ''" @click="changeCurrentSelection('carrot')">
         <img class="icon-item" :src="carrot"/>
       </div>
@@ -96,8 +96,8 @@ export default {
 <style lang="stylus" scoped>
   #container
     position fixed
-    top 20px
-    left 20px
+    top 50px
+    left 50px
     font-size 20px
     display flex
     justify-content flex-start
@@ -161,25 +161,21 @@ export default {
           width 30px
           height 30px
         }
+
   // Animation handler
 
   .fade-enter-active {
-    // transition: opacity .5s, left .5s;
-    transition: opacity .5s ease-out, transform .7s ease-out
+    transition: opacity  .2s ease-out, transform .5s cubic-bezier(.22,1.07,.57,1.42)
   }
 
    .fade-leave-active {
-     transition: opacity .5s ease-in, transform .5s ease-in 
+     transition: opacity .2s ease-in, transform .3s ease-in
    }
 
-  .fade-enter/* .fade-leave-active below version 2.1.8 */ {
+  .fade-enter, .fade-leave-to {
     transform: translateY(-20px)
     opacity: 0
   }
-   .fade-leave-to {
-    transform: translateY(20px)
-    opacity: 0
-   }
 
 
 </style>

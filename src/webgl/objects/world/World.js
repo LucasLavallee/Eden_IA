@@ -76,7 +76,7 @@ export default class World extends Object3D {
       const currentMode = store.getters.getCurrentMode
       const worldPosition = this.raycaster.getIntersectionPosition()
       switch (currentMode) {
-        case 'add': {
+        case 'Add': {
           this.controls.enabled = false
           const currentSelection = store.getters.getCurrentSelection
 
@@ -138,7 +138,7 @@ export default class World extends Object3D {
           }
           break
         }
-        case 'remove': {
+        case 'Remove': {
           this.controls.enabled = false
           if (!worldPosition) return
 
@@ -161,7 +161,7 @@ export default class World extends Object3D {
       const currentMode = store.getters.getCurrentMode
       const worldPosition = this.raycaster.getIntersectionPosition()
 
-      if (currentMode === 'remove') {
+      if (currentMode === 'Remove') {
         this.ground.update(worldPosition, this.removeRadius)
       } else {
         this.ground.update(null, 0.0)
@@ -172,7 +172,7 @@ export default class World extends Object3D {
     window.addEventListener('wheel', function (e) {
       const currentMode = store.getters.getCurrentMode
 
-      if (currentMode !== 'remove') { return }
+      if (currentMode !== 'Remove') { return }
 
       const delta = Math.sign(event.deltaY)
 
@@ -191,13 +191,13 @@ export default class World extends Object3D {
     const app = document.getElementById('app')
 
     switch (mode) {
-      case 'add':
+      case 'Add':
         app.style.cursor = 'crosshair'
         break
-      case 'navigate':
+      case 'Navigate':
         app.style.cursor = 'move'
         break
-      case 'remove':
+      case 'Remove':
         app.style.cursor = 'default'
         break
       default:
@@ -220,7 +220,7 @@ export default class World extends Object3D {
       }
     })
 
-    if (store.getters.getCurrentMode === 'remove') { this.ground.update(null, null) }
+    if (store.getters.getCurrentMode === 'Remove') { this.ground.update(null, null) }
 
     const newLB = this.geneticsManager.checkReproduction(dt)
     for (const LB of newLB) {

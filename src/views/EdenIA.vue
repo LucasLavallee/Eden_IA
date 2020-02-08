@@ -1,11 +1,15 @@
 <template>
   <div class="edenIA">
-    <!-- <canvas class="BackgroundGL" ref="canvas">
+    <canvas class="BackgroundGL" ref="canvas">
       fallback
-    </canvas> -->
+    </canvas>
     <ModeSelection/>
     <EnvironnementGui/>
     <Time/>
+    <Information/>
+    <div class="home-button">
+      <router-link to="/">Home</router-link>
+    </div>
   </div>
 </template>
 
@@ -15,6 +19,7 @@ import Webgl from '../webgl/Webgl'
 import loop from 'raf-loop'
 import ModeSelection from '../components/UI/ModeSelection'
 import EnvironnementGui from '../components/UI/EnvironnementGUI'
+import Information from '../components/UI/Informations'
 import Time from '../components/UI/Time'
 
 export default {
@@ -22,7 +27,8 @@ export default {
   components: {
     ModeSelection,
     EnvironnementGui,
-    Time
+    Time,
+    Information
   },
   data () {
     return {
@@ -56,5 +62,8 @@ export default {
     position absolute
     top 0
     left 0
-
+  .home-button
+    position absolute
+    bottom 50px
+    right 80px
 </style>
