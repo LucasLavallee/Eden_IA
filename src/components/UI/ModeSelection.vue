@@ -11,6 +11,7 @@
             <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
         </div>
     </div>
+    <transition name="fade">
     <div v-if="getCurrentMode === 'add'" class="items-container">
       <div class="item" id="carrot" :class="getCurrentSelection === 'carrot' ? 'active': ''" @click="changeCurrentSelection('carrot')">
         <img class="icon-item" :src="carrot"/>
@@ -43,6 +44,7 @@
         <img class="icon-item" :src="orange"/>
       </div>
     </div>
+    </transition>
   </div>
 </template>
 
@@ -137,9 +139,7 @@ export default {
       flex-wrap wrap
       width 400px
       padding 20px
-
       .item
-        // background-color #fff
         margin 10px
         padding 10px
         cursor pointer
@@ -161,5 +161,25 @@ export default {
           width 30px
           height 30px
         }
+  // Animation handler
+
+  .fade-enter-active {
+    // transition: opacity .5s, left .5s;
+    transition: opacity .5s ease-out, transform .7s ease-out
+  }
+
+   .fade-leave-active {
+     transition: opacity .5s ease-in, transform .5s ease-in 
+   }
+
+  .fade-enter/* .fade-leave-active below version 2.1.8 */ {
+    transform: translateY(-20px)
+    opacity: 0
+  }
+   .fade-leave-to {
+    transform: translateY(20px)
+    opacity: 0
+   }
+
 
 </style>
