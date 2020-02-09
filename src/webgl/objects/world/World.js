@@ -112,13 +112,13 @@ export default class World extends Object3D {
     const app = document.getElementById('app')
 
     switch (mode) {
-      case 'add':
+      case 'Add':
         app.style.cursor = 'crosshair'
         break
-      case 'navigate':
+      case 'Navigate':
         app.style.cursor = 'move'
         break
-      case 'remove':
+      case 'Remove':
         app.style.cursor = 'default'
         break
       default:
@@ -145,7 +145,11 @@ export default class World extends Object3D {
       }
     })
 
+<<<<<<< HEAD
     if (store.getters.getCurrentMode === 'remove') { this.ground.update(null, null) } */
+=======
+    if (store.getters.getCurrentMode === 'Remove') { this.ground.update(null, null) }
+>>>>>>> origin/features/UIHandler
 
     /* const newLB = this.geneticsManager.checkReproduction(dt)
     for (const LB of newLB) {
