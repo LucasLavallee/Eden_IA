@@ -1,8 +1,8 @@
 <template>
   <div class="edenIA">
-    <!-- <canvas class="BackgroundGL" ref="canvas">
+    <canvas class="BackgroundGL" ref="canvas">
       fallback
-    </canvas> -->
+    </canvas>
     <ModeSelection/>
     <!--<MiniWorldInfos/>-->
     <EnvironnementGui/>

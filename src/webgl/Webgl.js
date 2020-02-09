@@ -17,7 +17,6 @@ import constant from 'utils/constant'
 import Stats from 'stats.js'
 
 import World from './objects/world/World'
-import store from '../store'
 
 import store from '@/store'
 
