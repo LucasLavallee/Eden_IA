@@ -20,17 +20,17 @@ export default class Pear extends Fruit {
 
   init () {
     const x = 0; const y = 0
-    const size = 0.3
+    // const size = 0.3
     var leafShape = new Shape()
 
-    leafShape.bezierCurveTo(x + size * 2, y + size * 2, x + size * 2, y, x, y)
+    leafShape.bezierCurveTo(x + this.genome.size * 2, y + this.genome.size * 2, x + this.genome.size * 2, y, x, y)
 
     // base part 1
-    var geometry = new CylinderBufferGeometry(size * 0.2, size * 2, size * 2.5, 24, 32)
+    var geometry = new CylinderBufferGeometry(this.genome.size * 0.2, this.genome.size * 2, this.genome.size * 2.5, 24, 32)
     // base part 2
-    var geometry2 = new SphereBufferGeometry(size * 2.25, 32, 32)
+    var geometry2 = new SphereBufferGeometry(this.genome.size * 2.25, 32, 32)
     // tige
-    var geometry3 = new CylinderBufferGeometry(size / 6, size / 6, size * 1.5, 24, 32)
+    var geometry3 = new CylinderBufferGeometry(this.genome.size / 6, this.genome.size / 6, this.genome.size * 1.5, 24, 32)
     // feuille
     var geometry4 = new ShapeBufferGeometry(leafShape)
 
@@ -68,9 +68,9 @@ export default class Pear extends Fruit {
 
     /* positionnement de la tige et de la feuille
     par rapport à la base */
-    tige.position.set(0, size + 1, 0)
-    leaf.position.set(0, size + 1.5, 0.5)
-    base.position.set(0, -size * 2.2, 0)
+    tige.position.set(0, this.genome.size + 1, 0)
+    leaf.position.set(0, this.genome.size + 1.5, 0)
+    base.position.set(0, -this.genome.size * 2.2, 0)
 
     this.add(pear, base, tige, leaf)
   }

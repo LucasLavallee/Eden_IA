@@ -2,6 +2,9 @@ import { Object3D, Vector3 } from 'three'
 import MiniWorld from './MiniWorld'
 import Environment from './environment/Environment'
 
+import store from '@/store'
+// import carot from '../../../assets/carot.cur'
+
 export default class World extends Object3D {
   constructor (camera, controls) {
     super()
@@ -101,7 +104,31 @@ export default class World extends Object3D {
   initMouseClickEvent () {
 
   }
+
+  // Cursor
+
+  checkMode () {
+    const mode = store.getters.getCurrentMode
+    const app = document.getElementById('app')
+
+    switch (mode) {
+      case 'add':
+        app.style.cursor = 'crosshair'
+        break
+      case 'navigate':
+        app.style.cursor = 'move'
+        break
+      case 'remove':
+        app.style.cursor = 'default'
+        break
+      default:
+        app.style.cursor = 'default'
+        break
+    }
+  }
+
   update (dt) {
+    this.checkMode()
     this.currentTime = dt
 
     this.miniWorlds.forEach(miniWorld => {

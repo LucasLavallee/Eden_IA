@@ -2,7 +2,7 @@ import Fruit from './Fruit'
 import constant from 'utils/constant'
 
 import {
-  SphereBufferGeometry,
+  ConeBufferGeometry,
   CylinderBufferGeometry,
   Shape,
   ShapeBufferGeometry,
@@ -11,7 +11,7 @@ import {
   DoubleSide
 } from 'three'
 
-export default class Tomato extends Fruit {
+export default class Strawberry extends Fruit {
   constructor (bornTime = 0, genome, position) {
     super(bornTime, genome, position)
 
@@ -21,20 +21,16 @@ export default class Tomato extends Fruit {
   init () {
     const x = 0
     const y = 0
-
     var leafShape = new Shape()
-    var leafShape2 = new Shape()
 
-    leafShape.bezierCurveTo(x + this.genome.size, y + this.genome.size, x + this.genome.size, y, x, y)
-    leafShape2.bezierCurveTo(x + this.genome.size, this.genome.size, x + this.genome.size, y, x, y)
+    leafShape.bezierCurveTo(x + this.genome.size + 0.5, y + this.genome.size + 0.5, x + this.genome.size + 0.5, y, x, y)
 
     // base
-    const geometry = new SphereBufferGeometry(this.genome.size, 32, 32)
+    var geometry = new ConeBufferGeometry(this.genome.size, this.genome.size * 2, 32)
     // tige
-    const geometry2 = new CylinderBufferGeometry(this.genome.size / 16, this.genome.size / 32, this.genome.size / 2, 24)
+    var geometry2 = new CylinderBufferGeometry(this.genome.size / 10, this.genome.size / 4, this.genome.size / 2, 32)
     // feuille
-    const geometry3 = new ShapeBufferGeometry(leafShape)
-    const geometry4 = new ShapeBufferGeometry(leafShape2)
+    var geometry3 = new ShapeBufferGeometry(leafShape)
 
     // materials
     const material = new MeshPhongMaterial({
@@ -51,20 +47,21 @@ export default class Tomato extends Fruit {
       side: DoubleSide
     })
 
-    const tomato = new Mesh(geometry, material)
+    const strawberry = new Mesh(geometry, material)
     const tige = new Mesh(geometry2, material2)
     const leaf = new Mesh(geometry3, material2)
-    const leaf2 = new Mesh(geometry4, material2)
+    const leaf2 = new Mesh(geometry3, material2)
 
     /* positionnement de la tige et de la feuille
     par rapport à la base */
     tige.position.set(0, this.genome.size, 0)
-    leaf.position.set(0, this.genome.size, (this.genome.size / 100) * 3)
-    leaf2.position.set(0, this.genome.size, (this.genome.size / 100) * 3)
-    leaf.rotation.set(30, 10, 0)
-    leaf2.rotation.set(20, 0, 0)
+    leaf.position.set(0, this.genome.size, 0)
+    leaf2.position.set(0, this.genome.size, 0)
+    strawberry.rotation.set(0, 0, Math.PI)
+    leaf.rotation.set(Math.PI / 2, this.genome.size / 4, 0)
+    leaf2.rotation.set(Math.PI / 2, 0, Math.PI)
 
-    this.add(tomato, tige, leaf, leaf2)
+    this.add(strawberry, tige, leaf, leaf2)
   }
 
   update (dt) {
