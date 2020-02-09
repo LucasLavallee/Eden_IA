@@ -1,11 +1,12 @@
 <template>
   <div class="edenIA">
-    <canvas class="BackgroundGL" ref="canvas">
+    <!-- <canvas class="BackgroundGL" ref="canvas">
       fallback
-    </canvas>
+    </canvas> -->
     <ModeSelection/>
     <!--<MiniWorldInfos/>-->
     <EnvironnementGui/>
+    <Time/>
   </div>
 </template>
 
@@ -15,12 +16,14 @@ import Webgl from '../webgl/Webgl'
 import loop from 'raf-loop'
 import ModeSelection from '../components/UI/ModeSelection'
 import EnvironnementGui from '../components/UI/EnvironnementGUI'
+import Time from '../components/UI/Time'
 
 export default {
   name: 'EdenIA',
   components: {
     ModeSelection,
-    EnvironnementGui
+    EnvironnementGui,
+    Time
   },
   data () {
     return {

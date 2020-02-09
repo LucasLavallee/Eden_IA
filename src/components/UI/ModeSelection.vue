@@ -1,19 +1,20 @@
 <template>
   <div id="container">
-    <!-- <span>Tools</span> -->
     <div id="modeSelection">
         <div class="mode" :class="getCurrentMode === 'navigate' ? 'active': ''" @click="changeCurrentMode('navigate')">
-            <font-awesome-icon :icon="['fas','arrows-alt']" size="2x" />
-        </div>
-        <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
-            <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
+            <font-awesome-icon class="icon" :icon="['fas','arrows-alt']" size="2x" />
         </div>
         <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
             <font-awesome-icon :icon="['fas','trash-alt']" size="2x" />
         </div>
+        <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
+            <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
+        </div>
     </div>
     <div v-if="getCurrentMode === 'add'" class="items-container">
-      <div class="item" id="carot" :class="getCurrentSelection === 'carot' ? 'active': ''" @click="changeCurrentSelection('carot')"> Carot </div>
+      <div class="item" id="carot" :class="getCurrentSelection === 'carot' ? 'active': ''" @click="changeCurrentSelection('carot')">
+        <font-awesome-icon :icon="['fas','carrot']" size="2x"/>
+      </div>
       <div class="item" id="beet" :class="getCurrentSelection === 'beet' ? 'active': ''" @click="changeCurrentSelection('beet')"> Beet </div>
       <div class="item" id="pepper" :class="getCurrentSelection === 'pepper' ? 'active': ''" @click="changeCurrentSelection('pepper')"> Pepper </div>
       <div class="item" id="pumpkin" :class="getCurrentSelection === 'pumpkin' ? 'active': ''" @click="changeCurrentSelection('pumpkin')"> Pumpkin </div>
@@ -34,7 +35,7 @@ export default {
   name: 'ModeSelection',
   data () {
     return {
-      currendMode: this.getCurrentMode
+      currentMode: this.getCurrentMode
     }
   },
   methods: {
@@ -54,23 +55,23 @@ export default {
 
 <style lang="stylus" scoped>
   #container
-    // border solid 2px black
     position fixed
     top 20px
     left 20px
     font-size 20px
     display flex
     justify-content flex-start
+    flex-direction column
     #modeSelection
-      left 20px
       display flex
       flex-direction column
-      font-size 0.8em
-      margin-right 20px
+      font-size 0.6em
+      margin-bottom 20px
+      border-radius 0px
     .mode
       margin 5px 0
-      background-color #d1ccc0
-      border solid 1px #d1ccc0
+      // background-color #27ae60
+      border solid 2px #212121
       border-radius 20px
       padding 5px
       cursor pointer
@@ -79,28 +80,40 @@ export default {
       display flex
       justify-content center
       align-items center
+      color #212121
+      box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
       &.active
-        border solid 1px #84817a
+        background-color #212121
+        pointer-events none
+        color #099622
+        box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+      &:hover
+        // background-color #27ae60
+        // border solid 3px #34495e
+        // margin-left 10px
+        box-shadow 0px 0px 0px #000000, 0px 0px 0px #0d0d0d
 
     .items-container
       display flex
       flex-direction row
-      // border solid 2px yellow
+      border solid 2px #825a2c
+      border-radius 20px
       justify-content center
       flex-wrap wrap
-      width 100px
-      background-color #f7f1e3
+      width 400px
+      // background-color #825a2c
 
       .item
         background-color #fff
         margin 10px
-        padding 10px 30px
+        padding 10px
         cursor pointer
-        border-radius 8px
-        width 20px
-        height 30px
-
+        border-radius 50%
+        width 40px
+        height 40px
+        text-align center
         &.active
           background-color blue
           color #fff
+
 </style>

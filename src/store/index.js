@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     currentMode: 'add', // 'navigate', 'add', 'remove'
     currentSelection: 'carot',
-    activeWorld: 0
+    activeWorld: 0,
+    currentSpeed: 1
   },
   mutations: {
     CHANGE_CURRENT_MODE (state, val) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     CHANGE_ACTIVE_WORLD (state, val) {
       state.activeWorld = val
+    },
+    CHANGE_CURRENT_SPEED (state, val) {
+      state.currentSpeed = val
     }
   },
   actions: {
@@ -29,13 +33,17 @@ export default new Vuex.Store({
     },
     changeActiveWorld: (store, id) => {
       store.commit('CHANGE_ACTIVE_WORLD', id)
+    },
+    changeCurrentSpeed: (store, speed) => {
+      store.commit('CHANGE_CURRENT_SPEED', speed)
     }
 
   },
   getters: {
     getCurrentSelection: state => state.currentSelection,
     getCurrentMode: state => state.currentMode,
-    getActiveWorld: state => state.activeWorld
+    getActiveWorld: state => state.activeWorld,
+    getCurrentSpeed: state => state.currentSpeed
   },
   modules: {
   }
