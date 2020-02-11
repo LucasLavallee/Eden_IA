@@ -4,7 +4,7 @@
 		  <span class="info-mode">{{getCurrentMode}}</span><br/>
 	  </div>
 	  <div class="container-species">
-		  <span class="info-species" v-if="getCurrentMode==='Add'">{{getCurrentSelection}}</span>
+		  <span class="info-species" v-if="getCurrentMode==='add'">{{getCurrentSelection}}</span>
 	  </div>
   </div>
   
@@ -43,6 +43,9 @@ export default {
 				text-transform capitalize
 		.container-species
 			margin 10px
+	.info-mode
+	.info-species
+		text-transform capitalize
 	
 		
 </style>

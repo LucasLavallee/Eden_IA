@@ -13,35 +13,35 @@
         </div>
     </div>
     <transition name="fade">
-    <div v-if="pannelShow" v-on:mouseover="mouseOverHandle" v-on:mouseout="mouseOutHandle" class="items-container">
-      <div class="item" id="carrot" :class="getCurrentSelection === 'carrot' ? 'active': ''" @click="changeCurrentSelection('carrot')">
+    <div v-if="pannelShow" v-on:mouseout="mouseOutHandle" class="items-container">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="carrot" :class="getCurrentSelection === 'carrot' ? 'active': ''" @click="changeCurrentSelection('carrot')">
         <img class="icon-item" :src="carrot"/>
       </div>
-      <div class="item" id="beet" :class="getCurrentSelection === 'beet' ? 'active': ''" @click="changeCurrentSelection('beet')">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="beet" :class="getCurrentSelection === 'beet' ? 'active': ''" @click="changeCurrentSelection('beet')">
         <img class="icon-item" :src="beet"/>
       </div>
-      <div class="item" id="pepper" :class="getCurrentSelection === 'pepper' ? 'active': ''" @click="changeCurrentSelection('pepper')">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="pepper" :class="getCurrentSelection === 'pepper' ? 'active': ''" @click="changeCurrentSelection('pepper')">
         <img class="icon-item" :src="pepper"/>
       </div>
-      <div class="item" id="pumpkin" :class="getCurrentSelection === 'pumpkin' ? 'active': ''" @click="changeCurrentSelection('pumpkin')">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="pumpkin" :class="getCurrentSelection === 'pumpkin' ? 'active': ''" @click="changeCurrentSelection('pumpkin')">
         <img class="icon-item" :src="pumpkin"/>
       </div>
-      <div class="item" id="zucchini" :class="getCurrentSelection === 'zucchini' ? 'active': ''" @click="changeCurrentSelection('zucchini')">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="zucchini" :class="getCurrentSelection === 'zucchini' ? 'active': ''" @click="changeCurrentSelection('zucchini')">
         <img class="icon-item" :src="zucchini"/>
       </div>
-      <div class="item" id="banana" :class="getCurrentSelection === 'banana' ? 'active': ''" @click="changeCurrentSelection('banana')">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="banana" :class="getCurrentSelection === 'banana' ? 'active': ''" @click="changeCurrentSelection('banana')">
         <img class="icon-item" :src="banana"/>
       </div>
-      <div class="item" id="pear" :class="getCurrentSelection === 'pear' ? 'active': ''" @click="changeCurrentSelection('pear')">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="pear" :class="getCurrentSelection === 'pear' ? 'active': ''" @click="changeCurrentSelection('pear')">
         <img class="icon-item" :src="pear"/>
       </div>
-      <div class="item" id="tomato" :class="getCurrentSelection === 'tomato' ? 'active': ''" @click="changeCurrentSelection('tomato')">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="tomato" :class="getCurrentSelection === 'tomato' ? 'active': ''" @click="changeCurrentSelection('tomato')">
         <img class="icon-item" :src="tomato"/>
       </div>
-      <div class="item" id="strawberry" :class="getCurrentSelection === 'strawberry' ? 'active': ''" @click="changeCurrentSelection('strawberry')">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="strawberry" :class="getCurrentSelection === 'strawberry' ? 'active': ''" @click="changeCurrentSelection('strawberry')">
         <img class="icon-item" :src="strawberry"/>
       </div>
-      <div class="item" id="orange" :class="getCurrentSelection === 'orange' ? 'active': ''" @click="changeCurrentSelection('orange')">
+      <div v-on:mouseover="mouseOverHandle" class="item" id="orange" :class="getCurrentSelection === 'orange' ? 'active': ''" @click="changeCurrentSelection('orange')">
         <img class="icon-item" :src="orange"/>
       </div>
     </div>
@@ -94,7 +94,7 @@ export default {
       if(this.timerPannel !== null){
         clearInterval(this.timerPannel)
       }
-      this.timerPannel = setTimeout(()=>{this.pannelShow = false}, 1000)
+      this.timerPannel = setTimeout(()=>{this.pannelShow = false}, 1500)
 
     }
   },
@@ -137,7 +137,6 @@ export default {
       box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
       &.active
         background-color #212121
-        pointer-events none
         color #099622
         box-shadow 0px 0px 0px #000000, 0px 0px 0px #0d0d0d
       &:hover
