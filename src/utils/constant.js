@@ -122,15 +122,29 @@ export default {
       pollution: 30,
       brightness: [20, 70],
       humidity: [10, 40]
+    },
+    ORANGE_TREE: {
+      lifeTime: [60, 80], // year / cycle
+      nbFlowers: [5, 10],
+      size: 1.0,
+      temperature: [20, 40],
+      pollution: 20,
+      brightness: [20, 70],
+      humidity: [10, 40]
     }
   },
-
   BUSHES_DATA: {
     PEAR_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
       reproductionDistance: 20
+    },
+    ORANGE_TREE: {
+      startingCycle: 0.2,
+      flowerTimeFactor: 0.2,
+      fruitTimeFactor: 0.5,
+      reproductionDistance: 10
     }
   },
 

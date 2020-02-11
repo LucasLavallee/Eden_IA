@@ -34,8 +34,8 @@ export default class Orange extends Fruit {
     const geometry3 = new ShapeBufferGeometry(leafShape)
 
     const material = new MeshPhongMaterial({
-      color: this.genome.color,
-      emissive: this.genome.color,
+      color: 0xff8b00,
+      emissive: 0xff8b00,
       emissiveIntensity: 0.3,
       side: DoubleSide
     })
@@ -60,18 +60,5 @@ export default class Orange extends Fruit {
     leaf.rotation.set(Math.PI / -2, Math.PI / 2, Math.PI)
 
     this.add(orange, tige, leaf)
-  }
-
-  update (dt) {
-    const age = dt - this.bornTime
-
-    this.updateReproduction(dt)
-    if (age < this.lifeTime) {
-      let scale = age / (this.lifeTime / 2)
-      scale = scale <= 1 ? scale : 1
-      this.scale.set(scale, scale, scale)
-    } else {
-      this.die()
-    }
   }
 }

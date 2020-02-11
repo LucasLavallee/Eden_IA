@@ -1,18 +1,18 @@
 <template>
   <div id="container">
     <div id="modeSelection">
-        <div class="mode" :class="getCurrentMode === 'Navigate' ? 'active': ''" @click="changeCurrentMode('Navigate')">
+        <div class="mode" :class="getCurrentMode === 'navigate' ? 'active': ''" @click="changeCurrentMode('navigate')">
             <font-awesome-icon class="icon" :icon="['fas','arrows-alt']" size="2x" />
         </div>
-        <div class="mode" :class="getCurrentMode === 'Remove' ? 'active': ''" @click="changeCurrentMode('Remove')">
+        <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
             <font-awesome-icon :icon="['fas','trash-alt']" size="2x" />
         </div>
-        <div class="mode" :class="getCurrentMode === 'Add' ? 'active': ''" @click="changeCurrentMode('Add')">
+        <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
             <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
         </div>
     </div>
     <transition name="fade">
-    <div v-if="getCurrentMode === 'Add'" class="items-container">
+    <div v-if="getCurrentMode === 'add'" class="items-container">
       <div class="item" id="carrot" :class="getCurrentSelection === 'carrot' ? 'active': ''" @click="changeCurrentSelection('carrot')">
         <img class="icon-item" :src="carrot"/>
       </div>

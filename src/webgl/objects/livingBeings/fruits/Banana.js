@@ -55,18 +55,6 @@ class Banana extends Fruit {
     this.add(this.cone2)
   }
 
-  update (dt) {
-    const age = dt - this.bornTime
-
-    this.updateReproduction(dt)
-    if (age < this.lifeTime) {
-      let scale = age / (this.lifeTime / 2)
-      scale = scale <= 1 ? scale : 1
-      this.scale.set(scale, scale, scale)
-    } else {
-      this.die()
-    }
-  }
 }
 
 export default Banana

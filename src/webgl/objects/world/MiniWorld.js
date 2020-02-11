@@ -5,15 +5,13 @@ import Face from './ground/Face'
 import MouseRaycaster from '@/webgl/MouseRaycaster'
 import store from '@/store'
 
-// import Carot from '@/webgl/objects/livingBeings/vegetables/Carot'
-import Banana from '@/webgl/objects/livingBeings/fruits/Banana'
-import Tomato from '@/webgl/objects/livingBeings/fruits/Tomato'
-import Pear from '@/webgl/objects/livingBeings/fruits/Pear'
 import Genome from '@/webgl/genetics/Genome'
 import constant from '@/utils/constant'
 
 import { clamp } from 'utils/basicFunction'
 import PearTree from '../livingBeings/bushes/PearTree'
+import OrangeTree from '../livingBeings/bushes/OrangeTree.js'
+import BananaTree from '../livingBeings/bushes/BananaTree.js'
 import GeneticsManager from '../../genetics/GeneticsManager'
 
 export default class MiniWorld extends Object3D {
@@ -88,27 +86,33 @@ export default class MiniWorld extends Object3D {
       const currentMode = store.getters.getCurrentMode
       const worldPosition = this.raycaster.getIntersectionPosition()
       if (!worldPosition) return
+      console.log('click', currentMode)
 
       switch (currentMode) {
         case 'add': {
           const currentSelection = store.getters.getCurrentSelection
+          console.log(currentSelection)
           if (!worldPosition) return
 
           switch (currentSelection) {
-            case 'carot':
-              this.addEntity('PEAR_TREE', new PearTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PEAR_TREE, true), worldPosition, 'PEAR'))
+            case 'beet':
               break
             case 'banana':
-              this.addEntity('banana', new Banana(this.currentTime, new Genome(constant.DEFAULT_GENOME.BANANA, true)
-                , worldPosition))
+              this.addEntity('BANANA_TREE', new BananaTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.BANANA_TREE, true), worldPosition, 'BANANA'))
               break
-            case 'tomato':
-              this.addEntity('tomato', new Tomato(this.currentTime, new Genome(constant.DEFAULT_GENOME.TOMATO, true)
-                , worldPosition))
+            case 'orange': 
+              this.addEntity('ORANGE_TREE', new OrangeTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.ORANGE_TREE, true), worldPosition, 'ORANGE'))
               break
             case 'pear':
-              this.addEntity('pear', new Pear(this.currentTime, new Genome(constant.DEFAULT_GENOME.PEAR, true)
-                , worldPosition))
+              this.addEntity('PEAR_TREE', new PearTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PEAR_TREE, true), worldPosition, 'PEAR'))
+              break
+            case 'pumpkin':
+              break
+            case 'strawberry':
+              break
+            case 'tomato':
+              break
+            case 'zucchini':
               break
             default:
               break

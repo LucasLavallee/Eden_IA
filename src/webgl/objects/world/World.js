@@ -145,11 +145,8 @@ export default class World extends Object3D {
       }
     })
 
-<<<<<<< HEAD
     if (store.getters.getCurrentMode === 'remove') { this.ground.update(null, null) } */
-=======
-    if (store.getters.getCurrentMode === 'Remove') { this.ground.update(null, null) }
->>>>>>> origin/features/UIHandler
+
 
     /* const newLB = this.geneticsManager.checkReproduction(dt)
     for (const LB of newLB) {
