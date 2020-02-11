@@ -9,7 +9,10 @@
     <Time/>
     <Information/>
     <div class="home-button">
-      <router-link to="/">Home</router-link>
+      <router-link to="/">
+        <font-awesome-icon id="icon-home" :icon="['fas','home']" size="2x" />
+        <span v-if="textShow">Back to the homepage</span>
+      </router-link>
     </div>
   </div>
 </template>
@@ -33,7 +36,8 @@ export default {
   },
   data () {
     return {
-      engine: undefined
+      engine: undefined,
+      textShow: false
     }
   },
   mounted () {
@@ -67,4 +71,14 @@ export default {
     position absolute
     bottom 50px
     right 80px
+    background-color #212121
+    padding 10px
+    border-radius 50%
+    #icon-home
+      color #F9F9F9
+      &:hover
+      color #099622
+      &:visited
+        color #F9F9F9
+
 </style>
