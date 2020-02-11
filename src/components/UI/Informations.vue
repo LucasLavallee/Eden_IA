@@ -32,16 +32,17 @@ export default {
 		margin-left -50px
 		top 0
 		left 50%
-	.container-mode
-		border-radius 30px
-		background-color #212121
-		color #F9F9F9
-		// width 100px
-		// margin 0 auto 
-		padding 10px
-		margin-top 30px
-		font-weight bold
-	.container-species
-		margin 10px
+		.container-mode
+			border-radius 30px
+			background-color #212121
+			color #F9F9F9
+			padding 10px
+			margin-top 30px
+			font-weight bold
+			.info-mode
+				text-transform capitalize
+		.container-species
+			margin 10px
+	
 		
 </style>
