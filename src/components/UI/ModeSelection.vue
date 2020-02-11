@@ -7,12 +7,13 @@
         <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
             <font-awesome-icon :icon="['fas','trash-alt']" size="2x" />
         </div>
-        <div class="mode" :class="getCurrentMode === 'add' ? 'active': ''" @click="changeCurrentMode('add')">
+        <div class="mode" v-on:mouseover="mouseOverHandle" v-on:mouseout="mouseOutHandle" :class="getCurrentMode === 'add' ? 'active': ''">
             <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
+            <!-- @click="changeCurrentMode('add') -->
         </div>
     </div>
     <transition name="fade">
-    <div v-if="getCurrentMode === 'add'" class="items-container">
+    <div v-if="pannelShow" v-on:mouseover="mouseOverHandle" v-on:mouseout="mouseOutHandle" class="items-container">
       <div class="item" id="carrot" :class="getCurrentSelection === 'carrot' ? 'active': ''" @click="changeCurrentSelection('carrot')">
         <img class="icon-item" :src="carrot"/>
       </div>
@@ -76,13 +77,26 @@ export default {
       strawberry: strawberry,
       tomato: tomato,
       zucchini: zucchini,
+      pannelShow: false,
+      timerPannel: null
     }
   },
   methods: {
     ...mapActions([
       'changeCurrentMode',
       'changeCurrentSelection'
-    ])
+    ]),
+    mouseOverHandle() {
+      this.pannelShow = true
+      this.changeCurrentMode('add')
+    },
+    mouseOutHandle() {
+      if(this.timerPannel !== null){
+        clearInterval(this.timerPannel)
+      }
+      this.timerPannel = setTimeout(()=>{this.pannelShow = false}, 1000)
+
+    }
   },
   computed: {
     ...mapGetters([
@@ -123,7 +137,7 @@ export default {
       box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
       &.active
         background-color #212121
-        pointer-events none
+        // pointer-events none
         color #099622
         box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
       &:hover
