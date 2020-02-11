@@ -137,9 +137,9 @@ export default {
       box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
       &.active
         background-color #212121
-        // pointer-events none
+        pointer-events none
         color #099622
-        box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+        box-shadow 0px 0px 0px #000000, 0px 0px 0px #0d0d0d
       &:hover
         box-shadow 0px 0px 0px #000000, 0px 0px 0px #0d0d0d
 
