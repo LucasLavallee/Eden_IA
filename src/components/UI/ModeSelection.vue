@@ -1,10 +1,10 @@
 <template>
   <div id="container">
     <div id="modeSelection">
-        <div class="mode" :class="getCurrentMode === 'navigate' ? 'active': ''" @click="changeCurrentMode('navigate')">
+        <div class="mode" :class="getCurrentMode === 'navigate' ? 'active': ''" @click="clickHandle('navigate')">
             <font-awesome-icon class="icon" :icon="['fas','arrows-alt']" size="2x" />
         </div>
-        <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="changeCurrentMode('remove')">
+        <div class="mode" :class="getCurrentMode === 'remove' ? 'active': ''" @click="clickHandle('remove')">
             <font-awesome-icon :icon="['fas','trash-alt']" size="2x" />
         </div>
         <div class="mode" v-on:mouseover="mouseOverHandle" v-on:mouseout="mouseOutHandle" :class="getCurrentMode === 'add' ? 'active': ''">
@@ -88,14 +88,25 @@ export default {
     ]),
     mouseOverHandle() {
       this.pannelShow = true
-      this.changeCurrentMode('add')
+      if(this.timerPannel !== null){
+        clearInterval(this.timerPannel)
+      }
+      this.timerPannel = setTimeout(()=>{this.pannelShow = false}, 1500)
+      this.changeCurrentMode("add")
     },
     mouseOutHandle() {
       if(this.timerPannel !== null){
         clearInterval(this.timerPannel)
       }
       this.timerPannel = setTimeout(()=>{this.pannelShow = false}, 1500)
-
+    
+    },
+    clickHandle(mode) {
+      this.changeCurrentMode(mode)
+      if(this.timerPannel !== null) {
+        clearInterval(this.timerPannel)
+      }
+      this.pannelShow = false
     }
   },
   computed: {
