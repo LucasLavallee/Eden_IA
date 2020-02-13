@@ -8,12 +8,16 @@
     <EnvironnementGui/>
     <Time/>
     <Information/>
-    <div class="home-button">
-      <router-link to="/">
-        <font-awesome-icon id="icon-home" :icon="['fas','home']" size="2x" />
-        <span v-if="textShow">Back to the homepage</span>
-      </router-link>
-    </div>
+    <router-link to="/">
+      <div class="home-button">
+        <div class="item icon">
+            <font-awesome-icon id="icon-home" :icon="['fas','home']" size="1x" />
+        </div>
+        <div class="item text">
+          <span id="text-info" v-if="textShow">Back home</span>
+        </div>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -37,7 +41,7 @@ export default {
   data () {
     return {
       engine: undefined,
-      textShow: false
+      textShow: true
     }
   },
   mounted () {
@@ -61,6 +65,9 @@ export default {
 </script>
 
 <style lang="stylus">
+  a
+    &:visited
+      color #212121
   .edenIA
     width 100%
     height 100%
@@ -71,14 +78,21 @@ export default {
     position absolute
     bottom 50px
     right 80px
-    background-color #212121
-    padding 10px
-    border-radius 50%
+    display flex
+    flex-direction row
+    justify-content center
+    align-items center
+    .item
+      margin 0 5px 
+    .icon
+      background-color #212121
+      padding 5px
+      border-radius 50%
+      width 22px
     #icon-home
-      color #F9F9F9
+      color white
+    #text-info
       &:hover
-      color #099622
-      &:visited
-        color #F9F9F9
+        text-decoration underline
 
 </style>
