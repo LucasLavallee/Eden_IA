@@ -60,19 +60,19 @@ export default {
       switch(target.id) {
         case "temperature-slider":
           console.log("TEMPERATURE")
-          this.changeTemperature(target.value)
+          this.changeTemperature(parseInt(target.value))
           break;
         case "brightness-slider":
           console.log("BRIGHTNESS")
-          this.changeBrightness(target.value)
+          this.changeBrightness(parseInt(target.value))
           break;
         case "humidity-slider":
           console.log("HUMIDITY")
-          this.changeHumidity(target.value)
+          this.changeHumidity(parseInt(target.value))
           break;
         case "pollution-slider":
           console.log("POLLUTION")
-          this.changePollution(target.value)
+          this.changePollution(parseInt(target.value))
           break;
         default:
           break;

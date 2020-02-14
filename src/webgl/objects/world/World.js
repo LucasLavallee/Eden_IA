@@ -135,6 +135,8 @@ export default class World extends Object3D {
       miniWorld.update(dt)
     })
 
+    this.environment.update()
+
     /* this.entities.forEach(entity => {
       const livingBeing = entity.livingBeing
 

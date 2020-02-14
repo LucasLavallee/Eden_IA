@@ -1,29 +1,20 @@
 // import { datGui } from 'utils/debug'
-
+import store from '@/store'
 export default class Environment {
   constructor () {
     this.properties = {
-      temperature: 15,
-      humidity: 50,
-      brightness: 50,
-      pollution: 0
+      temperature: store.getters.getTemperature,
+      humidity: store.getters.getHumidity,
+      brightness: store.getters.getBrightness,
+      pollution: store.getters.getPollution
     }
-
-    // this.addEnvironmentGui()
   }
-
-  init () {
-
+  update () {
+    this.properties.temperature = store.getters.getTemperature
+    this.properties.brightness = store.getters.getBrightness
+    this.properties.humidity = store.getters.getHumidity
+    this.properties.pollution = store.getters.getPollution
   }
-
-  // addEnvironmentGui () {
-  //   const environmentFolder = datGui.addFolder('Environment properties')
-  //   environmentFolder.add(this.properties, 'temperature').min(0).max(40).step(1)
-  //   environmentFolder.add(this.properties, 'humidity').min(0).max(100).step(1)
-  //   environmentFolder.add(this.properties, 'brightness').min(0).max(100).step(1)
-  //   environmentFolder.add(this.properties, 'pollution').min(0).max(100).step(1)
-  // }
-
   getProperties () {
     return this.properties
   }
