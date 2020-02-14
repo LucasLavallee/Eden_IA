@@ -6,25 +6,25 @@
         <div class="value-container">
           <span class="infos">Temperature </span><span class="slider-value" id="temperature-slider-value">50</span>
         </div>
-        <input type="range" min="1" max="100" value="50" class="slider" id="temperature-slider" v-on:input="change">
+        <input type="range" min="1" max="100" value="50" class="slider" id="temperature-slider" v-on:input="change" v-on:change="changeFocus">
       </div>
       <div class="slidecontainer">
         <div class="value-container">
           <span class="infos">Brightness</span> <span class="slider-value" id="brightness-slider-value">50</span>
         </div>
-        <input type="range" min="1" max="100" value="50" class="slider" id="brightness-slider" v-on:input="change">
+        <input type="range" min="1" max="100" value=50 class="slider" id="brightness-slider" v-on:input="change" v-on:change="changeFocus">
       </div>
       <div class="slidecontainer">
         <div class="value-container">
           <span class="infos">Humidity </span><span class="slider-value" id="humidity-slider-value">50</span>
         </div>
-        <input type="range" min="1" max="100" value="50" class="slider" id="humidity-slider" v-on:input="change">
+        <input type="range" min="1" max="100" value=50 class="slider" id="humidity-slider" v-on:input="change" v-on:change="changeFocus">
       </div>
       <div class="slidecontainer">
         <div class="value-container">
           <span class="infos">Pollution </span><span class="slider-value" id="pollution-slider-value">50</span>
         </div>
-        <input type="range" min="1" max="100" value="50" class="slider" id="pollution-slider" v-on:input="change">
+        <input type="range" min="1" max="100" value="50" class="slider" id="pollution-slider" v-on:input="change" v-on:change="changeFocus">
       </div>
     </div>
   </div>
@@ -43,13 +43,40 @@ export default {
   methods: {
     ...mapActions([
       'changeCurrentMode',
-      'changeCurrentSelection'
+      'changeCurrentSelection',
+      'changeTemperature',
+      'changeBrightness',
+      'changeHumidity',
+      'changePollution'
     ]),
-    change (e) {
-      console.log(e.target.id)
-      console.log(e.target.value)
+    change(e) {
+      // console.log(e.target.id)
+      // console.log(e.target.value)
       const spanId = e.target.id + '-value'
       document.getElementById(spanId).innerText = e.target.value
+    },
+    changeFocus(e) {
+      const target = e.target
+      switch(target.id) {
+        case "temperature-slider":
+          console.log("TEMPERATURE")
+          this.changeTemperature(target.value)
+          break;
+        case "brightness-slider":
+          console.log("BRIGHTNESS")
+          this.changeBrightness(target.value)
+          break;
+        case "humidity-slider":
+          console.log("HUMIDITY")
+          this.changeHumidity(target.value)
+          break;
+        case "pollution-slider":
+          console.log("POLLUTION")
+          this.changePollution(target.value)
+          break;
+        default:
+          break;
+      }
     }
   },
   computed: {
