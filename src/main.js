@@ -8,11 +8,12 @@ import {
   faTrashAlt,
   faPlusCircle,
   faArrowsAlt,
-  faCarrot
+  faCarrot,
+  faHome
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faTrashAlt, faPlusCircle, faArrowsAlt, faCarrot)
+library.add(faTrashAlt, faPlusCircle, faArrowsAlt, faCarrot, faHome)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
