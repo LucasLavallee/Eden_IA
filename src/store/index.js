@@ -13,7 +13,7 @@ export default new Vuex.Store({
       temperature: 50,
       brightness: 50,
       humidity: 50,
-      pollution: 50,
+      pollution: 50
     }
   },
   mutations: {
@@ -66,7 +66,7 @@ export default new Vuex.Store({
     },
     changePollution: (store, value) => {
       store.commit('CHANGE_PARAMETER_POLLUTION', value)
-    },
+    }
   },
   getters: {
     getCurrentSelection: state => state.currentSelection,
@@ -76,8 +76,8 @@ export default new Vuex.Store({
     getTemperature: state => state.environmentParameters.temperature,
     getBrightness: state => state.environmentParameters.brightness,
     getHumidity: state => state.environmentParameters.humidity,
-    getPollution: state => state.environmentParameters.pollution,
-    
+    getPollution: state => state.environmentParameters.pollution
+
   },
   modules: {
   }

@@ -18,7 +18,7 @@
 			</div>
 		</transition>
   </div>
-  
+
 </template>
 
 <script>
@@ -35,16 +35,16 @@ import strawberry from '../../../public/Icons/strawberry.png'
 import tomato from '../../../public/Icons/tomato.png'
 import zucchini from '../../../public/Icons/zucchini.png'
 export default {
-	name: "Informations",
-	computed: {
+  name: 'Informations',
+  computed: {
     	...mapGetters([
       	'getCurrentMode',
       	'getCurrentSelection'
-		])
-	},
-	data() {
-		return {
-			carrot: carrot,
+    ])
+  },
+  data () {
+    return {
+      carrot: carrot,
       beet: beet,
       banana: banana,
       orange: orange,
@@ -53,47 +53,47 @@ export default {
       pumpkin: pumpkin,
       strawberry: strawberry,
       tomato: tomato,
-      zucchini: zucchini,
-		}
-	},
-	methods: {
-		getSpecieIcon() {
-			switch(this.getCurrentSelection()) {
-				case "carrot": 
-					return carrot
-					break
-				case "banana":
-					return banana
-					break
-				case "beet":
-					return beet
-					break
-				case "orange":
-					return orange
-					break
-				case "pear":
-					return pear
-					break
-				case "pepper":
-					return pepper
-					break
-				case "pumpkin":
-					return pumpkin
-					break
-				case "strawberry":
-					return strawberry
-					break
-				case "tomato":
-					return tomato
-					break
-				case "zucchini":
-					return zucchini
-					break
-				default:
-					break
-			}
-		}
-	}
+      zucchini: zucchini
+    }
+  },
+  methods: {
+    getSpecieIcon () {
+      switch (this.getCurrentSelection()) {
+        case 'carrot':
+          return carrot
+          break
+        case 'banana':
+          return banana
+          break
+        case 'beet':
+          return beet
+          break
+        case 'orange':
+          return orange
+          break
+        case 'pear':
+          return pear
+          break
+        case 'pepper':
+          return pepper
+          break
+        case 'pumpkin':
+          return pumpkin
+          break
+        case 'strawberry':
+          return strawberry
+          break
+        case 'tomato':
+          return tomato
+          break
+        case 'zucchini':
+          return zucchini
+          break
+        default:
+          break
+      }
+    }
+  }
 }
 </script>
 
@@ -115,12 +115,12 @@ export default {
 				text-transform capitalize
 		.container-species
 			margin 10px
-			.icon-specie 
+			.icon-specie
 				width 30px
 	.info-mode
 	.info-species
 		text-transform capitalize
-	
+
 	// Animation handler
 	.fade-enter-active {
     transition: opacity  .2s ease-out, transform .5s cubic-bezier(.22,1.07,.57,1.42)
@@ -135,5 +135,5 @@ export default {
     transform: translateY(-20px)
     opacity: 0
   }
-		
+
 </style>
