@@ -59,9 +59,9 @@ export default class Bush extends LivingBeings {
   }
 
   deployFlowers (time) {
-    console.log(this.genome)
     for (let i = 0; i < this.genome.nbFlowers; i++) {
       const spawnInfos = this.getRandomSpawnablePosition()
+      if(!spawnInfos) return
       const preciseLT = Math.ceil(this.cycleDetails.flowerTimeFactor * constant.TIME_INFOS.YEAR_TIME)
 
       const newFlower = new Flower(
@@ -98,6 +98,7 @@ export default class Bush extends LivingBeings {
 
   getRandomSpawnablePosition () {
     const randObject = this.spawnablePosition[randomInt(0, this.spawnablePosition.length)]
+    if(!randObject) return null
     let spawnPos = new Vector3()
     let normal = new Vector3()
 

@@ -38,8 +38,8 @@ export default class Tomato extends Fruit {
 
     // materials
     const material = new MeshPhongMaterial({
-      color: this.genome.color,
-      emissive: this.genome.color,
+      color: 0xAB0000,
+      emissive: 0xAB0000,
       emissiveIntensity: 0.3,
       side: DoubleSide
     })
@@ -65,18 +65,5 @@ export default class Tomato extends Fruit {
     leaf2.rotation.set(20, 0, 0)
 
     this.add(tomato, tige, leaf, leaf2)
-  }
-
-  update (dt) {
-    const age = dt - this.bornTime
-
-    this.updateReproduction(dt)
-    if (age < this.lifeTime) {
-      let scale = age / (this.lifeTime / 2)
-      scale = scale <= 1 ? scale : 1
-      this.scale.set(scale, scale, scale)
-    } else {
-      this.die()
-    }
   }
 }

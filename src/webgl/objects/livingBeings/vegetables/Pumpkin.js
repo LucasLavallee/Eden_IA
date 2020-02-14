@@ -34,8 +34,8 @@ export default class Pumpkin extends Vegetable {
     tubeGeometry.scale(0.15, 0.15, 0.15)
 
     const material = new MeshPhongMaterial({
-      color: this.genome.color,
-      emissive: this.genome.color,
+      color: 0xFF8100,
+      emissive: 0xFF8100,
       emissiveIntensity: 0.3,
       side: DoubleSide
     })
@@ -63,18 +63,5 @@ export default class Pumpkin extends Vegetable {
     pumpkin6.position.set(this.genome.size / 2, 0, this.genome.size / 2)
 
     this.add(pumpkin, pumpkin2, pumpkin3, pumpkin4, pumpkin5, pumpkin6, tige)
-  }
-
-  update (dt) {
-    const age = dt - this.bornTime
-
-    this.updateReproduction(dt)
-    if (age < this.lifeTime) {
-      let scale = age / (this.lifeTime / 2)
-      scale = scale <= 1 ? scale : 1
-      this.scale.set(scale, scale, scale)
-    } else {
-      this.die()
-    }
   }
 }

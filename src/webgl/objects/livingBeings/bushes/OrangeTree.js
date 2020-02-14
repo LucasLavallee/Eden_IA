@@ -14,27 +14,17 @@ export default class OrangeTree extends Bush {
   }
 
   spawn() { //L-System
-    /*const rules = [{
-      entry: 'A',
-      exit: 'F[++A]X[--A]^^^A'
-    }]*/
-
     const rules = [{
       entry: 'A',
-      exit: '[&FFFA]>>>>[&FFFA]>>>>[&FFFA]'
+      exit: 'F[++A]X[--A]^^^A'
     }]
-    //const lsystemParams = new Params("FFFFFA", rules,3, 25, 1, 0.2, 0.05, 0.05)
-    const lsystemParams = new Params("FFFA", rules,3, 10, 1, 0.2, 0.05, 0.05)
+    const lsystemParams = new Params("FFFFFA", rules,2, 25, 2, 1, 0.05, 0.05)
     const lSystem = new LSystemBuilder(lsystemParams.rewriteWithRules("FFFFFA", rules.iterations), lsystemParams, new Vector3(0,0,0))
     const tree = lSystem.build()
 
-    this.add(tree)
+    this.add(tree.tree)
 
-    this.spawnablePosition.push({
-      type: 'cube',
-      size: new Vector3(1,1,1),
-      position: new Vector3(0,0,0)
-    })
+    this.spawnablePosition = tree.spawnablePositions
   }
 
   deployFruit (time, position, newParentGenome) {

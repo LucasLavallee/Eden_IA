@@ -26,7 +26,7 @@ class Genome {
 
     switch (type) {
       default: // tree
-        this.nbBranchs = options.nbBranchs ? options.nbBranchs : 2
+        this.nbLeaves = options.nbLeaves ? options.nbLeaves : 2
         this.nbFlowers = options.nbFlowers ? (withRange ? randomInt(options.nbFlowers[0], options.nbFlowers[1]) : options.nbFlowers) : 10
         break
     }

@@ -131,6 +131,26 @@ export default {
       pollution: 20,
       brightness: [20, 70],
       humidity: [10, 40]
+    },
+    TOMATO_TREE: {
+      lifeTime: [5, 10], // year / cycle
+      nbFlowers: [2,5],
+      nbLeaves: 5,
+      size: 1.0,
+      temperature: [10, 25],
+      pollution: 20,
+      brightness: [20, 70],
+      humidity: [30, 70]
+    },
+    PUMPKIN_TREE: {
+      lifeTime: [5, 10], // year / cycle
+      nbFlowers: [2,5],
+      nbLeaves: 3,
+      size: 1.0,
+      temperature: [10, 25],
+      pollution: 20,
+      brightness: [20, 70],
+      humidity: [30, 70]
     }
   },
   BUSHES_DATA: {
@@ -145,7 +165,19 @@ export default {
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.5,
       reproductionDistance: 10
-    }
+    },
+    TOMATO_TREE: {
+      startingCycle: 0.2,
+      flowerTimeFactor: 0.2,
+      fruitTimeFactor: 0.4,
+      reproductionDistance: 20
+    },
+    PUMPKIN_TREE: {
+      startingCycle: 0.2,
+      flowerTimeFactor: 0.2,
+      fruitTimeFactor: 0.4,
+      reproductionDistance: 20
+    },
   },
 
   COLOR: {

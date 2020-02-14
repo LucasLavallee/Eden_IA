@@ -13,6 +13,8 @@ import PearTree from '../livingBeings/bushes/PearTree'
 import OrangeTree from '../livingBeings/bushes/OrangeTree.js'
 import BananaTree from '../livingBeings/bushes/BananaTree.js'
 import GeneticsManager from '../../genetics/GeneticsManager'
+import PumpkinBush from '../livingBeings/bushes/PumpkinBush'
+import TomatoBush from '../livingBeings/bushes/TomatoBush'
 
 export default class MiniWorld extends Object3D {
   constructor (options/* miniWorldId, position, rotation, type = 'vegGarden', camera, controls */) {
@@ -107,10 +109,13 @@ export default class MiniWorld extends Object3D {
               this.addEntity('PEAR_TREE', new PearTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PEAR_TREE, true), worldPosition, 'PEAR'))
               break
             case 'pumpkin':
+              this.addEntity('PUMPKIN_TREE', new PumpkinBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PUMPKIN_TREE, true), worldPosition, 'PUMPKIN'))
               break
             case 'strawberry':
               break
             case 'tomato':
+              this.addEntity('TOMATO_TREE', new TomatoBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.TOMATO_TREE, true), worldPosition, 'TOMATO'))
+              
               break
             case 'zucchini':
               break

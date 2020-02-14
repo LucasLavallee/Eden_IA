@@ -1,4 +1,4 @@
-import {Quaternion, Vector3, Object3D,CylinderBufferGeometry,Mesh,SphereBufferGeometry,MeshPhongMaterial} from 'three'
+import {Quaternion, Vector3, Object3D,CylinderBufferGeometry,Mesh,BoxBufferGeometry,MeshPhongMaterial} from 'three'
 
 export default class LSystemBuilder {
     constructor(string, params, position) {
@@ -19,6 +19,7 @@ export default class LSystemBuilder {
 
     build() {
         let tree = new Object3D()
+        let spawnablePosition = []
 
         for(let i = 0; i < this.string.length; i++) {
             let currentChar = this.string.charAt(i)
@@ -28,7 +29,9 @@ export default class LSystemBuilder {
                     tree.add(this.buildBranch())
                     break;
                 case 'X':
-                    tree.add(this.buildLeaves())
+                    const leave = this.buildLeaves()
+                    spawnablePosition.push(leave.spawnablePosition)
+                    tree.add(leave.mesh)
                     break;
                 case '+':
                     this.state.rotation.multiply( new Quaternion().setFromAxisAngle( new Vector3(0, 0, 1), this.params.angle * Math.PI/180 ) )
@@ -60,7 +63,10 @@ export default class LSystemBuilder {
             }
         }
 
-        return tree
+        return {
+            tree: tree,
+            spawnablePositions: spawnablePosition
+        }
     }
 
     buildBranch() {
@@ -71,7 +77,7 @@ export default class LSystemBuilder {
         position.applyQuaternion( this.state.rotation )
         this.state.position.add( position )
 
-        const geometry = new CylinderBufferGeometry( this.state.radius, this.state.radius, this.state.length, 8 )
+        const geometry = new BoxBufferGeometry( this.state.radius, this.state.length, this.state.radius )
         const material = new MeshPhongMaterial({
             color: 0xab2a20
         }) 
@@ -93,17 +99,24 @@ export default class LSystemBuilder {
         position.applyQuaternion( this.state.rotation )
         this.state.position.add( position )
 
-        const geometry = new SphereBufferGeometry( this.state.length/4, 16 )
+        const geometry = new BoxBufferGeometry( this.state.length*2, this.state.length*2, this.state.length*2)
         const material = new MeshPhongMaterial({
             color: 0x32a844
         }) 
         let mesh = new Mesh( geometry, material )
-        mesh.quaternion.copy( this.state.rotation )
+        //mesh.quaternion.copy( this.state.rotation )
         mesh.position.copy( this.state.position )
 
         this.state.position = new Vector3().copy( originalPosition )
 
-        return mesh
+        return {
+            mesh: mesh,
+            spawnablePosition: {
+                type: 'cube',
+                size: new Vector3(this.state.length*2, this.state.length*2, this.state.length*2),
+                position: mesh.position
+            }
+        }
     }
 
     cloneState(state) {
