@@ -5,7 +5,7 @@
       <h2>La planète végétale 3.0</h2>
       <p>Bienvenue à EdenIA, la planète végétale de la galaxie IMAC ! Tu as été envoyé(e) par l'équipage de la station E.J.20 pour créer un verger et un potager qui permettront aux populations à venir de s'alimenter sainement et sur des générations, assurant leur survie sur la planète.</p>
       <p>Afin de mener à bien ta mission, ton commandant t'a fourni plusieurs sacs de graines te permettant de planter différentes espèces de fruits et légumes. Il t'a également donné une télécommande révolutionnaire te permettant d'influencer les conditions environnementales. Attention, tu dois l'utiliser avec la plus grande attention. L'avenir de l'Homme est entre tes mains !</p>
-      <button type="button"><a href="./edenIA">Commencer !</a></button>
+      <a href="./edenIA"><button type="button">Commencer !</button></a>
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
     height 100vh
     background-size cover
     background-repeat no-repeat
-    background-position bottom right
+    background-position bottom -1px right
     font-family Raleway, Calibri, sans-serif
 
   .home .about .text
@@ -47,6 +47,9 @@ export default {
     margin 0
     text-shadow 0px 0px 15px #c2c2c2c2
 
+  .home .about .text h2
+    font-family Raleway, Calibri, sans-serif
+
   .home .about .text button
     border 2px solid #089622
     border-radius 20px
@@ -60,6 +63,7 @@ export default {
 
   .home .about .text button a
     margin-right 0
+    text-decoration none
 
   @media screen and (min-width: 1600px)
     .home .about .text

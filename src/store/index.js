@@ -8,7 +8,13 @@ export default new Vuex.Store({
     currentMode: 'navigate', // 'navigate', 'add', 'remove'
     currentSelection: 'carrot',
     activeWorld: 0,
-    currentSpeed: 1
+    currentSpeed: 1,
+    environmentParameters: {
+      temperature: 50,
+      brightness: 50,
+      humidity: 50,
+      pollution: 50,
+    }
   },
   mutations: {
     CHANGE_CURRENT_MODE (state, val) {
@@ -22,6 +28,18 @@ export default new Vuex.Store({
     },
     CHANGE_CURRENT_SPEED (state, val) {
       state.currentSpeed = val
+    },
+    CHANGE_PARAMETER_TEMPERATURE (state, val) {
+      state.environmentParameters.temperature = val
+    },
+    CHANGE_PARAMETER_BRIGHTNESS (state, val) {
+      state.environmentParameters.brightness = val
+    },
+    CHANGE_PARAMETER_HUMIDITY (state, val) {
+      state.environmentParameters.humidity = val
+    },
+    CHANGE_PARAMETER_POLLUTION (state, val) {
+      state.environmentParameters.pollution = val
     }
   },
   actions: {
@@ -36,14 +54,30 @@ export default new Vuex.Store({
     },
     changeCurrentSpeed: (store, speed) => {
       store.commit('CHANGE_CURRENT_SPEED', speed)
-    }
-
+    },
+    changeTemperature: (store, value) => {
+      store.commit('CHANGE_PARAMETER_TEMPERATURE', value)
+    },
+    changeBrightness: (store, value) => {
+      store.commit('CHANGE_PARAMETER_BRIGHTNESS', value)
+    },
+    changeHumidity: (store, value) => {
+      store.commit('CHANGE_PARAMETER_HUMIDITY', value)
+    },
+    changePollution: (store, value) => {
+      store.commit('CHANGE_PARAMETER_POLLUTION', value)
+    },
   },
   getters: {
     getCurrentSelection: state => state.currentSelection,
     getCurrentMode: state => state.currentMode,
     getActiveWorld: state => state.activeWorld,
-    getCurrentSpeed: state => state.currentSpeed
+    getCurrentSpeed: state => state.currentSpeed,
+    getTemperature: state => state.environmentParameters.temperature,
+    getBrightness: state => state.environmentParameters.brightness,
+    getHumidity: state => state.environmentParameters.humidity,
+    getPollution: state => state.environmentParameters.pollution,
+    
   },
   modules: {
   }
