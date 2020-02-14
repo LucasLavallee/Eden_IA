@@ -86,24 +86,23 @@ export default {
       'changeCurrentMode',
       'changeCurrentSelection'
     ]),
-    mouseOverHandle() {
+    mouseOverHandle () {
       this.pannelShow = true
-      if(this.timerPannel !== null){
+      if (this.timerPannel !== null) {
         clearInterval(this.timerPannel)
       }
-      this.timerPannel = setTimeout(()=>{this.pannelShow = false}, 1500)
-      this.changeCurrentMode("add")
+      this.timerPannel = setTimeout(() => { this.pannelShow = false }, 1500)
+      this.changeCurrentMode('add')
     },
-    mouseOutHandle() {
-      if(this.timerPannel !== null){
+    mouseOutHandle () {
+      if (this.timerPannel !== null) {
         clearInterval(this.timerPannel)
       }
-      this.timerPannel = setTimeout(()=>{this.pannelShow = false}, 1500)
-    
+      this.timerPannel = setTimeout(() => { this.pannelShow = false }, 1500)
     },
-    clickHandle(mode) {
+    clickHandle (mode) {
       this.changeCurrentMode(mode)
-      if(this.timerPannel !== null) {
+      if (this.timerPannel !== null) {
         clearInterval(this.timerPannel)
       }
       this.pannelShow = false
@@ -200,6 +199,5 @@ export default {
     transform: translateY(-20px)
     opacity: 0
   }
-
 
 </style>
