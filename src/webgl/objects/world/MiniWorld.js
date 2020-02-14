@@ -1,5 +1,8 @@
 import {
-  Object3D
+  Object3D,
+  BoxGeometry,
+  MeshPhongMaterial,
+  Mesh
 } from 'three'
 import Face from './ground/Face'
 import MouseRaycaster from '@/webgl/MouseRaycaster'
@@ -15,6 +18,8 @@ import BananaTree from '../livingBeings/bushes/BananaTree.js'
 import GeneticsManager from '../../genetics/GeneticsManager'
 import PumpkinBush from '../livingBeings/bushes/PumpkinBush'
 import TomatoBush from '../livingBeings/bushes/TomatoBush'
+import ZucchiniBush from '../livingBeings/bushes/ZucchiniBush'
+import Carot from '../livingBeings/vegetables/Carot'
 
 export default class MiniWorld extends Object3D {
   constructor (options/* miniWorldId, position, rotation, type = 'vegGarden', camera, controls */) {
@@ -41,6 +46,16 @@ export default class MiniWorld extends Object3D {
   init () {
     this.ground.init()
     this.add(this.ground)
+
+    const geometry = new BoxGeometry(1, 1, 1)
+    const material = new MeshPhongMaterial({
+      color: 0xFF6600,
+      emissive: 0xFF6600,
+      emissiveIntensity: 0.3
+    })
+    const cube = new Mesh(geometry, material)
+    cube.position.set(0,0,0)
+    this.add(cube)
     this.initMouseClickEvent()
   }
 
@@ -88,7 +103,6 @@ export default class MiniWorld extends Object3D {
       const currentMode = store.getters.getCurrentMode
       const worldPosition = this.raycaster.getIntersectionPosition()
       if (!worldPosition) return
-      console.log('click', currentMode)
 
       switch (currentMode) {
         case 'add': {
@@ -99,10 +113,13 @@ export default class MiniWorld extends Object3D {
           switch (currentSelection) {
             case 'beet':
               break
+            case 'carrot':
+              this.addEntity('CARROT_TREE', new Carot(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.CARROT_TREE, true), worldPosition, 'CARROT'))
+              break
             case 'banana':
               this.addEntity('BANANA_TREE', new BananaTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.BANANA_TREE, true), worldPosition, 'BANANA'))
               break
-            case 'orange': 
+            case 'orange':
               this.addEntity('ORANGE_TREE', new OrangeTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.ORANGE_TREE, true), worldPosition, 'ORANGE'))
               break
             case 'pear':
@@ -115,9 +132,9 @@ export default class MiniWorld extends Object3D {
               break
             case 'tomato':
               this.addEntity('TOMATO_TREE', new TomatoBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.TOMATO_TREE, true), worldPosition, 'TOMATO'))
-              
               break
             case 'zucchini':
+              this.addEntity('ZUCCHINI_TREE', new ZucchiniBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.ZUCCHINI_TREE, true), worldPosition, 'ZUCCHINI'))
               break
             default:
               break
@@ -185,6 +202,9 @@ export default class MiniWorld extends Object3D {
         if (entity.isAlive()) {
           const res = entity.update(dt)
           if (res && res.length > 0) {
+            console.log('-----------')
+            console.log(res)
+            console.log('-----------')
             res.forEach(bush => {
               this.addEntity(bush.type, bush.livingBeing)
             })

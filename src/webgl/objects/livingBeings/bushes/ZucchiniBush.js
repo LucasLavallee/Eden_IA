@@ -1,12 +1,11 @@
 import Bush from './Bush'
 import Genome from '../../../genetics/Genome'
-import Pumpkin from '../vegetables/Pumpkin'
+import Zucchini from '../vegetables/Zucchini'
 import constant from '@/utils/constant'
-import Params from '../../../lSystems/Params'
 import { Vector3, BoxBufferGeometry, MeshPhongMaterial, Mesh, Object3D } from 'three'
 import { randomFloat } from 'utils/basicFunction'
 
-export default class PumpkinBush extends Bush {
+export default class ZucchiniBush extends Bush {
   constructor (bornTime, genome, position, bushType) {
     super(bornTime, genome, position, bushType)
 
@@ -55,19 +54,19 @@ export default class PumpkinBush extends Bush {
   }
 
   deployFruit (time, position, newParentGenome) {
-    const genomeOptions = { ...constant.DEFAULT_GENOME.PUMPKIN, lifeTime: [constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.PUMPKIN_TREE.fruitTimeFactor, constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.PUMPKIN_TREE.fruitTimeFactor] }
+    const genomeOptions = { ...constant.DEFAULT_GENOME.ZUCCHINI, lifeTime: [constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.ZUCCHINI_TREE.fruitTimeFactor, constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.ZUCCHINI_TREE.fruitTimeFactor] }
 
-    const newPumpkin = new Pumpkin(time, new Genome(genomeOptions, true, 'fruit')
+    const newZucchini = new Zucchini(time, new Genome(genomeOptions, true, 'fruit')
       , position, newParentGenome)
 
-    this.add(newPumpkin)
-    this.fruits.push(newPumpkin)
+    this.add(newZucchini)
+    this.fruits.push(newZucchini)
   }
 
   createNewBush (dt, position) {
     return {
-      type: 'PUMPKIN_TREE',
-      livingBeing: new PumpkinBush(dt, new Genome(constant.DEFAULT_BUSH_GENOME.PUMPKIN_TREE, true), position, 'PUMPKIN')
+      type: 'ZUCCHINI_TREE',
+      livingBeing: new ZucchiniBush(dt, new Genome(constant.DEFAULT_BUSH_GENOME.ZUCCHINI_TREE, true), position, 'ZUCCHINI')
     }
   }
 }

@@ -21,7 +21,7 @@ export default {
       lifeTime: [180, 220],
       reproductionRate: [100, 120]
     },
-    CAROT: {
+    CARROT: {
       color: '#FF6600',
       size: 1,
       temperature: [5, 25],
@@ -43,7 +43,7 @@ export default {
     },
     PUMPKIN: {
       color: '#FF8100',
-      size: 1,
+      size: 0.7,
       temperature: [5, 25],
       pollution: 60,
       brightness: [20, 70],
@@ -73,7 +73,7 @@ export default {
     },
     TOMATO: {
       color: '#AB0000',
-      size: 1,
+      size: 0.3,
       temperature: [5, 25],
       pollution: 60,
       brightness: [20, 70],
@@ -114,6 +114,15 @@ export default {
   },
 
   DEFAULT_BUSH_GENOME: {
+    CARROT_TREE: {
+      lifeTime: [3,6], // year / cycle
+      nbFlowers: [2,3],
+      size: 1.0,
+      temperature: [5, 25],
+      pollution: 30,
+      brightness: [20, 70],
+      humidity: [10, 40]
+    },
     PEAR_TREE: {
       lifeTime: [80, 120], // year / cycle
       nbFlowers: [10, 20],
@@ -134,7 +143,7 @@ export default {
     },
     TOMATO_TREE: {
       lifeTime: [5, 10], // year / cycle
-      nbFlowers: [2,5],
+      nbFlowers: [2, 5],
       nbLeaves: 5,
       size: 1.0,
       temperature: [10, 25],
@@ -144,7 +153,17 @@ export default {
     },
     PUMPKIN_TREE: {
       lifeTime: [5, 10], // year / cycle
-      nbFlowers: [2,5],
+      nbFlowers: [2, 5],
+      nbLeaves: 3,
+      size: 1.0,
+      temperature: [10, 25],
+      pollution: 20,
+      brightness: [20, 70],
+      humidity: [30, 70]
+    },
+    ZUCCHINI_TREE: {
+      lifeTime: [5, 10], // year / cycle
+      nbFlowers: [2, 5],
       nbLeaves: 3,
       size: 1.0,
       temperature: [10, 25],
@@ -153,7 +172,13 @@ export default {
       humidity: [30, 70]
     }
   },
-  BUSHES_DATA: {
+  BUSHES_DATA: { 
+    CARROT_TREE: {
+      startingCycle: 0.4,
+      flowerTimeFactor: 0.2,
+      fruitTimeFactor: 0.2,
+      reproductionDistance: 10
+    },
     PEAR_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
@@ -178,6 +203,12 @@ export default {
       fruitTimeFactor: 0.4,
       reproductionDistance: 20
     },
+    ZUCCHINI_TREE: {
+      startingCycle: 0.2,
+      flowerTimeFactor: 0.2,
+      fruitTimeFactor: 0.4,
+      reproductionDistance: 20
+    }
   },
 
   COLOR: {

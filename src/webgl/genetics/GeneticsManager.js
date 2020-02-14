@@ -128,7 +128,7 @@ export default class GeneticsManager {
   // Find a partner and test reproduction
   checkReproduction (dt, entityType) {
     if (this.done.includes(entityType)) return
-
+console.log(entityType)
     const yearTime = dt % constant.TIME_INFOS.YEAR_TIME
     const speciesData = constant.BUSHES_DATA[entityType]
 

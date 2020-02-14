@@ -4,7 +4,7 @@ import Genome from '../../../genetics/Genome'
 import constant from '@/utils/constant'
 import Params from '../../../lSystems/Params'
 import LSystemBuilder from '../../../lSystems/LSystemBuilder'
-import {Vector3} from 'three'
+import { Vector3 } from 'three'
 
 export default class OrangeTree extends Bush {
   constructor (bornTime, genome, position, bushType) {
@@ -13,13 +13,13 @@ export default class OrangeTree extends Bush {
     this.spawn()
   }
 
-  spawn() { //L-System
+  spawn () { // L-System
     const rules = [{
       entry: 'A',
       exit: 'F[++A]X[--A]^^^A'
     }]
-    const lsystemParams = new Params("FFFFFA", rules,2, 25, 2, 1, 0.05, 0.05)
-    const lSystem = new LSystemBuilder(lsystemParams.rewriteWithRules("FFFFFA", rules.iterations), lsystemParams, new Vector3(0,0,0))
+    const lsystemParams = new Params('FFFFFA', rules, 2, 25, 2, 1, 0.05, 0.05)
+    const lSystem = new LSystemBuilder(lsystemParams.rewriteWithRules('FFFFFA', rules.iterations), lsystemParams, new Vector3(0, 0, 0))
     const tree = lSystem.build()
 
     this.add(tree.tree)

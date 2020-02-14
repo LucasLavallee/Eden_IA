@@ -34,8 +34,8 @@ export default class Zucchini extends Vegetable {
     const geometry = new CylinderBufferGeometry(this.genome.size / 2, this.genome.size / 5, this.genome.size / 2, 32, 32)
 
     const material = new MeshPhongMaterial({
-      color: this.genome.color,
-      emissive: this.genome.color,
+      color: 0x356100,
+      emissive: 0x356100,
       emissiveIntensity: 0.3,
       side: DoubleSide
     })
@@ -57,16 +57,4 @@ export default class Zucchini extends Vegetable {
     this.add(zucchini, tige)
   }
 
-  update (dt) {
-    const age = dt - this.bornTime
-
-    this.updateReproduction(dt)
-    if (age < this.lifeTime) {
-      let scale = age / (this.lifeTime / 2)
-      scale = scale <= 1 ? scale : 1
-      this.scale.set(scale, scale, scale)
-    } else {
-      this.die()
-    }
-  }
 }

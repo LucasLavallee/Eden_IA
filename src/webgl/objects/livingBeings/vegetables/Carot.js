@@ -1,26 +1,27 @@
-import Vegetable from './Vegetable'
-
 import {
   BoxGeometry,
   MeshPhongMaterial,
-  Mesh
+  Mesh,
+  Vector3
 } from 'three'
 import constant from 'utils/constant'
+import Bush from '../bushes/Bush'
+import Genome from '../../../genetics/Genome'
+import {randomFloat} from 'utils/basicFunction'
 
-export default class Carot extends Vegetable {
-  constructor (bornTime = 0, genome, position) {
-    super(bornTime, genome, position)
-
-    this.init()
+export default class Carot extends Bush {
+  constructor (bornTime = 0, genome, position, bushType) {
+    super(bornTime, genome, position, bushType)
+    this.spawn()
   }
 
-  init () {
+  spawn () {
     const height = 3
 
     const geometry = new BoxGeometry(1, height, 1)
     const material = new MeshPhongMaterial({
-      color: this.genome.color,
-      emissive: this.genome.color,
+      color: 0xFF6600,
+      emissive: 0xFF6600,
       emissiveIntensity: 0.3
     })
     const cube = new Mesh(geometry, material)
@@ -37,18 +38,44 @@ export default class Carot extends Vegetable {
     leave.position.y = (height / 2) + 0.5
 
     this.add(leave)
+
+    this.spawnablePosition.push({
+      type: 'cube',
+      size: new Vector3(0.5, 1, 0.5),
+      position: new Vector3(leave.position.x, leave.position.y , leave.position.z)
+    })
   }
 
-  update (dt) {
-    const age = dt - this.bornTime
+  deployFruit (time, position, newParentGenome) {
+    const genomeOptions = { ...constant.DEFAULT_BUSH_GENOME.CARROT_TREE, lifeTime: [constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.CARROT_TREE.fruitTimeFactor, constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.CARROT_TREE.fruitTimeFactor] }
 
-    this.updateReproduction(dt)
-    if (age < this.lifeTime) {
-      let scale = age / (this.lifeTime / 2)
-      scale = scale <= 1 ? scale : 1
-      this.scale.set(scale, scale, scale)
-    } else {
-      this.die()
+    const spawningAngle = Math.random() * Math.PI * 2
+    const newPosX = 3*Math.cos(spawningAngle) + position.x
+    const newPosZ = 3*Math.sin(spawningAngle) + position.z
+    
+    const newBornPosition = {
+      x: newPosX,
+      y: position.y,
+      z: newPosZ
     }
+    
+    const newCarrot = new Carot(time, new Genome(genomeOptions, true)
+      , newBornPosition, "CARROT")
+
+    this.fruits.push(newCarrot)
+    
+  }
+
+  updateFruits (dt) {
+    const newBushes = []
+
+    for (let i = this.fruits.length; i > 0; i--) {
+      const myBush = this.removeFruit(this.fruits[i])
+      newBushes.push({
+        type: "CARROT_TREE",
+        livingBeing: myBush[0]
+      })
+    }
+    return newBushes
   }
 }

@@ -54,7 +54,6 @@ class Banana extends Fruit {
     this.cone2.rotateZ(degRadian(-122))
     this.add(this.cone2)
   }
-
 }
 
 export default Banana

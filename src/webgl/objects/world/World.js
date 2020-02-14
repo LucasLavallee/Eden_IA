@@ -147,7 +147,6 @@ export default class World extends Object3D {
 
     if (store.getters.getCurrentMode === 'remove') { this.ground.update(null, null) } */
 
-
     /* const newLB = this.geneticsManager.checkReproduction(dt)
     for (const LB of newLB) {
       this.addEntity(LB.type, LB.entity)

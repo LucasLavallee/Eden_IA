@@ -83,7 +83,7 @@ export default {
     justify-content center
     align-items center
     .item
-      margin 0 5px 
+      margin 0 5px
     .icon
       background-color #212121
       padding 5px

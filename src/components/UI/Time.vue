@@ -28,50 +28,50 @@ export default {
 	  currentSpeed: 1
     }
   },
-	methods: {
-		...mapActions([
-			'changeCurrentSpeed'
-		]),
-		setSpeed (el) {
-			const speedText = el.target.innerText
-			switch (speedText) {
-				case 'x1':
-					this.speed = 1000
-					store.dispatch('changeCurrentSpeed', 1)
-					this.currentSpeed = 1
-					break
-				case 'x2':
-					this.speed = 500
-					store.dispatch('changeCurrentSpeed', 2)
-					this.currentSpeed = 2
-					break
-				case 'x10':
-					this.speed = 100
-					store.dispatch('changeCurrentSpeed', 10)
-					this.currentSpeed = 10
-					break
-				case 'x100':
-					this.speed = 1
-					store.dispatch('changeCurrentSpeed', 100)
-					this.currentSpeed = 100
-					break
-				default:
-					break
-			}
-			this.timeManager.setSpeed(this.speed)
-			this.timeManager.changeSpeed()
-			clearInterval(this.timerId)
-			this.timerId = setInterval(() => {
-				this.time = this.timeManager.print()
-				}, this.speed)
-		},
-	},
-    computed: {
+  methods: {
+    ...mapActions([
+      'changeCurrentSpeed'
+    ]),
+    setSpeed (el) {
+      const speedText = el.target.innerText
+      switch (speedText) {
+        case 'x1':
+          this.speed = 1000
+          store.dispatch('changeCurrentSpeed', 1)
+          this.currentSpeed = 1
+          break
+        case 'x2':
+          this.speed = 500
+          store.dispatch('changeCurrentSpeed', 2)
+          this.currentSpeed = 2
+          break
+        case 'x10':
+          this.speed = 100
+          store.dispatch('changeCurrentSpeed', 10)
+          this.currentSpeed = 10
+          break
+        case 'x100':
+          this.speed = 1
+          store.dispatch('changeCurrentSpeed', 100)
+          this.currentSpeed = 100
+          break
+        default:
+          break
+      }
+      this.timeManager.setSpeed(this.speed)
+      this.timeManager.changeSpeed()
+      clearInterval(this.timerId)
+      this.timerId = setInterval(() => {
+        this.time = this.timeManager.print()
+      }, this.speed)
+    }
+  },
+  computed: {
     	...mapGetters([
       		'getCurrentSpeed'
     	])
-	},
-    
+  },
+
   	mounted () {
     this.timeManager = new TimeManager()
     this.timerId = setInterval(() => {
