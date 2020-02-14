@@ -126,33 +126,6 @@ export default {
       -webkit-appearance: none /* Hides the slider so that custom slider can be made */
       width: 100% /* Specific width is required for Firefox. */
       background: transparent /* Otherwise white in Chrome */
-
-    input[type=range]
-      &::-webkit-slider-thumb,
-      &::-moz-range-thumb
-        &:focus
-          outline none
-        -webkit-appearance none
-        // border 1px solid #212121
-        height 23px
-        width 23px
-        border-color #099622
-        border-radius 20px
-        background #099622
-        cursor pointer
-        margin-top -8px /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-        box-shadow 0px 0px 1px #0d0d0d /* Add cool effects to your sliders! */
-      &::-webkit-slider-runnable-track
-      &::-moz-range-track
-        &:focus
-            outline none
-        width 100%
-        height 8.4px
-        cursor pointer
-        box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
-        background #424242
-        border-radius 20px
-        border 0.2px solid #010101
     input[type=range]
       &:focus
         outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
@@ -164,4 +137,44 @@ export default {
         background: transparent
         border-color: transparent
         color: transparent
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 23px;
+    width: 23px;
+    border-color: #099622;
+    border-radius: 20px;
+    background: #099622;
+    cursor: pointer;
+    margin-top: -8px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    box-shadow: 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+  } 
+  input[type=range]::-webkit-slider-runnable-track {
+    width 100%
+    height 8.4px
+    cursor pointer
+    box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+    background #424242
+    border-radius 20px
+    border 0.2px solid #010101
+  }
+  input[type=range]::-moz-range-thumb {
+    height 23px
+    width 23px
+    border-color #099622
+    border-radius 20px
+    background #099622
+    cursor pointer
+    margin-top -8px /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    box-shadow 0px 0px 1px #0d0d0d /* Add cool effects to your sliders! */
+  } 
+  input[type=range]::-moz-range-track {
+    width 100%
+    height 8.4px
+    cursor pointer
+    box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+    background #424242
+    border-radius 20px
+    border 0.2px solid #010101
+  }
+        
 </style>
