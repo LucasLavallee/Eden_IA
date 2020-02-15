@@ -6,6 +6,7 @@
     <ModeSelection/>
     <!--<MiniWorldInfos/>-->
     <EnvironnementGui/>
+    <StatsWorlds/>
     <Time/>
     <Information/>
     <router-link to="/">
@@ -29,6 +30,7 @@ import ModeSelection from '../components/UI/ModeSelection'
 import EnvironnementGui from '../components/UI/EnvironnementGUI'
 import Information from '../components/UI/Informations'
 import Time from '../components/UI/Time'
+import StatsWorlds from '@/components/UI/StatsWorlds'
 
 export default {
   name: 'EdenIA',
@@ -36,7 +38,8 @@ export default {
     ModeSelection,
     EnvironnementGui,
     Time,
-    Information
+    Information,
+    StatsWorlds
   },
   data () {
     return {
