@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="container" v-on:mouseover="changeCurrentMode('Menu')">
     <span class="title">Environment</span>
     <div id="sliders-container">
       <div class="slidecontainer">
@@ -47,7 +47,8 @@ export default {
       'changeTemperature',
       'changeBrightness',
       'changeHumidity',
-      'changePollution'
+      'changePollution',
+      'changeCurrentMode'
     ]),
     change (e) {
       // console.log(e.target.id)
