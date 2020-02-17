@@ -1,5 +1,5 @@
 <template>
-  <div id="container" v-on:mouseover="changeCurrentMode('Menu')">
+  <div id="container" v-on:mouseover="previousMode=getCurrentMode;changeCurrentMode('Menu')" v-on:mouseout="changeCurrentMode(previousMode)" >
     <span class="title">Environment</span>
     <div id="sliders-container">
       <div class="slidecontainer">
@@ -37,7 +37,8 @@ export default {
   name: 'EnvironnementGui',
   data () {
     return {
-      currendMode: this.getCurrentMode
+      currentMode: this.getCurrentMode,
+      previousMode: this.currentMode
     }
   },
   methods: {
@@ -51,8 +52,6 @@ export default {
       'changeCurrentMode'
     ]),
     change (e) {
-      // console.log(e.target.id)
-      // console.log(e.target.value)
       const spanId = e.target.id + '-value'
       document.getElementById(spanId).innerText = e.target.value
     },
@@ -60,19 +59,15 @@ export default {
       const target = e.target
       switch (target.id) {
         case 'temperature-slider':
-          console.log('TEMPERATURE')
           this.changeTemperature(parseInt(target.value))
           break
         case 'brightness-slider':
-          console.log('BRIGHTNESS')
           this.changeBrightness(parseInt(target.value))
           break
         case 'humidity-slider':
-          console.log('HUMIDITY')
           this.changeHumidity(parseInt(target.value))
           break
         case 'pollution-slider':
-          console.log('POLLUTION')
           this.changePollution(parseInt(target.value))
           break
         default:
