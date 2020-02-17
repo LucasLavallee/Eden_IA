@@ -1,6 +1,10 @@
 <template>
   <div id="miniWorldInfos">
-    <span>Mini World n°{{getActiveWorld}}</span>
+    <span>Mini World n°{{currentWorld}}</span><br/>
+    <span>Temperature: {{this.getTemperature}}</span><br/>
+    <span>Brightness: {{this.getBrightness}}</span><br/>
+    <span>Humidity: {{this.getHumidity}}</span><br/>
+    <span>Pollution: {{this.getPollution}}</span><br/>
   </div>
 </template>
 
@@ -11,14 +15,18 @@ export default {
   name: 'ModeSelection',
   data () {
     return {
-      currentWorld: this.getActiveWorld
+      currentWorld: 0
     }
   },
   methods: {
   },
   computed: {
     ...mapGetters([
-      'getActiveWorld'
+      'getActiveWorld',
+      'getTemperature',
+      'getBrightness',
+      'getHumidity',
+      'getPollution'
     ])
   }
 }
@@ -27,8 +35,9 @@ export default {
 <style lang="stylus">
   #miniWorldInfos
     position fixed
-    top 20px
-    right 20px
+    top 90px
+    left 50%
+    transform translate3d(-50%, 0, 0)
     font-size 20px
 
 </style>

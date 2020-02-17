@@ -38,7 +38,9 @@ export default class TimeManager {
         }
       }
     }
+
   }
+  
 
   getHours () {
     if (this.hours < 10) {

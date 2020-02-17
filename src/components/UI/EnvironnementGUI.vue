@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="container" v-on:mouseover="previousMode=getCurrentMode;changeCurrentMode('Menu')" v-on:mouseout="changeCurrentMode(previousMode)" >
     <span class="title">Environment</span>
     <div id="sliders-container">
       <div class="slidecontainer">
@@ -37,7 +37,8 @@ export default {
   name: 'EnvironnementGui',
   data () {
     return {
-      currendMode: this.getCurrentMode
+      currentMode: this.getCurrentMode,
+      previousMode: this.currentMode
     }
   },
   methods: {
@@ -47,35 +48,30 @@ export default {
       'changeTemperature',
       'changeBrightness',
       'changeHumidity',
-      'changePollution'
+      'changePollution',
+      'changeCurrentMode'
     ]),
-    change(e) {
-      // console.log(e.target.id)
-      // console.log(e.target.value)
+    change (e) {
       const spanId = e.target.id + '-value'
       document.getElementById(spanId).innerText = e.target.value
     },
-    changeFocus(e) {
+    changeFocus (e) {
       const target = e.target
-      switch(target.id) {
-        case "temperature-slider":
-          console.log("TEMPERATURE")
+      switch (target.id) {
+        case 'temperature-slider':
           this.changeTemperature(parseInt(target.value))
-          break;
-        case "brightness-slider":
-          console.log("BRIGHTNESS")
+          break
+        case 'brightness-slider':
           this.changeBrightness(parseInt(target.value))
-          break;
-        case "humidity-slider":
-          console.log("HUMIDITY")
+          break
+        case 'humidity-slider':
           this.changeHumidity(parseInt(target.value))
-          break;
-        case "pollution-slider":
-          console.log("POLLUTION")
+          break
+        case 'pollution-slider':
           this.changePollution(parseInt(target.value))
-          break;
+          break
         default:
-          break;
+          break
       }
     }
   },
@@ -100,6 +96,7 @@ export default {
     padding 20px
     border-radius 20px
     color #F9F9F9
+    cursor default
     .title
       font-weight bold
     #sliders-container
@@ -174,7 +171,7 @@ export default {
     cursor: pointer;
     margin-top: -8px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
     box-shadow: 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
-  } 
+  }
   input[type=range]::-webkit-slider-runnable-track {
     width 100%
     height 8.4px
@@ -193,7 +190,7 @@ export default {
     cursor pointer
     margin-top -8px /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
     box-shadow 0px 0px 1px #0d0d0d /* Add cool effects to your sliders! */
-  } 
+  }
   input[type=range]::-moz-range-track {
     width 100%
     height 8.4px
@@ -203,5 +200,5 @@ export default {
     border-radius 20px
     border 0.2px solid #010101
   }
-        
+
 </style>

@@ -9,7 +9,6 @@
         </div>
         <div class="mode" v-on:mouseover="mouseOverHandle" v-on:mouseout="mouseOutHandle" :class="getCurrentMode === 'add' ? 'active': ''">
             <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
-            <!-- @click="changeCurrentMode('add') -->
         </div>
     </div>
     <transition name="fade">
@@ -145,6 +144,7 @@ export default {
       align-items center
       color #212121
       box-shadow 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+      background-color #F9F9FF
       &.active
         background-color #212121
         color #099622
