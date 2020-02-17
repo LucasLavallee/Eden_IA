@@ -8,6 +8,7 @@
     <ModeSelection/>
     <MiniWorldInfos/>
     <EnvironnementGui/>
+    <StatsWorlds/>
     <Time/>
     <Information/>
     <router-link to="/">
@@ -35,6 +36,8 @@ import MiniWorldInfos from '../components/UI/MiniWorldInfos'
 import mouseAdd from '../../public/Icons/mouse_add.png'
 import mouseNavigate from '../../public/Icons/mouse_navigate.png'
 import { mapGetters } from 'vuex'
+import StatsWorlds from '@/components/UI/StatsWorlds'
+
 export default {
   name: 'EdenIA',
   components: {
@@ -42,7 +45,8 @@ export default {
     EnvironnementGui,
     Time,
     Information,
-    MiniWorldInfos
+    MiniWorldInfos,
+    StatsWorlds
   },
   data () {
     return {
