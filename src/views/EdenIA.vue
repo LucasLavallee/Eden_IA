@@ -77,9 +77,6 @@ export default {
     resize () {
       this.webgl.onResize()
     },
-    mouseMove (e) {
-      console.log('Pomme')
-    },
     setCursor () {
       const currentMode = this.getCurrentMode
       switch (currentMode) {

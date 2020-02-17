@@ -20,7 +20,6 @@ export default {
   },
   methods: {
     mouseMove (e) {
-      console.log(e.x)
       if (document.getElementById('cursor-image-add')) {
         const cursorImage = document.getElementById('cursor-image-add')
         cursorImage.style.left = e.x + 'px'

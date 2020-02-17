@@ -9,7 +9,6 @@
         </div>
         <div class="mode" v-on:mouseover="mouseOverHandle" v-on:mouseout="mouseOutHandle" :class="getCurrentMode === 'add' ? 'active': ''">
             <font-awesome-icon :icon="['fas','plus-circle']" size="2x" />
-            <!-- @click="changeCurrentMode('add') -->
         </div>
     </div>
     <transition name="fade">

@@ -26,23 +26,14 @@ export default class TimeManager {
 
   getMinutes () {
     if (this.minutes < 10) {
-      console.log('<10')
       return '0' + this.minutes
-    } else {
-      if (this.minutes < 60) {
-        console.log('<60')
-        return this.minutes
-      } else {
-        if (this.minutes - (this.hours * 60) < 10) {
-          console.log('>60 mais <10 en relatif')
-          return '0' + (this.minutes - (this.hours * 60))
-        } else {
-          console.log('>60 mais >10 en relatif')
-          return this.minutes - (this.hours * 60)
-        }
-      }
-    }
+    } else
+    if (this.minutes < 60) { return this.minutes } else
+    if (this.minutes - (this.hours * 60) < 10) {
+      return '0' + (this.minutes - (this.hours * 60))
+    } else { return this.minutes - (this.hours * 60) }
   }
+  
 
   getHours () {
     if (this.hours < 10) {
