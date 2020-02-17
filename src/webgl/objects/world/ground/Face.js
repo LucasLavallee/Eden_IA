@@ -79,4 +79,9 @@ export default class Face extends Object3D {
     }
     this.shaderMaterial.uniforms.uRadius.value = this.shaderMaterial.uniforms.uRadius.value
   }
+
+
+  strongAxis() {
+    return this.position.x !== 0 ? 'x' : (this.position.y !== 0 ? 'y' : 'z') 
+  }
 }

@@ -12,8 +12,8 @@ import {
 } from 'three'
 
 export default class Pumpkin extends Vegetable {
-  constructor (bornTime = 0, genome, position) {
-    super(bornTime, genome, position)
+  constructor (bornTime = 0, genome, position, parentGenome) {
+    super(bornTime, genome, position, parentGenome)
 
     this.curve = new CatmullRomCurve3([
       new Vector3(-this.genome.size * 3, this.genome.size * 4, 0),

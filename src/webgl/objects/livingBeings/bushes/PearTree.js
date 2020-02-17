@@ -10,11 +10,11 @@ export default class PearTree extends Bush {
     this.spawn()
   }
 
-  deployFruit (time, position, newParentGenome) {
+  deployFruit (time, flower) {
     const genomeOptions = { ...constant.DEFAULT_GENOME.PEAR, lifeTime: [constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.PEAR_TREE.fruitTimeFactor, constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.PEAR_TREE.fruitTimeFactor] }
 
     const newPear = new Pear(time, new Genome(genomeOptions, true, 'fruit')
-      , position, newParentGenome)
+      , flower.position, flower.parentGenome)
 
     this.add(newPear)
     this.fruits.push(newPear)

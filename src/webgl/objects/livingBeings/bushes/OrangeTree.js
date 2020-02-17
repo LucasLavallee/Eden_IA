@@ -27,20 +27,20 @@ export default class OrangeTree extends Bush {
     this.spawnablePosition = tree.spawnablePositions
   }
 
-  deployFruit (time, position, newParentGenome) {
+  deployFruit (time, flower) {
     const genomeOptions = { ...constant.DEFAULT_GENOME.ORANGE, lifeTime: [constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.ORANGE_TREE.fruitTimeFactor, constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.ORANGE_TREE.fruitTimeFactor] }
 
     const newOrange = new Orange(time, new Genome(genomeOptions, true, 'fruit')
-      , position, newParentGenome)
+      , flower.position, flower.parentGenome)
 
     this.add(newOrange)
     this.fruits.push(newOrange)
   }
 
-  createNewBush (dt, position) {
+  createNewBush (dt, position, genome) {
     return {
       type: 'ORANGE_TREE',
-      livingBeing: new OrangeTree(dt, new Genome(constant.DEFAULT_BUSH_GENOME.ORANGE_TREE, true), position, 'ORANGE')
+      livingBeing: new OrangeTree(dt, genome, position, 'ORANGE')
     }
   }
 }

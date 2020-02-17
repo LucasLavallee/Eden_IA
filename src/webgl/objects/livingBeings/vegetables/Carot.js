@@ -6,19 +6,18 @@ import {
 } from 'three'
 import constant from 'utils/constant'
 import Bush from '../bushes/Bush'
-import Genome from '../../../genetics/Genome'
-import {randomFloat} from 'utils/basicFunction'
 
 export default class Carot extends Bush {
   constructor (bornTime = 0, genome, position, bushType) {
     super(bornTime, genome, position, bushType)
+
     this.spawn()
   }
 
   spawn () {
-    const height = 3
+    this.height = 3
 
-    const geometry = new BoxGeometry(1, height, 1)
+    const geometry = new BoxGeometry(1, this.height, 1)
     const material = new MeshPhongMaterial({
       color: 0xFF6600,
       emissive: 0xFF6600,
@@ -35,7 +34,7 @@ export default class Carot extends Bush {
       emissiveIntensity: 0.3
     })
     const leave = new Mesh(geometryLeave, materialLeave)
-    leave.position.y = (height / 2) + 0.5
+    leave.position.y = (this.height / 2) + 0.5
 
     this.add(leave)
 
@@ -46,21 +45,18 @@ export default class Carot extends Bush {
     })
   }
 
-  deployFruit (time, position, newParentGenome) {
-    const genomeOptions = { ...constant.DEFAULT_BUSH_GENOME.CARROT_TREE, lifeTime: [constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.CARROT_TREE.fruitTimeFactor, constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.CARROT_TREE.fruitTimeFactor] }
+  deployFruit (time, flower, strongAxis) {
+    let vectorPos = new Vector3()
+    vectorPos.setFromMatrixPosition(flower.matrixWorld)
 
     const spawningAngle = Math.random() * Math.PI * 2
-    const newPosX = 3*Math.cos(spawningAngle) + position.x
-    const newPosZ = 3*Math.sin(spawningAngle) + position.z
+
+    vectorPos.x = (strongAxis === 'x' ? (vectorPos.x - this.height/2) : 3*Math.cos(spawningAngle) + vectorPos.x)
+    vectorPos.y = (strongAxis === 'y' ? (vectorPos.y - this.height/2) : 3*Math.sin(spawningAngle) + vectorPos.y)
+    vectorPos.z = (strongAxis === 'z' ? (vectorPos.z - this.height/2) : 3*Math.sin(spawningAngle) + vectorPos.z)
     
-    const newBornPosition = {
-      x: newPosX,
-      y: position.y,
-      z: newPosZ
-    }
-    
-    const newCarrot = new Carot(time, new Genome(genomeOptions, true)
-      , newBornPosition, "CARROT")
+    const newCarrot = new Carot(time, flower.parentGenome
+      , vectorPos, "CARROT")
 
     this.fruits.push(newCarrot)
     

@@ -20,6 +20,7 @@ import PumpkinBush from '../livingBeings/bushes/PumpkinBush'
 import TomatoBush from '../livingBeings/bushes/TomatoBush'
 import ZucchiniBush from '../livingBeings/bushes/ZucchiniBush'
 import Carot from '../livingBeings/vegetables/Carot'
+import Beet from '../livingBeings/vegetables/Beet'
 
 export default class MiniWorld extends Object3D {
   constructor (options/* miniWorldId, position, rotation, type = 'vegGarden', camera, controls */) {
@@ -86,9 +87,11 @@ export default class MiniWorld extends Object3D {
     livingBeing.rotation.x = this.ground.rotation.x + Math.PI / 2
     livingBeing.rotation.z = this.ground.rotation.z
 
+    
     if (!(type in this.entities)) this.entities[type] = []
 
     this.entities[type].push(livingBeing)
+
     this.add(livingBeing)
   }
 
@@ -107,11 +110,12 @@ export default class MiniWorld extends Object3D {
       switch (currentMode) {
         case 'add': {
           const currentSelection = store.getters.getCurrentSelection
-          console.log(currentSelection)
+          
           if (!worldPosition) return
 
           switch (currentSelection) {
             case 'beet':
+              this.addEntity('BEET_TREE', new Beet(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.BEET_TREE, true), worldPosition, 'BEET'))          
               break
             case 'carrot':
               this.addEntity('CARROT_TREE', new Carot(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.CARROT_TREE, true), worldPosition, 'CARROT'))
@@ -200,11 +204,8 @@ export default class MiniWorld extends Object3D {
       this.entities[keys[i]].forEach(entity => {
         // check if entity is still alive
         if (entity.isAlive()) {
-          const res = entity.update(dt)
+          const res = entity.update(dt, this.ground.strongAxis())
           if (res && res.length > 0) {
-            console.log('-----------')
-            console.log(res)
-            console.log('-----------')
             res.forEach(bush => {
               this.addEntity(bush.type, bush.livingBeing)
             })
@@ -219,4 +220,6 @@ export default class MiniWorld extends Object3D {
     const currentId = store.getters.getActiveWorld
     if (store.getters.getCurrentMode === 'remove' && this.miniWorldId === currentId) { this.ground.update(null, null) }
   }
+
+  
 }

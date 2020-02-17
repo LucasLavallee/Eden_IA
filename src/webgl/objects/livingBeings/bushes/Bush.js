@@ -16,6 +16,7 @@ export default class Bush extends LivingBeings {
 
     this.bushType = bushType + '_TREE'
     this.fruit = bushType
+
     this.cycleDetails = constant.BUSHES_DATA[this.bushType]
     this.cycleStarted = false
 
@@ -56,6 +57,7 @@ export default class Bush extends LivingBeings {
       size: new Vector3(1 * scale, 2 * scale, 1 * scale),
       position: leave.position
     })
+
   }
 
   deployFlowers (time) {
@@ -63,7 +65,7 @@ export default class Bush extends LivingBeings {
       const spawnInfos = this.getRandomSpawnablePosition()
       if (!spawnInfos) return
       const preciseLT = Math.ceil(this.cycleDetails.flowerTimeFactor * constant.TIME_INFOS.YEAR_TIME)
-
+      
       const newFlower = new Flower(
         time + randomInt(0, preciseLT * 0.1),
         new Genome({
@@ -71,7 +73,8 @@ export default class Bush extends LivingBeings {
           lifeTime: randomInt(preciseLT * 0.9, preciseLT * 1.1)
         }, false, 'flower'),
         spawnInfos.position,
-        this.genome // could use mutation here
+        this.genome, // could use mutation here
+        time
       )
 
       this.flowers.push(newFlower)
@@ -85,7 +88,7 @@ export default class Bush extends LivingBeings {
     this.cycleStarted = true
   }
 
-  deployFruit (time, position, genome) {
+  deployFruit (time, flower, strongAxis) {
 
   }
 
@@ -150,7 +153,7 @@ export default class Bush extends LivingBeings {
     return removeFruit
   }
 
-  update (dt) {
+  update (dt, strongAxis) {
     const age = dt - this.bornTime
     const yearTime = dt % constant.TIME_INFOS.YEAR_TIME
 
@@ -168,7 +171,7 @@ export default class Bush extends LivingBeings {
         if (yearTime > this.cycleDetails.startingCycle * constant.TIME_INFOS.YEAR_TIME) {
           if (this.cycleStarted) {
             if (this.flowers.length !== 0) {
-              this.updateFlowers(dt)
+              this.updateFlowers(dt, strongAxis)
               return
             }
 
@@ -187,14 +190,14 @@ export default class Bush extends LivingBeings {
     this.die()
   }
 
-  updateFlowers (dt) {
+  updateFlowers (dt, strongAxis) {
     this.flowers.forEach(flower => {
       if (flower.isAlive()) {
         flower.update(dt)
       } else {
         if (flower.isFecondate) {
           // Add fruit
-          this.deployFruit(dt, flower.position, flower.fruitGenome)
+          this.deployFruit(dt, flower, strongAxis)
         }
         this.removeFlower(flower)
       }
@@ -209,14 +212,13 @@ export default class Bush extends LivingBeings {
         this.fruits[i].update(dt)
         continue
       }
-      const randTest = (randomInt(0, 100) === 1)
+
+      const randTest = (randomInt(0, 10) === 1)
 
       if (randTest) {
         let vectorPos = new Vector3()
         vectorPos.setFromMatrixPosition(this.fruits[i].matrixWorld)
-        newBushes.push(this.createNewBush(dt, vectorPos))
-
-        console.log(vectorPos)
+        newBushes.push(this.createNewBush(dt, vectorPos, this.fruits[i].parentGenome))
       }
       this.removeFruit(this.fruits[i])
     }
@@ -224,7 +226,7 @@ export default class Bush extends LivingBeings {
     return newBushes
   }
 
-  createNewBush (dt, position) {
+  createNewBush (dt, position, genome) {
 
   }
 }

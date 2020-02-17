@@ -22,7 +22,7 @@ export default class GeneticsManager {
     const keys = Object.keys(this.entities)
     keys.forEach(key => {
       this.entities[key].forEach(entity => {
-        this.mutate(entity.genome, true)
+        this.mutate(entity.genome, true, key)
       })
     })
   }
@@ -35,7 +35,7 @@ export default class GeneticsManager {
     const bestChildren = this.getTheBest(childrens)
 
     this.mutate(bestChildren.genome)
-    second.fruitGenome = bestChildren.genome
+    second.parentGenome = bestChildren.genome
     second.fecondate()
   }
 
@@ -55,11 +55,10 @@ export default class GeneticsManager {
     if (fitness < 0.6) {
       genome.lifeTime -= 40 * randomFloat(0, 1.0)
     }
-
     return fitness
   }
 
-  mutate (genome, forceMutation = false) {
+  mutate (genome, forceMutation = false, entityType = "") {
     const mutate = randomInt(0, 4) === 1 // one chance in two of being greeted
 
     if (!mutate && !forceMutation) { return }
@@ -71,16 +70,33 @@ export default class GeneticsManager {
       genome[key] += gap * mutateStrength
     })
 
+
+    const fitness = this.fitness(genome)
+    if(genome.nbLeaves) {
+      const rand = randomInt(0, 3) === 1
+      if(!rand) return
+
+      if (fitness < 0.6) {
+        genome.nbLeaves = clamp(genome.nbLeaves-1, 1, constant.BUSHES_DATA[entityType].maxLeaves)
+      } else if(fitness > 0.8){
+        genome.nbLeaves = clamp(genome.nbLeaves+1, 1, constant.BUSHES_DATA[entityType].maxLeaves)
+      }
+    }
+
+    console.log(fitness)
+
     if (!forceMutation) return
 
     if (genome.nbFlowers) {
-      const fitness = this.fitness(genome)
       if (fitness < 0.6) {
-        genome.nbFlowers = clamp(Math.floor(genome.nbFlowers * 0.8), 2, 20)
+        genome.nbFlowers = clamp(Math.floor(genome.nbFlowers * 0.8), 1, constant.BUSHES_DATA[entityType].maxFlowers)
       } else {
-        genome.nbFlowers = clamp(Math.ceil(genome.nbFlowers * 1.2), 2, 15)
+        genome.nbFlowers = clamp(Math.ceil(genome.nbFlowers * 1.2), 1, constant.BUSHES_DATA[entityType].maxFlowers)
       }
     }
+
+    
+
   }
 
   getNewChildrens (genome, targetGenome) {
@@ -95,7 +111,8 @@ export default class GeneticsManager {
           brightness: randomInt(0, 2) === 1 ? genome.brightness : targetGenome.brightness,
           humidity: randomInt(0, 2) === 1 ? genome.humidity : targetGenome.humidity,
           lifeTime: randomInt(0, 2) === 1 ? genome.lifeTime : targetGenome.lifeTime,
-          nbFlowers: randomInt(0, 2) === 1 ? genome.nbFlowers : targetGenome.nbFlowers
+          nbFlowers: randomInt(0, 2) === 1 ? genome.nbFlowers : targetGenome.nbFlowers,
+          nbLeaves: randomInt(0, 2) === 1 ? genome.nbLeaves : targetGenome.nbLeaves
         }, false
       )
       childrensGenome.push(createdGenome)
@@ -128,7 +145,7 @@ export default class GeneticsManager {
   // Find a partner and test reproduction
   checkReproduction (dt, entityType) {
     if (this.done.includes(entityType)) return
-console.log(entityType)
+
     const yearTime = dt % constant.TIME_INFOS.YEAR_TIME
     const speciesData = constant.BUSHES_DATA[entityType]
 

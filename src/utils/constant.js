@@ -115,13 +115,22 @@ export default {
 
   DEFAULT_BUSH_GENOME: {
     CARROT_TREE: {
-      lifeTime: [3,6], // year / cycle
-      nbFlowers: [2,3],
+      lifeTime: [3,5], // year / cycle
+      nbFlowers: [1,3],
       size: 1.0,
       temperature: [5, 25],
       pollution: 30,
       brightness: [20, 70],
       humidity: [10, 40]
+    },
+    BEET_TREE: {
+      lifeTime: [4,7], // year / cycle
+      nbFlowers: [1,3],
+      size: 0.8,
+      temperature: [5, 25],
+      pollution: 50,
+      brightness: [20, 30],
+      humidity: [60, 80]
     },
     PEAR_TREE: {
       lifeTime: [80, 120], // year / cycle
@@ -177,37 +186,52 @@ export default {
       startingCycle: 0.4,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.2,
-      reproductionDistance: 10
+      reproductionDistance: 5,
+      maxFlowers: 2
+    },
+    BEET_TREE: {
+      startingCycle: 0.5,
+      flowerTimeFactor: 0.2,
+      fruitTimeFactor: 0.2,
+      reproductionDistance: 5,
+      maxFlowers: 2
     },
     PEAR_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
-      reproductionDistance: 20
+      reproductionDistance: 20,
+      maxFlowers: 25
     },
     ORANGE_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.5,
-      reproductionDistance: 10
+      reproductionDistance: 10,
+      maxFlowers: 10
     },
     TOMATO_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
-      reproductionDistance: 20
+      reproductionDistance: 20,
+      maxFlowers: 5
     },
     PUMPKIN_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
-      reproductionDistance: 20
+      reproductionDistance: 20,
+      maxFlowers: 5,
+      maxLeaves: 6
     },
     ZUCCHINI_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
-      reproductionDistance: 20
+      reproductionDistance: 20,
+      maxFlowers: 5,
+      maxLeaves: 4
     }
   },
 

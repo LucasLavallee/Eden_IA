@@ -40,4 +40,5 @@ export default class Ground extends Object3D {
     }
     this.shaderMaterial.uniforms.uRadius.value = this.shaderMaterial.uniforms.uRadius.value */
   }
+
 }

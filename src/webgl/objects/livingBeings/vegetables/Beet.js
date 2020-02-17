@@ -1,4 +1,3 @@
-import Vegetable from './Vegetable'
 import constant from 'utils/constant'
 
 import {
@@ -11,15 +10,16 @@ import {
   MeshPhongMaterial,
   DoubleSide
 } from 'three'
+import Bush from '../bushes/Bush'
 
-export default class Beet extends Vegetable {
-  constructor (bornTime = 0, genome, position) {
-    super(bornTime, genome, position)
+export default class Beet extends Bush {
+  constructor (bornTime = 0, genome, position, bushType) {
+    super(bornTime, genome, position, bushType)
 
-    this.init()
+    this.spawn()
   }
 
-  init () {
+  spawn () {
     const x = 0
     const y = 0
 
@@ -37,8 +37,8 @@ export default class Beet extends Vegetable {
     geometry4.scale(2.5, 2.5, 2.5)
 
     const material = new MeshPhongMaterial({
-      color: this.genome.color,
-      emissive: this.genome.color,
+      color: 0x7F023D,
+      emissive: 0x7F023D,
       emissiveIntensity: 0.3,
       side: DoubleSide
     })
@@ -76,16 +76,33 @@ export default class Beet extends Vegetable {
     this.add(beetUp, beetDown, tige, tige2, tige3, leaf, leaf2, leaf3)
   }
 
-  update (dt) {
-    const age = dt - this.bornTime
+  deployFruit (time, flower, strongAxis) {
+    let vectorPos = new Vector3()
+    vectorPos.setFromMatrixPosition(flower.matrixWorld)
 
-    this.updateReproduction(dt)
-    if (age < this.lifeTime) {
-      let scale = age / (this.lifeTime / 2)
-      scale = scale <= 1 ? scale : 1
-      this.scale.set(scale, scale, scale)
-    } else {
-      this.die()
+    const spawningAngle = Math.random() * Math.PI * 2
+
+    vectorPos.x = (strongAxis === 'x' ? (vectorPos.x - this.height/2) : 3*Math.cos(spawningAngle) + vectorPos.x)
+    vectorPos.y = (strongAxis === 'y' ? (vectorPos.y - this.height/2) : 3*Math.sin(spawningAngle) + vectorPos.y)
+    vectorPos.z = (strongAxis === 'z' ? (vectorPos.z - this.height/2) : 3*Math.sin(spawningAngle) + vectorPos.z)
+    
+    const newBeet = new Beet(time, flower.parentGenome
+      , vectorPos, "BEET")
+
+    this.fruits.push(newBeet)
+    
+  }
+
+  updateFruits (dt) {
+    const newBushes = []
+
+    for (let i = this.fruits.length; i > 0; i--) {
+      const myBush = this.removeFruit(this.fruits[i])
+      newBushes.push({
+        type: "BEET_TREE",
+        livingBeing: myBush[0]
+      })
     }
+    return newBushes
   }
 }

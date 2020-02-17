@@ -15,6 +15,9 @@ export default class PumpkinBush extends Bush {
 
   spawn () {
     const nbLeaves = this.genome.nbLeaves
+
+    console.log(this.genome)
+
     const width = 4
     let currentRot = 0
     for (let i = 0; i < nbLeaves; i++) {
@@ -54,20 +57,20 @@ export default class PumpkinBush extends Bush {
     }
   }
 
-  deployFruit (time, position, newParentGenome) {
+  deployFruit (time, flower) {
     const genomeOptions = { ...constant.DEFAULT_GENOME.PUMPKIN, lifeTime: [constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.PUMPKIN_TREE.fruitTimeFactor, constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.PUMPKIN_TREE.fruitTimeFactor] }
 
     const newPumpkin = new Pumpkin(time, new Genome(genomeOptions, true, 'fruit')
-      , position, newParentGenome)
+      , flower.position, flower.parentGenome)
 
     this.add(newPumpkin)
     this.fruits.push(newPumpkin)
   }
 
-  createNewBush (dt, position) {
+  createNewBush (dt, position, genome) {
     return {
       type: 'PUMPKIN_TREE',
-      livingBeing: new PumpkinBush(dt, new Genome(constant.DEFAULT_BUSH_GENOME.PUMPKIN_TREE, true), position, 'PUMPKIN')
+      livingBeing: new PumpkinBush(dt, genome, position, 'PUMPKIN')
     }
   }
 }

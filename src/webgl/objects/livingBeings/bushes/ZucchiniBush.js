@@ -53,20 +53,20 @@ export default class ZucchiniBush extends Bush {
     }
   }
 
-  deployFruit (time, position, newParentGenome) {
+  deployFruit (time, flower) {
     const genomeOptions = { ...constant.DEFAULT_GENOME.ZUCCHINI, lifeTime: [constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.ZUCCHINI_TREE.fruitTimeFactor, constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.ZUCCHINI_TREE.fruitTimeFactor] }
 
     const newZucchini = new Zucchini(time, new Genome(genomeOptions, true, 'fruit')
-      , position, newParentGenome)
+      , flower.position, flower.parentGenome)
 
     this.add(newZucchini)
     this.fruits.push(newZucchini)
   }
 
-  createNewBush (dt, position) {
+  createNewBush (dt, position, genome) {
     return {
       type: 'ZUCCHINI_TREE',
-      livingBeing: new ZucchiniBush(dt, new Genome(constant.DEFAULT_BUSH_GENOME.ZUCCHINI_TREE, true), position, 'ZUCCHINI')
+      livingBeing: new ZucchiniBush(dt, genome, position, 'ZUCCHINI')
     }
   }
 }

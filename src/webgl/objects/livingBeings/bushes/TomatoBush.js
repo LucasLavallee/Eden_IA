@@ -41,20 +41,20 @@ export default class TomatoBush extends Bush {
     }
   }
 
-  deployFruit (time, position, newParentGenome) {
+  deployFruit (time, flower) {
     const genomeOptions = { ...constant.DEFAULT_GENOME.TOMATO, lifeTime: [constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.TOMATO_TREE.fruitTimeFactor, constant.TIME_INFOS.YEAR_TIME * constant.BUSHES_DATA.TOMATO_TREE.fruitTimeFactor] }
 
     const newTomato = new Tomato(time, new Genome(genomeOptions, true, 'fruit')
-      , position, newParentGenome)
+      , flower.position, flower.parentGenome)
 
     this.add(newTomato)
     this.fruits.push(newTomato)
   }
 
-  createNewBush (dt, position) {
+  createNewBush (dt, position, genome) {
     return {
       type: 'TOMATO_TREE',
-      livingBeing: new TomatoBush(dt, new Genome(constant.DEFAULT_BUSH_GENOME.TOMATO_TREE, true), position, 'TOMATO')
+      livingBeing: new TomatoBush(dt, genome, position, 'TOMATO')
     }
   }
 }

@@ -1,8 +1,10 @@
 import LivingBeings from '../LivingBeings'
 
 export default class Vegetable extends LivingBeings {
-  constructor (bornTime = 0, genome, position) {
+  constructor (bornTime = 0, genome, position, parentGenome) {
     super(bornTime, genome, position)
+    
+    this.parentGenome = parentGenome
   }
 
   update (dt) {
