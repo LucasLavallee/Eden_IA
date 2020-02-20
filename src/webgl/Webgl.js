@@ -88,37 +88,37 @@ export default class Webgl {
           this.controls.target = new Vector3(0, 0, 0)
           this.camera.position.set(constant.GROUND.WIDTH * 2, constant.GROUND.WIDTH * 2, constant.GROUND.WIDTH * 2)
           this.camera.rotation.set(0, 0, 0)
-          store.state.activeWorld = 0
+          store.state.activeWorld = 6
           break
         case 97:
           this.controls.target = new Vector3(0, constant.GROUND.WIDTH * 1 / 2, 0)
           this.camera.position.set(0, constant.GROUND.WIDTH * 2, 0)
-          store.state.activeWorld = 1
+          store.state.activeWorld = 0
           break
         case 98:
           this.controls.target = new Vector3(constant.GROUND.WIDTH * 1 / 2, 0, 0)
           this.camera.position.set(constant.GROUND.WIDTH * 2, 0, 0)
-          store.state.activeWorld = 2
+          store.state.activeWorld = 1
           break
         case 99:
           this.controls.target = new Vector3(0, 0, -constant.GROUND.WIDTH * 1 / 2)
           this.camera.position.set(0, 0, -constant.GROUND.WIDTH * 2)
-          store.state.activeWorld = 3
+          store.state.activeWorld = 2
           break
         case 100:
           this.controls.target = new Vector3(-constant.GROUND.WIDTH * 1 / 2, 0, 0)
           this.camera.position.set(-constant.GROUND.WIDTH * 2, 0, 0)
-          store.state.activeWorld = 4
+          store.state.activeWorld = 3
           break
         case 101:
           this.controls.target = new Vector3(0, 0, constant.GROUND.WIDTH * 1 / 2)
           this.camera.position.set(0, 0, constant.GROUND.WIDTH * 2)
-          store.state.activeWorld = 5
+          store.state.activeWorld = 4
           break
         case 102:
           this.controls.target = new Vector3(0, -constant.GROUND.WIDTH * 1 / 2, 0)
           this.camera.position.set(0, -constant.GROUND.WIDTH * 2, 0)
-          store.state.activeWorld = 6
+          store.state.activeWorld = 5
           break
         default:
           break

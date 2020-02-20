@@ -34,8 +34,8 @@ export default class Pepper extends Vegetable {
     tubeGeometry.scale(0.15, 0.15, 0.15)
 
     const material = new MeshPhongMaterial({
-      color: this.genome.color,
-      emissive: this.genome.color,
+      color: 0xFFA700,
+      emissive: 0xFFA700,
       emissiveIntensity: 0.3,
       side: DoubleSide
     })
@@ -61,16 +61,4 @@ export default class Pepper extends Vegetable {
     this.add(pepper, pepper2, pepper3, pepper4, tige)
   }
 
-  update (dt) {
-    const age = dt - this.bornTime
-
-    this.updateReproduction(dt)
-    if (age < this.lifeTime) {
-      let scale = age / (this.lifeTime / 2)
-      scale = scale <= 1 ? scale : 1
-      this.scale.set(scale, scale, scale)
-    } else {
-      this.die()
-    }
-  }
 }

@@ -1,10 +1,7 @@
 <template>
   <div id="miniWorldInfos">
-    <span>Mini World n°{{currentWorld}}</span><br/>
-    <span>Temperature: {{this.getTemperature}}</span><br/>
-    <span>Brightness: {{this.getBrightness}}</span><br/>
-    <span>Humidity: {{this.getHumidity}}</span><br/>
-    <span>Pollution: {{this.getPollution}}</span><br/>
+    <span>Mini World n°{{getActiveWorld}}</span><br/>
+    {{getWorldsInfos[getActiveWorld]}}
   </div>
 </template>
 
@@ -26,7 +23,8 @@ export default {
       'getTemperature',
       'getBrightness',
       'getHumidity',
-      'getPollution'
+      'getPollution',
+      'getWorldsInfos'
     ])
   }
 }

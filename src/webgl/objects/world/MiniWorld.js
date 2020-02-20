@@ -21,6 +21,8 @@ import TomatoBush from '../livingBeings/bushes/TomatoBush'
 import ZucchiniBush from '../livingBeings/bushes/ZucchiniBush'
 import Carot from '../livingBeings/vegetables/Carot'
 import Beet from '../livingBeings/vegetables/Beet'
+import StrawberryBush from '../livingBeings/bushes/StrawberryBush'
+import PepperBush from '../livingBeings/bushes/PepperBush'
 
 export default class MiniWorld extends Object3D {
   constructor (options/* miniWorldId, position, rotation, type = 'vegGarden', camera, controls */) {
@@ -41,7 +43,6 @@ export default class MiniWorld extends Object3D {
     this.raycaster = new MouseRaycaster(options.camera, [this.ground])
 
     this.geneticsManager = new GeneticsManager(this.entities, options.environment)
-
     this.init()
   }
   init () {
@@ -83,7 +84,7 @@ export default class MiniWorld extends Object3D {
     return foundEntities
   }
 
-  addEntity (type, livingBeing) {
+  addEntity (type, livingBeing, bornNaturally = false) {
     livingBeing.rotation.x = this.ground.rotation.x + Math.PI / 2
     livingBeing.rotation.z = this.ground.rotation.z
 
@@ -93,12 +94,38 @@ export default class MiniWorld extends Object3D {
     this.entities[type].push(livingBeing)
 
     this.add(livingBeing)
+
+    const prevState = store.state.worlds[this.miniWorldId][type]
+
+    let newState = {
+      count: 1,
+      planted: !bornNaturally ? 1 :  0,
+      naturally: bornNaturally ? 1 : 0
+    }
+
+    if(prevState) {
+      newState = {
+        count: prevState.count + 1,
+        planted: !bornNaturally ? prevState.planted + 1 :  prevState.planted,
+        naturally: bornNaturally ? prevState.naturally + 1 : prevState.naturally
+      }
+    }
+     
+    store.state.worlds[this.miniWorldId][type] = newState
   }
 
   removeEntity (type, entity) {
     const index = this.entities[type].indexOf(entity)
     this.entities[type].splice(index, 1)
     this.remove(entity)
+
+    const prevState = store.state.worlds[this.miniWorldId][type]
+    const newState = {
+      count: prevState.count - 1,
+      planted: prevState.planted,
+      naturally: prevState.naturally
+    }
+    store.state.worlds[this.miniWorldId][type] = newState
   }
 
   initMouseClickEvent () {
@@ -113,37 +140,50 @@ export default class MiniWorld extends Object3D {
           
           if (!worldPosition) return
 
-          switch (currentSelection) {
-            case 'beet':
-              this.addEntity('BEET_TREE', new Beet(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.BEET_TREE, true), worldPosition, 'BEET'))          
-              break
-            case 'carrot':
-              this.addEntity('CARROT_TREE', new Carot(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.CARROT_TREE, true), worldPosition, 'CARROT'))
-              break
-            case 'banana':
-              this.addEntity('BANANA_TREE', new BananaTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.BANANA_TREE, true), worldPosition, 'BANANA'))
-              break
-            case 'orange':
-              this.addEntity('ORANGE_TREE', new OrangeTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.ORANGE_TREE, true), worldPosition, 'ORANGE'))
-              break
-            case 'pear':
-              this.addEntity('PEAR_TREE', new PearTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PEAR_TREE, true), worldPosition, 'PEAR'))
-              break
-            case 'pumpkin':
-              this.addEntity('PUMPKIN_TREE', new PumpkinBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PUMPKIN_TREE, true), worldPosition, 'PUMPKIN'))
-              break
-            case 'strawberry':
-              break
-            case 'tomato':
-              this.addEntity('TOMATO_TREE', new TomatoBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.TOMATO_TREE, true), worldPosition, 'TOMATO'))
-              break
-            case 'zucchini':
-              this.addEntity('ZUCCHINI_TREE', new ZucchiniBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.ZUCCHINI_TREE, true), worldPosition, 'ZUCCHINI'))
-              break
-            default:
-              break
+          if(this.ground.type === 'vegGarden') {
+            switch (currentSelection) {
+              case 'beet':
+                this.addEntity('BEET_TREE', new Beet(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.BEET_TREE, true), worldPosition, 'BEET'))          
+                break
+              case 'carrot':
+                this.addEntity('CARROT_TREE', new Carot(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.CARROT_TREE, true), worldPosition, 'CARROT'))
+                break
+              case 'pepper': 
+                this.addEntity('PEPPER_TREE', new PepperBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PEPPER_TREE, true), worldPosition, 'PEPPER'))
+                break  
+              case 'pumpkin':
+                this.addEntity('PUMPKIN_TREE', new PumpkinBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PUMPKIN_TREE, true), worldPosition, 'PUMPKIN'))
+                break
+              case 'strawberry':
+                this.addEntity('STRAWBERRY_TREE', new StrawberryBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.STRAWBERRY_TREE, true), worldPosition, 'STRAWBERRY'))
+                break
+              case 'tomato':
+                this.addEntity('TOMATO_TREE', new TomatoBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.TOMATO_TREE, true), worldPosition, 'TOMATO'))
+                break
+              case 'zucchini':
+                this.addEntity('ZUCCHINI_TREE', new ZucchiniBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.ZUCCHINI_TREE, true), worldPosition, 'ZUCCHINI'))
+                break
+              default:
+                break
+            }
+            break
+          } else {
+            switch (currentSelection) {
+              case 'banana':
+                this.addEntity('BANANA_TREE', new BananaTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.BANANA_TREE, true), worldPosition, 'BANANA'))
+                break
+              case 'orange':
+                this.addEntity('ORANGE_TREE', new OrangeTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.ORANGE_TREE, true), worldPosition, 'ORANGE'))
+                break
+              case 'pear':
+                this.addEntity('PEAR_TREE', new PearTree(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PEAR_TREE, true), worldPosition, 'PEAR'))
+                break
+              default:
+                break
+            }
+            break
           }
-          break
+          
         }
         case 'remove': {
           this.controls.enabled = false
@@ -207,7 +247,7 @@ export default class MiniWorld extends Object3D {
           const res = entity.update(dt, this.ground.strongAxis())
           if (res && res.length > 0) {
             res.forEach(bush => {
-              this.addEntity(bush.type, bush.livingBeing)
+              this.addEntity(bush.type, bush.livingBeing, true)
             })
           }
         } else {

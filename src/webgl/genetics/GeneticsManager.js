@@ -83,8 +83,6 @@ export default class GeneticsManager {
       }
     }
 
-    console.log(fitness)
-
     if (!forceMutation) return
 
     if (genome.nbFlowers) {

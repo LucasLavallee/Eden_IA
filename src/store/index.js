@@ -14,7 +14,10 @@ export default new Vuex.Store({
       brightness: 50,
       humidity: 50,
       pollution: 50
-    }
+    },
+    worlds: [
+      [],[],[],[],[],[]
+    ]
   },
   mutations: {
     CHANGE_CURRENT_MODE (state, val) {
@@ -76,8 +79,8 @@ export default new Vuex.Store({
     getTemperature: state => state.environmentParameters.temperature,
     getBrightness: state => state.environmentParameters.brightness,
     getHumidity: state => state.environmentParameters.humidity,
-    getPollution: state => state.environmentParameters.pollution
-
+    getPollution: state => state.environmentParameters.pollution,
+    getWorldsInfos: state => state.worlds
   },
   modules: {
   }

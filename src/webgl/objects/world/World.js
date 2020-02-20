@@ -16,7 +16,7 @@ export default class World extends Object3D {
 
     this.miniWorlds = []
     this.miniWorlds.push(new MiniWorld({
-      miniWorldId: 5,
+      miniWorldId: 4,
       position: new Vector3(0, 0, 1 / 2),
       rotation: new Vector3(0, 0, 0),
       type: 'orchards',
@@ -26,7 +26,7 @@ export default class World extends Object3D {
     })) // front
 
     this.miniWorlds.push(new MiniWorld({
-      miniWorldId: 3,
+      miniWorldId: 2,
       position: new Vector3(0, 0, -1 / 2),
       rotation: new Vector3(Math.PI, 0, 0),
       type: 'vegGarden',
@@ -37,7 +37,7 @@ export default class World extends Object3D {
 
     // L & R
     this.miniWorlds.push(new MiniWorld({
-      miniWorldId: 2,
+      miniWorldId: 1,
       position: new Vector3(-1 / 2, 0, 0),
       rotation: new Vector3(0, -Math.PI / 2, Math.PI / 2),
       type: 'vegGarden',
@@ -47,7 +47,7 @@ export default class World extends Object3D {
     }))
 
     this.miniWorlds.push(new MiniWorld({
-      miniWorldId: 4,
+      miniWorldId: 3,
       position: new Vector3(1 / 2, 0, 0),
       rotation: new Vector3(0, Math.PI / 2, -Math.PI / 2),
       type: 'vegGarden',
@@ -58,7 +58,7 @@ export default class World extends Object3D {
 
     // T & B
     this.miniWorlds.push(new MiniWorld({
-      miniWorldId: 1,
+      miniWorldId: 0,
       position: new Vector3(0, 1 / 2, 0),
       rotation: new Vector3(-Math.PI / 2, 0, 0),
       type: 'vegGarden',
@@ -67,7 +67,7 @@ export default class World extends Object3D {
       environment: this.environment
     }))
     this.miniWorlds.push(new MiniWorld({
-      miniWorldId: 6,
+      miniWorldId: 5,
       position: new Vector3(0, -1 / 2, 0),
       rotation: new Vector3(Math.PI / 2, 0, 0),
       type: 'orchards',

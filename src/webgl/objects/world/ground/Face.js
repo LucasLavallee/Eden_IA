@@ -22,7 +22,7 @@ export default class Face extends Object3D {
 
     this.heightMap = new HeightMap()
     this.geometry = new PlaneBufferGeometry(constant.GROUND.WIDTH, constant.GROUND.WIDTH, constant.GROUND.SUBDIVISIONS, constant.GROUND.SUBDIVISIONS)
-
+    this.type = type
     this.material = new MeshPhongMaterial({
       color: (type === 'vegGarden' ? 0x451000 : 0x93f542)
       // side: DoubleSide

@@ -33,7 +33,7 @@ export default {
     },
     PEPPER: {
       color: '#FFA700',
-      size: 1,
+      size: 0.5,
       temperature: [5, 25],
       pollution: 60,
       brightness: [20, 70],
@@ -93,7 +93,7 @@ export default {
     },
     STRAWBERRY: {
       color: '#7C0000',
-      size: 0.5,
+      size: 0.4,
       temperature: [5, 25],
       pollution: 60,
       brightness: [20, 70],
@@ -134,7 +134,7 @@ export default {
     },
     PEAR_TREE: {
       lifeTime: [80, 120], // year / cycle
-      nbFlowers: [10, 20],
+      nbFlowers: [5, 10],
       size: 1.0,
       temperature: [5, 25],
       pollution: 30,
@@ -150,10 +150,29 @@ export default {
       brightness: [20, 70],
       humidity: [10, 40]
     },
+    STRAWBERRY_TREE: {
+      lifeTime: [80, 120], // year / cycle
+      nbFlowers: [4,8],
+      size: 1.0,
+      temperature: [5, 25],
+      pollution: 30,
+      brightness: [20, 70],
+      humidity: [10, 40]
+    },
     TOMATO_TREE: {
       lifeTime: [5, 10], // year / cycle
       nbFlowers: [2, 5],
       nbLeaves: 5,
+      size: 1.0,
+      temperature: [10, 25],
+      pollution: 20,
+      brightness: [20, 70],
+      humidity: [30, 70]
+    },
+    PEPPER_TREE: {
+      lifeTime: [5, 10], // year / cycle
+      nbFlowers: [2, 5],
+      nbLeaves: 3,
       size: 1.0,
       temperature: [10, 25],
       pollution: 20,
@@ -216,6 +235,21 @@ export default {
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,
       maxFlowers: 5
+    },
+    STRAWBERRY_TREE: {
+      startingCycle: 0.2,
+      flowerTimeFactor: 0.2,
+      fruitTimeFactor: 0.4,
+      reproductionDistance: 20,
+      maxFlowers: 8
+    },
+    PEPPER_TREE: {
+      startingCycle: 0.4,
+      flowerTimeFactor: 0.3,
+      fruitTimeFactor: 0.2,
+      reproductionDistance: 10,
+      maxFlowers: 5,
+      maxLeaves: 5
     },
     PUMPKIN_TREE: {
       startingCycle: 0.2,
