@@ -51,16 +51,16 @@
 <script>
 
 import { mapGetters, mapActions } from 'vuex'
-import carrot from '../../../public/Icons/carrot.png'
-import banana from '../../../public/Icons/banana.png'
-import beet from '../../../public/Icons/beet.png'
-import orange from '../../../public/Icons/orange.png'
-import pear from '../../../public/Icons/pear.png'
-import pepper from '../../../public/Icons/pepper.png'
-import pumpkin from '../../../public/Icons/pumpkin.png'
-import strawberry from '../../../public/Icons/strawberry.png'
-import tomato from '../../../public/Icons/tomato.png'
-import zucchini from '../../../public/Icons/zucchini.png'
+import carrot from '../../../public/Icons/carrot.svg'
+import banana from '../../../public/Icons/banana.svg'
+import beet from '../../../public/Icons/beet.svg'
+import orange from '../../../public/Icons/orange.svg'
+import pear from '../../../public/Icons/pear.svg'
+import pepper from '../../../public/Icons/pepper.svg'
+import pumpkin from '../../../public/Icons/pumpkin.svg'
+import strawberry from '../../../public/Icons/strawberry.svg'
+import tomato from '../../../public/Icons/tomato.svg'
+import zucchini from '../../../public/Icons/zucchini.svg'
 export default {
   name: 'ModeSelection',
   data () {
