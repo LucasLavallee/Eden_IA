@@ -25,6 +25,11 @@ export default {
         cursorImage.style.left = e.x + 'px'
         cursorImage.style.top = e.y + 'px'
       }
+      if (document.getElementById('cursor-image-remove')) {
+        const cursorImage = document.getElementById('cursor-image-remove')
+        cursorImage.style.left = e.x + 'px'
+        cursorImage.style.top = e.y + 'px'
+      }
       if (document.getElementById('cursor-image-navigate')) {
         const cursorImage = document.getElementById('cursor-image-navigate')
         cursorImage.style.left = e.x + 'px'

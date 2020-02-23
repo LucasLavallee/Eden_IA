@@ -1,6 +1,7 @@
 <template>
   <div class="edenIA">
     <img v-if="getCurrentMode == 'add'" class="cursor-image" id="cursor-image-add" :src="mouseAdd"/>
+    <img v-if="getCurrentMode == 'remove'" class="cursor-image" id="cursor-image-remove" :src="mouseRemove"/>
     <img v-if="getCurrentMode == 'navigate'" class="cursor-image" id="cursor-image-navigate" :src="mouseNavigate"/>
     <canvas class="BackgroundGL" ref="canvas">
       fallback
@@ -34,6 +35,7 @@ import Information from '../components/UI/Informations'
 import Time from '../components/UI/Time'
 import MiniWorldInfos from '../components/UI/MiniWorldInfos'
 import mouseAdd from '../../public/Icons/mouse_add.png'
+import mouseRemove from '../../public/Icons/mouse_remove.svg'
 import mouseNavigate from '../../public/Icons/mouse_navigate.png'
 import { mapGetters } from 'vuex'
 import StatsWorlds from '@/components/UI/StatsWorlds'
@@ -53,6 +55,7 @@ export default {
       engine: undefined,
       textShow: true,
       mouseAdd: mouseAdd,
+      mouseRemove: mouseRemove,
       mouseNavigate: mouseNavigate
     }
   },
@@ -77,17 +80,6 @@ export default {
     resize () {
       this.webgl.onResize()
     },
-    setCursor () {
-      const currentMode = this.getCurrentMode
-      switch (currentMode) {
-        case 'add':
-          return mouseAdd
-        case 'navigate':
-          return mouseNavigate
-        default:
-          break
-      }
-    }
   }
 }
 </script>
@@ -100,6 +92,8 @@ export default {
     width 30px
     pointer-events none
     z-index 1000
+  #cursor-image-remove
+    width 40px
   .BackgroundGL
     cursor none
   a
