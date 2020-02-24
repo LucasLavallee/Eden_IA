@@ -20,10 +20,11 @@ export default class PearTree extends Bush {
     this.fruits.push(newPear)
   }
 
-  createNewBush (dt, position) {
+  createNewBush (dt, position, genome) {
+    console.log(genome)
     return {
       type: 'PEAR_TREE',
-      livingBeing: new PearTree(dt, new Genome(constant.DEFAULT_BUSH_GENOME.PEAR_TREE, true), position, 'PEAR')
+      livingBeing: new PearTree(dt, genome, position, 'PEAR')
     }
   }
 }

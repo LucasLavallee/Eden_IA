@@ -62,7 +62,7 @@ export default class ZucchiniBush extends Bush {
     this.add(newZucchini)
     this.fruits.push(newZucchini)
   }
-
+  
   createNewBush (dt, position, genome) {
     return {
       type: 'ZUCCHINI_TREE',

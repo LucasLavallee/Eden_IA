@@ -133,8 +133,8 @@ export default {
       humidity: [60, 80]
     },
     PEAR_TREE: {
-      lifeTime: [80, 120], // year / cycle
-      nbFlowers: [5, 10],
+      lifeTime: [10,20], // year / cycle
+      nbFlowers: [3, 7],
       size: 1.0,
       temperature: [5, 25],
       pollution: 30,
@@ -142,8 +142,9 @@ export default {
       humidity: [10, 40]
     },
     ORANGE_TREE: {
-      lifeTime: [60, 80], // year / cycle
-      nbFlowers: [5, 10],
+      lifeTime: [15,20], // year / cycle
+      nbFlowers: [5, 7],
+      nbLeaves: 3,
       size: 1.0,
       temperature: [20, 40],
       pollution: 20,
@@ -151,7 +152,7 @@ export default {
       humidity: [10, 40]
     },
     STRAWBERRY_TREE: {
-      lifeTime: [80, 120], // year / cycle
+      lifeTime: [5,9], // year / cycle
       nbFlowers: [4,8],
       size: 1.0,
       temperature: [5, 25],
@@ -227,7 +228,8 @@ export default {
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.5,
       reproductionDistance: 10,
-      maxFlowers: 10
+      maxFlowers: 7,
+      maxLeaves: 5
     },
     TOMATO_TREE: {
       startingCycle: 0.2,

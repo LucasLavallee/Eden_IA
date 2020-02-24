@@ -11,8 +11,8 @@ import {
 } from 'three'
 
 class Banana extends Fruit {
-  constructor (bornTime = 0, genome, position) {
-    super(bornTime, genome, position)
+  constructor (bornTime = 0, genome, position,parentGenome) {
+    super(bornTime, genome, position,parentGenome)
 
     // Banana neutral shape
     this.curve = new CatmullRomCurve3([

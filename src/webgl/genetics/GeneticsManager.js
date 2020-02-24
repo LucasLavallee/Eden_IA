@@ -92,9 +92,6 @@ export default class GeneticsManager {
         genome.nbFlowers = clamp(Math.ceil(genome.nbFlowers * 1.2), 1, constant.BUSHES_DATA[entityType].maxFlowers)
       }
     }
-
-    
-
   }
 
   getNewChildrens (genome, targetGenome) {

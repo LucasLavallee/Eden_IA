@@ -56,7 +56,7 @@ export default class Carot extends Bush {
     vectorPos.z = (strongAxis === 'z' ? (vectorPos.z - this.height/2) : 3*Math.sin(spawningAngle) + vectorPos.z)
     
     const newCarrot = new Carot(time, flower.parentGenome
-      , vectorPos, "CARROT")
+      , vectorPos, "CARROT",flower.parentGenome)
 
     this.fruits.push(newCarrot)
     

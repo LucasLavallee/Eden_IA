@@ -8,13 +8,14 @@ import {
   ShapeBufferGeometry,
   Mesh,
   MeshPhongMaterial,
-  DoubleSide
+  DoubleSide,
+  Vector3
 } from 'three'
 import Bush from '../bushes/Bush'
 
 export default class Beet extends Bush {
-  constructor (bornTime = 0, genome, position, bushType) {
-    super(bornTime, genome, position, bushType)
+  constructor (bornTime = 0, genome, position, bushType,parentGenome) {
+    super(bornTime, genome, position, bushType,parentGenome)
 
     this.spawn()
   }
@@ -73,6 +74,12 @@ export default class Beet extends Bush {
     leaf3.position.set(0, this.genome.size * 3, 0)
     leaf3.rotation.set(Math.PI / 2, Math.PI / 2, 0)
 
+    this.spawnablePosition.push({
+      type: 'cube',
+      size: new Vector3(1, 1, 1),
+      position: new Vector3(tige.position.x, tige.position.y , tige.position.z)
+    })
+
     this.add(beetUp, beetDown, tige, tige2, tige3, leaf, leaf2, leaf3)
   }
 
@@ -82,9 +89,9 @@ export default class Beet extends Bush {
 
     const spawningAngle = Math.random() * Math.PI * 2
 
-    vectorPos.x = (strongAxis === 'x' ? (vectorPos.x - this.height/2) : 3*Math.cos(spawningAngle) + vectorPos.x)
-    vectorPos.y = (strongAxis === 'y' ? (vectorPos.y - this.height/2) : 3*Math.sin(spawningAngle) + vectorPos.y)
-    vectorPos.z = (strongAxis === 'z' ? (vectorPos.z - this.height/2) : 3*Math.sin(spawningAngle) + vectorPos.z)
+    vectorPos.x = (strongAxis === 'x' ? vectorPos.x - 2.1 : 3*Math.cos(spawningAngle) + vectorPos.x)
+    vectorPos.y = (strongAxis === 'y' ? vectorPos.y - 2.1 : 3*Math.sin(spawningAngle) + vectorPos.y)
+    vectorPos.z = (strongAxis === 'z' ? vectorPos.z - 2.1 : 3*Math.sin(spawningAngle) + vectorPos.z)
     
     const newBeet = new Beet(time, flower.parentGenome
       , vectorPos, "BEET")

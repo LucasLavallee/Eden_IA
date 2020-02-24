@@ -53,6 +53,7 @@ export default class StrawberryBush extends Bush {
   }
 
   createNewBush (dt, position, genome) {
+    console.log('in')
     return {
       type: 'STRAWBERRY_TREE',
       livingBeing: new StrawberryBush(dt, genome, position, 'STRAWBERRY')
