@@ -8,7 +8,7 @@ export default {
     DISTANCE: 20
   },
   TIME_INFOS: {
-    YEAR_TIME: 1000
+    YEAR_TIME: 100
   },
   DEFAULT_GENOME: {
     BEET: {

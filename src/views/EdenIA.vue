@@ -12,6 +12,7 @@
     <StatsWorlds/>
     <Time/>
     <Information/>
+    <WorldChange/>
     <router-link to="/">
       <div class="home-button">
         <div class="item icon">
@@ -39,6 +40,8 @@ import mouseRemove from '../../public/Icons/mouse_remove.svg'
 import mouseNavigate from '../../public/Icons/mouse_navigate.svg'
 import { mapGetters } from 'vuex'
 import StatsWorlds from '@/components/UI/StatsWorlds'
+import WorldChange from '@/components/UI/WorldChange'
+import store from '@/store'
 
 export default {
   name: 'EdenIA',
@@ -48,7 +51,8 @@ export default {
     Time,
     Information,
     MiniWorldInfos,
-    StatsWorlds
+    StatsWorlds,
+    WorldChange
   },
   data () {
     return {
@@ -61,15 +65,21 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getCurrentMode'
+      'getCurrentMode',
+      'getActiveWorld'
     ])
   },
   mounted () {
+    const self = this
     this.webgl = new Webgl(this.$refs['canvas'])
     this.engine = loop(this.webgl.render)
     this.engine.start()
     this.resize()
     window.addEventListener('resize', this.resize)
+
+    store.watch((state) => state.activeWorld, (newVal, oldVal) => {
+      self.webgl.changeCurrentWorld(newVal)
+    })
   },
   beforeDestroy () {
     this.webgl.destroy()
