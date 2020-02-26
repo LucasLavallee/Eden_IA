@@ -100,8 +100,8 @@ export default {
 <style lang="stylus" scoped>
 	.container
 		position fixed
-		width 100px
-		margin-left -50px
+		width 150px
+		margin-left -75px
 		top 0
 		left 50%
 		.container-mode
