@@ -9,6 +9,7 @@ export default new Vuex.Store({
     currentSelection: 'carrot',
     activeWorld: 0,
     currentSpeed: 1,
+    currentTime: 0,
     environmentParameters: {
       temperature: 50,
       brightness: 50,
@@ -91,11 +92,25 @@ export default new Vuex.Store({
     getCurrentMode: state => state.currentMode,
     getActiveWorld: state => state.activeWorld,
     getCurrentSpeed: state => state.currentSpeed,
+    getCurrentTime: state => state.currentTime,
     getTemperature: state => state.environmentParameters.temperature,
     getBrightness: state => state.environmentParameters.brightness,
     getHumidity: state => state.environmentParameters.humidity,
     getPollution: state => state.environmentParameters.pollution,
-    getWorldsInfos: state => state.worlds
+    getWorldsInfos: state => state.worlds,
+    getNumberOfPresentSpecies: (state) => {
+      let count = 0
+      const presentSpecies = state.worlds.presentSpecies
+      for(const specie in presentSpecies) {
+        if(presentSpecies[specie] > 0) {
+          count++
+        }
+      }
+      return count
+    },
+    getNumberOfPlanted: state => state.worlds.planted,
+    getNumberOfBornNaturally: state => state.worlds.bornNaturally,
+    getNumberOfDead: state => state.worlds.dead,
   },
   modules: {
   }

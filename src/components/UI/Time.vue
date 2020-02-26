@@ -1,7 +1,8 @@
 <template>
   <div class="time-container">
 	<div class="time-value-container">
-		<span> <b>Timer</b>: {{this.time}}</span>
+		<span> <b>Cycle en année</b>: {{Math.trunc(getCurrentTime / this.year_time)}}</span><br/>
+		<span> <b>Temps de jeu</b>: {{this.time}}</span>
 	</div>
 	<div class="button-container">
 		<button class="button" :class="currentSpeed === 1 ? 'active': ''" v-on:click="setSpeed"><span>x1</span></button>
@@ -17,6 +18,7 @@
 import TimeManager from '../../webgl/controls/TimeManager'
 import { mapGetters, mapActions } from 'vuex'
 import store from '@/store'
+import constant from 'utils/constant'
 
 export default {
   name: 'Time',
@@ -25,7 +27,8 @@ export default {
       time: '',
       speed: 1000,
 	  timerId: 0,
-	  currentSpeed: 1
+    currentSpeed: 1,
+    year_time: constant.TIME_INFOS.YEAR_TIME
     }
   },
   methods: {
@@ -68,7 +71,8 @@ export default {
   },
   computed: {
     	...mapGetters([
-      		'getCurrentSpeed'
+          'getCurrentSpeed',
+          'getCurrentTime'
     	])
   },
 

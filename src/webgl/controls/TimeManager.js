@@ -1,4 +1,5 @@
 import store from '@/store'
+import constant from 'utils/constant.js'
 
 export default class TimeManager {
   constructor () {
@@ -11,7 +12,7 @@ export default class TimeManager {
 
     this.timeId = setInterval(() => {
       this.update()
-    }, this.getSpeed())
+    }, 1000)
   }
 
   getSeconds () {
@@ -54,6 +55,8 @@ export default class TimeManager {
 
   print () {
     return (this.getHours() + ':' + this.getMinutes() + ':' + this.getSeconds())
+    // console.log(this.milliseconds / constant.TIME_INFOS.YEAR_TIME)
+    // return ("Année: " + store.state.currentTime / constant.TIME_INFOS.YEAR_TIME)
   }
 
   setSpeed (speed) {
@@ -68,7 +71,7 @@ export default class TimeManager {
     clearInterval(this.timeId)
     this.timeId = setInterval(() => {
       this.update()
-    }, this.getSpeed())
+    }, 1000)
   }
 
   update () {
