@@ -1,5 +1,5 @@
 <template>
-  <div id="container" v-on:mouseover="previousMode=getCurrentMode;changeCurrentMode('Menu')" v-on:mouseout="changeCurrentMode(previousMode)" >
+  <div id="container" v-on:mouseover="previousMode=getCurrentMode;changeCurrentMode('Environment')" v-on:mouseout="changeCurrentMode(previousMode)" >
     <span class="title">Environment</span>
     <div id="sliders-container">
       <div class="slidecontainer">

@@ -2,29 +2,11 @@
   <div class="statsWorld">
     <p>Stats</p>
     <ul>
-      <li>Present species : {{ getWorldsInfos.bornNaturally }}</li>
-      <li>Planted invidual : {{ }}</li>
-      <li>Born naturally : {{  }}</li>
-      <li>Dead : {{  }}</li>
+      <li>Present species : {{ getNumberOfPresentSpecies }}</li>
+      <li>Planted invidual : {{ getNumberOfPlanted }}</li>
+      <li>Born naturally : {{ getNumberOfBornNaturally }}</li>
+      <li>Dead : {{ getNumberOfDead }}</li>
     </ul>
-
-    <!--<p>Vegetables</p>
-    <ul>
-      <li>Beets :</li>
-      <li>Carots :</li>
-      <li>Pepper :</li>
-      <li>Pumpkins :</li>
-      <li>Zucchinis :</li>
-    </ul>
-
-    <p>Fruits</p>
-    <ul>
-      <li>Bananas :</li>
-      <li>Oranges :</li>
-      <li>Pears :</li>
-      <li>Strawberries :</li>
-      <li>Tomatos :</li>
-    </ul>-->
   </div>
 </template>
 
@@ -35,12 +17,16 @@ export default {
 	name: 'StatsWorlds',
 	data() {
       return {
-        worldsInfos: null
+        worldsInfos: null,
       }
   },
   computed: {
     ...mapGetters([
-      'getWorldsInfos'
+      'getWorldsInfos',
+      'getNumberOfPresentSpecies',
+      'getNumberOfPlanted',
+      'getNumberOfBornNaturally',
+      'getNumberOfDead',
     ])
   },
   mounted() {

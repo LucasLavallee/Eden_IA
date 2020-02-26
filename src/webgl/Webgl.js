@@ -144,6 +144,7 @@ export default class Webgl {
   render () {
     this.stats.begin()
     this.currentTime += 1 * store.getters.getCurrentSpeed
+    store.state.currentTime = this.currentTime
 
     this.controls.update()
 
