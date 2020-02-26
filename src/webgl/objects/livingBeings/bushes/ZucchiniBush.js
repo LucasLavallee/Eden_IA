@@ -3,7 +3,7 @@ import Genome from '../../../genetics/Genome'
 import Zucchini from '../vegetables/Zucchini'
 import constant from '@/utils/constant'
 import { Vector3, BoxBufferGeometry, MeshPhongMaterial, Mesh, Object3D } from 'three'
-import { randomFloat } from 'utils/basicFunction'
+import { randomFloat, clamp } from 'utils/basicFunction'
 
 export default class ZucchiniBush extends Bush {
   constructor (bornTime, genome, position, bushType) {
@@ -20,8 +20,7 @@ export default class ZucchiniBush extends Bush {
       const branch = new Object3D()
       const geometry = new BoxBufferGeometry(width, 0.1, 0.1)
       geometry.translate(width / 2, 0, 0)
-      /* geometry.rotateZ(Math.PI/10)
-        geometry.rotateY(currentRot) */
+      
       const material = new MeshPhongMaterial({
         color: 0x32a844
       })
@@ -63,10 +62,19 @@ export default class ZucchiniBush extends Bush {
     this.fruits.push(newZucchini)
   }
   
-  createNewBush (dt, position, genome) {
+  createNewBush (dt, position, genome, strongAxis) {
+
+    let vectorPos = new Vector3(position.x, position.y, position.z)
+
+    const spawningAngle = Math.random() * Math.PI * 2
+  
+    vectorPos.x = strongAxis === 'x' ? (vectorPos.x) : clamp(5*Math.cos(spawningAngle) + vectorPos.x, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.y = strongAxis === 'y' ? (vectorPos.y) : clamp(5*Math.sin(spawningAngle) + vectorPos.y, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.z = strongAxis === 'z' ? (vectorPos.z) : clamp(5*Math.sin(spawningAngle) + vectorPos.z, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+   
     return {
       type: 'ZUCCHINI_TREE',
-      livingBeing: new ZucchiniBush(dt, genome, position, 'ZUCCHINI')
+      livingBeing: new ZucchiniBush(dt, genome, vectorPos, 'ZUCCHINI')
     }
   }
 }

@@ -207,21 +207,24 @@ export default {
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.2,
       reproductionDistance: 5,
-      maxFlowers: 2
+      maxFlowers: 2,
+      maxTree: 10
     },
     BEET_TREE: {
       startingCycle: 0.5,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.2,
       reproductionDistance: 5,
-      maxFlowers: 2
+      maxFlowers: 2,
+      maxTree: 50
     },
     PEAR_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
-      reproductionDistance: 20,
-      maxFlowers: 25
+      reproductionDistance: 10,
+      maxFlowers: 25,
+      maxTree: 20
     },
     ORANGE_TREE: {
       startingCycle: 0.2,
@@ -229,21 +232,24 @@ export default {
       fruitTimeFactor: 0.5,
       reproductionDistance: 10,
       maxFlowers: 7,
-      maxLeaves: 5
+      maxLeaves: 5,
+      maxTree: 20
     },
     TOMATO_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,
-      maxFlowers: 5
+      maxFlowers: 5,
+      maxTree: 20
     },
     STRAWBERRY_TREE: {
       startingCycle: 0.2,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,
-      maxFlowers: 8
+      maxFlowers: 8,
+      maxTree: 20
     },
     PEPPER_TREE: {
       startingCycle: 0.4,
@@ -251,7 +257,8 @@ export default {
       fruitTimeFactor: 0.2,
       reproductionDistance: 10,
       maxFlowers: 5,
-      maxLeaves: 5
+      maxLeaves: 5,
+      maxTree: 30
     },
     PUMPKIN_TREE: {
       startingCycle: 0.2,
@@ -259,7 +266,8 @@ export default {
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,
       maxFlowers: 5,
-      maxLeaves: 6
+      maxLeaves: 6,
+      maxTree: 20
     },
     ZUCCHINI_TREE: {
       startingCycle: 0.2,
@@ -267,7 +275,8 @@ export default {
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,
       maxFlowers: 5,
-      maxLeaves: 4
+      maxLeaves: 4,
+      maxTree: 20
     }
   },
 

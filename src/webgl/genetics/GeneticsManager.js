@@ -134,7 +134,7 @@ export default class GeneticsManager {
 
   getPollutionRatio () {
     const datas = this.environment.getProperties()
-    return Math.floor(clamp(datas.pollution, 10, 100) / 10) + 1
+    return Math.floor(clamp(datas.pollution, 20, 100) / 10) + 1
   }
 
   // Find a partner and test reproduction
@@ -157,7 +157,7 @@ export default class GeneticsManager {
     for (let i = 0; i < flowers.length; i++) {
       const callingEntity = flowers[i]
 
-      const rand = randomInt(0, 3/*this.getPollutionRatio()*/)
+      const rand = randomInt(0, 4/*this.getPollutionRatio()*/)
       const fecondate = rand === 1
 
       if (!fecondate) continue

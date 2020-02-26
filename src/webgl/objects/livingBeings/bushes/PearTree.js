@@ -2,6 +2,8 @@ import Bush from './Bush'
 import Pear from '../fruits/Pear'
 import Genome from '../../../genetics/Genome'
 import constant from '@/utils/constant'
+import {Vector3} from 'three'
+import {clamp} from 'utils/basicFunction'
 
 export default class PearTree extends Bush {
   constructor (bornTime, genome, position, bushType) {
@@ -20,11 +22,19 @@ export default class PearTree extends Bush {
     this.fruits.push(newPear)
   }
 
-  createNewBush (dt, position, genome) {
-    console.log(genome)
+  createNewBush (dt, position, genome, strongAxis) {
+
+    let vectorPos = new Vector3(position.x, position.y, position.z)
+
+    const spawningAngle = Math.random() * Math.PI * 2
+  
+    vectorPos.x = strongAxis === 'x' ? (vectorPos.x) : clamp(5*Math.cos(spawningAngle) + vectorPos.x, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.y = strongAxis === 'y' ? (vectorPos.y) : clamp(5*Math.sin(spawningAngle) + vectorPos.y, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.z = strongAxis === 'z' ? (vectorPos.z) : clamp(5*Math.sin(spawningAngle) + vectorPos.z, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+
     return {
       type: 'PEAR_TREE',
-      livingBeing: new PearTree(dt, genome, position, 'PEAR')
+      livingBeing: new PearTree(dt, genome, vectorPos, 'PEAR')
     }
   }
 }

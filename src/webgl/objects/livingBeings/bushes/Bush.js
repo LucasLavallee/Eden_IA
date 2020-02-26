@@ -9,6 +9,7 @@ import constant from '@/utils/constant'
 import { randomInt, randomFloat } from 'utils/basicFunction'
 import Flower from './Flower'
 import Genome from '../../../genetics/Genome'
+import store from '@/store'
 
 export default class Bush extends LivingBeings {
   constructor (bornTime = 0, genome, position, bushType) {
@@ -176,7 +177,7 @@ export default class Bush extends LivingBeings {
             }
 
             if (this.fruits.length !== 0) {
-              return this.updateFruits(dt)
+              return this.updateFruits(dt, strongAxis)
             }
             return
           }
@@ -204,7 +205,7 @@ export default class Bush extends LivingBeings {
     })
   }
 
-  updateFruits (dt) {
+  updateFruits (dt, strongAxis) {
     const newBushes = []
 
     for (let i = 0; i < this.fruits.length; i++) {
@@ -215,10 +216,11 @@ export default class Bush extends LivingBeings {
 
       const randTest = (randomInt(0, 10) === 1)
 
-      if (randTest) {
+      if (randTest && this.cycleDetails.maxTree > store.state.worlds.presentSpecies[this.bushType]) {
+
         let vectorPos = new Vector3()
         vectorPos.setFromMatrixPosition(this.fruits[i].matrixWorld)
-        newBushes.push(this.createNewBush(dt, vectorPos, this.fruits[i].parentGenome))
+        newBushes.push(this.createNewBush(dt, vectorPos, this.fruits[i].parentGenome,strongAxis))
       }
       this.removeFruit(this.fruits[i])
     }
@@ -226,7 +228,7 @@ export default class Bush extends LivingBeings {
     return newBushes
   }
 
-  createNewBush (dt, position, genome) {
+  createNewBush (dt, position, genome, strongAxis) {
 
   }
 }

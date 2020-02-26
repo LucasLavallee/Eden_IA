@@ -2,9 +2,8 @@ import Bush from './Bush'
 import Genome from '../../../genetics/Genome'
 import Pumpkin from '../vegetables/Pumpkin'
 import constant from '@/utils/constant'
-import Params from '../../../lSystems/Params'
 import { Vector3, BoxBufferGeometry, MeshPhongMaterial, Mesh, Object3D } from 'three'
-import { randomFloat } from 'utils/basicFunction'
+import { randomFloat, clamp } from 'utils/basicFunction'
 
 export default class PumpkinBush extends Bush {
   constructor (bornTime, genome, position, bushType) {
@@ -16,16 +15,13 @@ export default class PumpkinBush extends Bush {
   spawn () {
     const nbLeaves = this.genome.nbLeaves
 
-    console.log(this.genome)
-
     const width = 4
     let currentRot = 0
     for (let i = 0; i < nbLeaves; i++) {
       const branch = new Object3D()
       const geometry = new BoxBufferGeometry(width, 0.1, 0.1)
       geometry.translate(width / 2, 0, 0)
-      /* geometry.rotateZ(Math.PI/10)
-        geometry.rotateY(currentRot) */
+
       const material = new MeshPhongMaterial({
         color: 0x32a844
       })
@@ -38,7 +34,7 @@ export default class PumpkinBush extends Bush {
         position: mesh.position
       })
 
-      // leaves
+      // Leaves
       for (let j = 0; j < 3; j++) {
         const leaveGeometry = new BoxBufferGeometry(1.5, 0.1, 1.5)
         leaveGeometry.rotateY(randomFloat(0.0, Math.PI / 2))
@@ -67,10 +63,19 @@ export default class PumpkinBush extends Bush {
     this.fruits.push(newPumpkin)
   }
 
-  createNewBush (dt, position, genome) {
+  createNewBush (dt, position, genome, strongAxis) {
+
+    let vectorPos = new Vector3(position.x, position.y, position.z)
+
+    const spawningAngle = Math.random() * Math.PI * 2
+  
+    vectorPos.x = strongAxis === 'x' ? (vectorPos.x) : clamp(5*Math.cos(spawningAngle) + vectorPos.x, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.y = strongAxis === 'y' ? (vectorPos.y) : clamp(5*Math.sin(spawningAngle) + vectorPos.y, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.z = strongAxis === 'z' ? (vectorPos.z) : clamp(5*Math.sin(spawningAngle) + vectorPos.z, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    
     return {
       type: 'PUMPKIN_TREE',
-      livingBeing: new PumpkinBush(dt, genome, position, 'PUMPKIN')
+      livingBeing: new PumpkinBush(dt, genome, vectorPos, 'PUMPKIN')
     }
   }
 }

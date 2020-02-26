@@ -6,6 +6,7 @@ import {
 } from 'three'
 import constant from 'utils/constant'
 import Bush from '../bushes/Bush'
+import { clamp } from 'utils/basicFunction'
 
 export default class Carot extends Bush {
   constructor (bornTime = 0, genome, position, bushType) {
@@ -51,9 +52,9 @@ export default class Carot extends Bush {
 
     const spawningAngle = Math.random() * Math.PI * 2
 
-    vectorPos.x = (strongAxis === 'x' ? (vectorPos.x - this.height/2) : 3*Math.cos(spawningAngle) + vectorPos.x)
-    vectorPos.y = (strongAxis === 'y' ? (vectorPos.y - this.height/2) : 3*Math.sin(spawningAngle) + vectorPos.y)
-    vectorPos.z = (strongAxis === 'z' ? (vectorPos.z - this.height/2) : 3*Math.sin(spawningAngle) + vectorPos.z)
+    vectorPos.x = strongAxis === 'x' ? (vectorPos.x - this.height/2) : clamp(3*Math.cos(spawningAngle) + vectorPos.x, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.y = strongAxis === 'y' ? (vectorPos.y - this.height/2) : clamp(3*Math.sin(spawningAngle) + vectorPos.y, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.z = strongAxis === 'z' ? (vectorPos.z - this.height/2) : clamp(3*Math.sin(spawningAngle) + vectorPos.z, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
     
     const newCarrot = new Carot(time, flower.parentGenome
       , vectorPos, "CARROT",flower.parentGenome)

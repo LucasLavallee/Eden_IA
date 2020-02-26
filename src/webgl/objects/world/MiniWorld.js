@@ -100,7 +100,7 @@ export default class MiniWorld extends Object3D {
 
     let prevState = store.state.worlds
     prevState.presentSpecies[type]--
-    prevState.dead ++
+    prevState.dead++
     store.state.worlds = prevState
   }
 

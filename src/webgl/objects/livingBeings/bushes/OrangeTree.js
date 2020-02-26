@@ -5,6 +5,7 @@ import constant from '@/utils/constant'
 import Params from '../../../lSystems/Params'
 import LSystemBuilder from '../../../lSystems/LSystemBuilder'
 import { Vector3 } from 'three'
+import { clamp } from 'utils/basicFunction'
 
 export default class OrangeTree extends Bush {
   constructor (bornTime, genome, position, bushType) {
@@ -37,10 +38,20 @@ export default class OrangeTree extends Bush {
     this.fruits.push(newOrange)
   }
 
-  createNewBush (dt, position, genome) {
+  createNewBush (dt, position, genome, strongAxis) {
+
+
+    let vectorPos = new Vector3(position.x, position.y, position.z)
+
+    const spawningAngle = Math.random() * Math.PI * 2
+  
+    vectorPos.x = strongAxis === 'x' ? (vectorPos.x) : clamp(5*Math.cos(spawningAngle) + vectorPos.x, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.y = strongAxis === 'y' ? (vectorPos.y) : clamp(5*Math.sin(spawningAngle) + vectorPos.y, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.z = strongAxis === 'z' ? (vectorPos.z) : clamp(5*Math.sin(spawningAngle) + vectorPos.z, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    
     return {
       type: 'ORANGE_TREE',
-      livingBeing: new OrangeTree(dt, genome, position, 'ORANGE')
+      livingBeing: new OrangeTree(dt, genome, vectorPos, 'ORANGE')
     }
   }
 }

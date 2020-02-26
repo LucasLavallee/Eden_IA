@@ -3,7 +3,7 @@ import Genome from '../../../genetics/Genome'
 import Pepper from '../vegetables/Pepper'
 import constant from '@/utils/constant'
 import { Vector3, BoxBufferGeometry, MeshPhongMaterial, Mesh, Object3D } from 'three'
-import { randomInt, randomFloat } from 'utils/basicFunction'
+import { randomInt, randomFloat, clamp } from 'utils/basicFunction'
 
 export default class PepperBush extends Bush {
   constructor (bornTime, genome, position, bushType) {
@@ -51,10 +51,20 @@ export default class PepperBush extends Bush {
     this.fruits.push(newPepper)
   }
 
-  createNewBush (dt, position, genome) {
+  createNewBush (dt, position, genome, strongAxis) {
+
+    let vectorPos = new Vector3(position.x, position.y, position.z)
+
+    const spawningAngle = Math.random() * Math.PI * 2
+  
+    vectorPos.x = strongAxis === 'x' ? (vectorPos.x) : clamp(5*Math.cos(spawningAngle) + vectorPos.x, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.y = strongAxis === 'y' ? (vectorPos.y) : clamp(5*Math.sin(spawningAngle) + vectorPos.y, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+    vectorPos.z = strongAxis === 'z' ? (vectorPos.z) : clamp(5*Math.sin(spawningAngle) + vectorPos.z, -constant.GROUND.WIDTH/2, constant.GROUND.WIDTH/2)
+   
+    
     return {
       type: 'PEPPER_TREE',
-      livingBeing: new PepperBush(dt, genome, position, 'PEPPER')
+      livingBeing: new PepperBush(dt, genome, vectorPos, 'PEPPER')
     }
   }
 }
