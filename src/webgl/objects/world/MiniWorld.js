@@ -73,17 +73,6 @@ export default class MiniWorld extends Object3D {
     })
   }
 
-  getEntitiesInArea (position, radius) {
-    let foundEntities = []
-
-    /* for (let entity of this.entities) {
-            let entityPosition = entity.livingBeing.position
-            if (distance(entityPosition.x, entityPosition.z, position.x, position.z) < radius) { foundEntities.push(entity) }
-        } */
-
-    return foundEntities
-  }
-
   addEntity (type, livingBeing, bornNaturally = false) {
     livingBeing.rotation.x = this.ground.rotation.x + Math.PI / 2
     livingBeing.rotation.z = this.ground.rotation.z
@@ -95,23 +84,13 @@ export default class MiniWorld extends Object3D {
 
     this.add(livingBeing)
 
-    const prevState = store.state.worlds[this.miniWorldId][type]
+    let prevState = store.state.worlds
 
-    let newState = {
-      count: 1,
-      planted: !bornNaturally ? 1 :  0,
-      naturally: bornNaturally ? 1 : 0
-    }
+    prevState.presentSpecies[type]++
+    prevState.planted = !bornNaturally ? prevState.planted + 1 :  prevState.planted
+    prevState.bornNaturally = bornNaturally ? prevState.bornNaturally + 1 : prevState.bornNaturally
 
-    if(prevState) {
-      newState = {
-        count: prevState.count + 1,
-        planted: !bornNaturally ? prevState.planted + 1 :  prevState.planted,
-        naturally: bornNaturally ? prevState.naturally + 1 : prevState.naturally
-      }
-    }
-     
-    store.state.worlds[this.miniWorldId][type] = newState
+    store.state.worlds = prevState
   }
 
   removeEntity (type, entity) {
@@ -119,13 +98,10 @@ export default class MiniWorld extends Object3D {
     this.entities[type].splice(index, 1)
     this.remove(entity)
 
-    const prevState = store.state.worlds[this.miniWorldId][type]
-    const newState = {
-      count: prevState.count - 1,
-      planted: prevState.planted,
-      naturally: prevState.naturally
-    }
-    store.state.worlds[this.miniWorldId][type] = newState
+    let prevState = store.state.worlds
+    prevState.presentSpecies[type]--
+    prevState.dead ++
+    store.state.worlds = prevState
   }
 
   initMouseClickEvent () {

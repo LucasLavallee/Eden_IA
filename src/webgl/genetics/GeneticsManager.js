@@ -157,7 +157,7 @@ export default class GeneticsManager {
     for (let i = 0; i < flowers.length; i++) {
       const callingEntity = flowers[i]
 
-      const rand = randomInt(0, this.getPollutionRatio())
+      const rand = randomInt(0, 3/*this.getPollutionRatio()*/)
       const fecondate = rand === 1
 
       if (!fecondate) continue
@@ -171,7 +171,6 @@ export default class GeneticsManager {
         if (distance(callingEntity.position.x, callingEntity.position.z, targetEntity.position.x, targetEntity.position.z) > constant.BUSHES_DATA[entityType].reproductionDistance) {
           continue
         }
-
         this.makeGeneticsAppend(callingEntity, targetEntity)
         break
       }

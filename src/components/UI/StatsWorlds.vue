@@ -2,10 +2,10 @@
   <div class="statsWorld">
     <p>Stats</p>
     <ul>
-      <li>Present species : {{ this.presentSpecies }}</li>
-      <li>Planted invidual : {{ this.plantedIndividuals }}</li>
-      <li>Born naturally : {{ this.bornNaturally }}</li>
-      <li>Dead : {{ this.dead }}</li>
+      <li>Present species : {{ getWorldsInfos.bornNaturally }}</li>
+      <li>Planted invidual : {{ }}</li>
+      <li>Born naturally : {{  }}</li>
+      <li>Dead : {{  }}</li>
     </ul>
 
     <!--<p>Vegetables</p>
@@ -29,16 +29,22 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
 	name: 'StatsWorlds',
 	data() {
       return {
-        presentSpecies: 0,
-        plantedIndividuals: 0,
-        bornNaturally: 0,
-        dead: 0
+        worldsInfos: null
       }
-	}
+  },
+  computed: {
+    ...mapGetters([
+      'getWorldsInfos'
+    ])
+  },
+  mounted() {
+  }
 }
 </script>
 

@@ -2,6 +2,7 @@
   <div id="miniWorldInfos">
     <span>Mini World n°{{getActiveWorld}}</span><br/>
     {{getWorldsInfos[getActiveWorld]}}
+    
   </div>
 </template>
 

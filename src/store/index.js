@@ -15,9 +15,24 @@ export default new Vuex.Store({
       humidity: 50,
       pollution: 50
     },
-    worlds: [
-      [],[],[],[],[],[]
-    ]
+    worlds: {
+      presentSpecies: {
+        "BEET_TREE" : 0,
+        "CARROT_TREE": 0,
+        "PEPPER_TREE": 0,
+        "PUMPKIN_TREE": 0,
+        "STRAWBERRY_TREE": 0,
+        "TOMATO_TREE": 0,
+        "ZUCCHINI_TREE": 0,
+        "BANANA_TREE": 0,
+        "ORANGE_TREE": 0,
+        "PEAR_TREE": 0
+      }
+      ,
+      planted: 0,
+      bornNaturally: 0,
+      dead: 0
+    }
   },
   mutations: {
     CHANGE_CURRENT_MODE (state, val) {
