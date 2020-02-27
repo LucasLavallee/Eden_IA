@@ -7,7 +7,7 @@
       fallback
     </canvas>
     <ModeSelection/>
-    <MiniWorldInfos/>
+    <!-- <MiniWorldInfos/> -->
     <EnvironnementGui/>
     <StatsWorlds/>
     <Time/>
