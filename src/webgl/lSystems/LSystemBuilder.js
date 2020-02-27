@@ -2,9 +2,10 @@ import { Quaternion, Vector3, Object3D, CylinderBufferGeometry, Mesh, BoxBufferG
 
 export default class LSystemBuilder {
   constructor (string, params, position) {
-    this.string = string
+    this.string = string // lsystem string
     this.params = params
     this.position = position
+    // this.state is set to keep in memory the changes on parameters while processing the lSystem
     this.state = {
       radius: this.params.branchRadius,
       length: this.params.branchLength,
@@ -14,6 +15,7 @@ export default class LSystemBuilder {
       rotation: new Quaternion()
     }
 
+    // Keep in memory the differents state steps
     this.stateSteps = []
   }
 
@@ -69,6 +71,9 @@ export default class LSystemBuilder {
     }
   }
 
+  /*
+    Build new branch with state parameters
+  */
   buildBranch () {
     let transform = new Quaternion()
     transform.multiply(this.state.rotation)
@@ -90,6 +95,9 @@ export default class LSystemBuilder {
     return mesh
   }
 
+  /*
+    Build new leaf with state parameters
+  */
   buildLeaves () {
     let transform = new Quaternion()
     transform.multiply(this.state.rotation)
@@ -119,6 +127,9 @@ export default class LSystemBuilder {
     }
   }
 
+  /*
+    clone the state. Useful when we hit specifics characters like '[' or ']'
+  */
   cloneState (state) {
     return {
       radius: state.radius,

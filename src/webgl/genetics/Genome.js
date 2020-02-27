@@ -11,8 +11,8 @@
 import { randomInt } from 'utils/basicFunction'
 
 class Genome {
-  constructor (options = {}/* color = 'blue', size = 1, temperature = 10, pollution = 50, brightness = 50, humidity = 50 */, withRange = false, type = 'tree') {
-    // this.color = options.color ? options.color : 'yellow'
+  constructor (options = {}, withRange = false, type = 'tree') {
+
     this.size = options.size ? options.size : 1.0
 
     if (type !== 'flower') {
@@ -28,7 +28,6 @@ class Genome {
       default: // tree
         this.nbLeaves = options.nbLeaves ? options.nbLeaves : 2
         this.nbFlowers = options.nbFlowers ? (withRange ? randomInt(options.nbFlowers[0], options.nbFlowers[1]) : options.nbFlowers) : 10
-        
         break
     }
   }
