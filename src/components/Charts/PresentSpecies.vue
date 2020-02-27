@@ -18,6 +18,8 @@ export default {
   data () {
     return {
       chartPresentSpecies: null,
+      presentSpeciesArray: [],
+      labelArray: [],
       options: {
         scales: {
           yAxes: [{
@@ -44,22 +46,24 @@ export default {
   },
   methods: {
     generateData: function () {
-      let presentSpeciesArray = []
-      let labelArray = []
-      for(let i=0 ; i<10 ; i++) {
-        presentSpeciesArray.push(store.getters.getNumberOfPresentSpecies)
-        labelArray.push(store.getters.getCurrentTime)
-      }
+      if(this.presentSpeciesArray.length >= 11){
+          this.presentSpeciesArray.shift()
+        }
+        this.presentSpeciesArray.push(store.getters.getNumberOfPresentSpecies)
+        if(this.labelArray.length >= 11){
+          this.labelArray.shift()
+        }
+        this.labelArray.push(store.getters.getCurrentTime)
     
       this.chartPresentSpecies = {
-        labels: labelArray,
+        labels: this.labelArray,
         datasets: [
           {
             label: 'Present species',
             backgroundColor: 'transparent',
             borderColor: 'rgba(247, 134, 29, 0.50)',
             pointBackgroundColor: 'rgba(247, 134, 29, 1)',
-            data: presentSpeciesArray
+            data: this.presentSpeciesArray
           }
         ]
       }

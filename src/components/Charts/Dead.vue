@@ -18,6 +18,8 @@ export default {
   data () {
     return {
       chartDead: null,
+      labelArray: [],
+      deadArray: [],
       options: {
         scales: {
           yAxes: [{
@@ -44,26 +46,24 @@ export default {
   },
   methods: {
     generateData: function () {
-      let deadArray = []
-      let labelArray = []
-      for(let i=0 ; i<10 ; i++) {
-        deadArray.push(store.getters.getNumberOfDead)
-        if(labelArray.length >= 11){
-          labelArray.shift()
-        } else {
-          labelArray.push(store.getters.getCurrentTime)
-        } 
-      }
+      if(this.deadArray.length >= 11){
+          this.deadArray.shift()
+        }
+        this.deadArray.push(store.getters.getNumberOfDead)
+        if(this.labelArray.length >= 11){
+          this.labelArray.shift()
+        }
+        this.labelArray.push(store.getters.getCurrentTime)
     
       this.chartDead = {
-        labels: labelArray,
+        labels: this.labelArray,
         datasets: [
           {
             label: 'Dead',
             backgroundColor: 'transparent',
             borderColor: 'rgba(0, 0, 0, 0.50)',
             pointBackgroundColor: 'rgba(0, 0, 0, 1)',
-            data: deadArray,
+            data: this.deadArray,
           }
         ]
       }

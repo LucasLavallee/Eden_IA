@@ -18,6 +18,8 @@ export default {
   data () {
     return {
       chartPlantedInvidividual: null,
+      plantedArray: [],
+      labelArray: [],
       options: {
         scales: {
           yAxes: [{
@@ -44,26 +46,24 @@ export default {
   },
   methods: {
     generateData: function () {
-      let plantedArray = []
-      let labelArray = []
-      for(let i=0 ; i<10 ; i++) {
-        plantedArray.push(store.getters.getNumberOfPlanted)
-        if(labelArray.length >= 11){
-          labelArray.shift()
-        } else {
-          labelArray.push(store.getters.getCurrentTime)
-        } 
-      }
+      if(this.plantedArray.length >= 11){
+          this.plantedArray.shift()
+        }
+        this.plantedArray.push(store.getters.getNumberOfPlanted)
+        if(this.labelArray.length >= 11){
+          this.labelArray.shift()
+        }
+        this.labelArray.push(store.getters.getCurrentTime)
     
       this.chartPlantedInvidividual = {
-        labels: labelArray,
+        labels: this.labelArray,
         datasets: [
           {
             label: 'Planted Individual',
             backgroundColor: 'transparent',
             borderColor: 'rgba(12, 182, 23, 0.50)',
             pointBackgroundColor: 'rgba(12, 182, 23, 1)',
-            data: plantedArray
+            data: this.plantedArray
           }
         ]
       }

@@ -18,6 +18,8 @@ export default {
   data () {
     return {
       chartBornNaturally: null,
+      bornArray: [],
+      labelArray:[],
       options: {
         scales: {
           yAxes: [{
@@ -44,26 +46,29 @@ export default {
   },
   methods: {
     generateData: function () {
-      let bornArray = []
-      let labelArray = []
-      for(let i=0 ; i<10 ; i++) {
-        bornArray.push(store.getters.getNumberOfBornNaturally)
-        if(labelArray.length >= 11){
-          labelArray.shift()
-        } else {
-          labelArray.push(store.getters.getCurrentTime)
-        } 
-      }
+      // let bornArray = []
+      // let labelArray = []
+      // for(let i=0 ; i<10 ; i++) {
+        if(this.bornArray.length >= 11){
+          this.bornArray.shift()
+        }
+        this.bornArray.push(store.getters.getNumberOfBornNaturally)
+        if(this.labelArray.length >= 11){
+          this.labelArray.shift()
+        }
+        this.labelArray.push(store.getters.getCurrentTime)
+        // } 
+      // }
     
       this.chartBornNaturally = {
-        labels: labelArray,
+        labels: this.labelArray,
         datasets: [
           {
             label: 'Born naturally',
             backgroundColor: 'transparent',
             borderColor: 'rgba(34, 210, 241, 0.50)',
             pointBackgroundColor: 'rgba(34, 210, 241, 1)',
-            data: bornArray
+            data: this.bornArray
           }
         ]
       }
