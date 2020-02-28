@@ -5,6 +5,7 @@ export default class Vegetable extends LivingBeings {
     super(bornTime, genome, position)
     
     this.parentGenome = parentGenome
+    this.fallingTime = 10
   }
 
   update (dt) {
@@ -16,10 +17,11 @@ export default class Vegetable extends LivingBeings {
       this.scale.set(scale, scale, scale)
 
       if (this.lifeTime - this.fallingTime < age) {
-        //this.fall()
+        this.fall()
       }
     } else {
       this.die()
     }
   }
+  fall(){}
 }

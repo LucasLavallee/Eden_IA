@@ -60,5 +60,8 @@ export default class Pepper extends Vegetable {
 
     this.add(pepper, pepper2, pepper3, pepper4, tige)
   }
-
+  
+  fall () {
+    this.position.set(this.position.x, 0, this.position.z)
+  }
 }
