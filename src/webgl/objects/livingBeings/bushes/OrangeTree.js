@@ -19,7 +19,7 @@ export default class OrangeTree extends Bush {
       entry: 'A',
       exit: 'F[++A]X[--A]^^^A'
     }]
-    const lsystemParams = new Params('FFFFFA', rules, 2, 25 + 5 * this.genome.nbLeaves, 2, 1, 0.05, 0.05)
+    const lsystemParams = new Params('FFFFFA', rules, 2, 25 + 20 * this.genome.nbLeaves, 2, 1, 0.05, 0.05)
     const lSystem = new LSystemBuilder(lsystemParams.rewriteWithRules('FFFFFA', rules.iterations), lsystemParams, new Vector3(0, 0, 0))
     const tree = lSystem.build()
 
