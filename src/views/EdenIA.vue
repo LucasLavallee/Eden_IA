@@ -1,6 +1,6 @@
 <template>
   <div class="edenIA">
-    <figure>
+    <figure class="audio">
       <audio autoplay loop src="../../public/Music/world_music.mp3" type="audio/mpeg" id="audio"></audio>
     </figure>
     <img v-if="getCurrentMode == 'add'" class="cursor-image" id="cursor-image-add" :src="mouseAdd"/>
@@ -99,6 +99,8 @@ export default {
 </script>
 
 <style lang="stylus">
+  .audio
+    position absolute
   .cursor-image
     position absolute
     left 50px
@@ -140,5 +142,4 @@ export default {
     #text-info
       &:hover
         text-decoration underline
-
 </style>
