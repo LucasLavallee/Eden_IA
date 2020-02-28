@@ -7,7 +7,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import store from '@/store'
-
+import constant from 'utils/constant'
 import Dead from '@/components/Charts/Dead.js'
 
 export default {
@@ -54,7 +54,7 @@ export default {
       if(this.labelArray.length >= 11){
         this.labelArray.shift()
       } else {
-        this.labelArray.push(store.getters.getCurrentTime)
+        this.labelArray.push(Math.trunc(store.getters.getCurrentTime / constant.TIME_INFOS.YEAR_TIME))
       } 
     
       this.chartDead = {
