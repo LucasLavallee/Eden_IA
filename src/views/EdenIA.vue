@@ -10,7 +10,6 @@
       fallback
     </canvas>
     <ModeSelection/>
-    <!-- <MiniWorldInfos/> -->
     <EnvironnementGui/>
     <Time/>
     <Information/>
@@ -79,6 +78,7 @@ export default {
     this.engine = loop(this.webgl.render)
     this.engine.start()
     this.resize()
+    
     window.addEventListener('resize', this.resize)
 
     store.watch((state) => state.activeWorld, (newVal, oldVal) => {
