@@ -18,15 +18,14 @@ export default {
   data () {
     return {
       chartPresentSpecies: null,
-      presentSpeciesArray: [],
+      presentSpeciesArray:[],
       labelArray: [],
       options: {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
-              /* stepSize: 2,
-              maxTicksLimit: 10 */
+              beginAtZero: true,
+              maxTicksLimit: 10
             }
           }],
           xAxes: [{
@@ -46,14 +45,17 @@ export default {
   },
   methods: {
     generateData: function () {
-      if(this.presentSpeciesArray.length >= 11){
+    if(this.presentSpeciesArray.length >= 11){
           this.presentSpeciesArray.shift()
-        }
+      } else {
         this.presentSpeciesArray.push(store.getters.getNumberOfPresentSpecies)
-        if(this.labelArray.length >= 11){
+      }
+
+      if(this.labelArray.length >= 11){
           this.labelArray.shift()
-        }
+      } else {
         this.labelArray.push(store.getters.getCurrentTime)
+      }
     
       this.chartPresentSpecies = {
         labels: this.labelArray,
@@ -74,10 +76,3 @@ export default {
   }
 }
 </script>
-
-<style lang=stylus>
-  .presentChart{
-    width 150%
-    height 30%
-  }
-</style>

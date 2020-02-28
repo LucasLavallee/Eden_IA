@@ -24,9 +24,8 @@ export default {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
-              /* stepSize: 2,
-              maxTicksLimit: 10 */
+              beginAtZero: true,
+              maxTicksLimit: 10
             }
           }],
           xAxes: [{
@@ -46,19 +45,18 @@ export default {
   },
   methods: {
     generateData: function () {
-      // let bornArray = []
-      // let labelArray = []
-      // for(let i=0 ; i<10 ; i++) {
-        if(this.bornArray.length >= 11){
-          this.bornArray.shift()
-        }
+      if(this.bornArray.length >= 11){
+        this.bornArray.shift()
+      } else {
         this.bornArray.push(store.getters.getNumberOfBornNaturally)
-        if(this.labelArray.length >= 11){
-          this.labelArray.shift()
-        }
+      }   
+
+      if(this.labelArray.length >= 11){
+        this.labelArray.shift()
+      }
+      else {
         this.labelArray.push(store.getters.getCurrentTime)
-        // } 
-      // }
+      }
     
       this.chartBornNaturally = {
         labels: this.labelArray,
@@ -79,10 +77,3 @@ export default {
   }
 }
 </script>
-
-<style lang=stylus>
-  .bornChart{
-    width 150%
-    height 30%
-  }
-</style>

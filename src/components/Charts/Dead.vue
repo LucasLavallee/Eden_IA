@@ -18,15 +18,14 @@ export default {
   data () {
     return {
       chartDead: null,
-      labelArray: [],
       deadArray: [],
+      labelArray: [],
       options: {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
-              /* stepSize: 2,
-              maxTicksLimit: 10 */
+              beginAtZero: true,
+              maxTicksLimit: 10
             }
           }],
           xAxes: [{
@@ -47,13 +46,16 @@ export default {
   methods: {
     generateData: function () {
       if(this.deadArray.length >= 11){
-          this.deadArray.shift()
-        }
+        this.deadArray.shift()
+      } else {
         this.deadArray.push(store.getters.getNumberOfDead)
-        if(this.labelArray.length >= 11){
-          this.labelArray.shift()
-        }
+      }
+
+      if(this.labelArray.length >= 11){
+        this.labelArray.shift()
+      } else {
         this.labelArray.push(store.getters.getCurrentTime)
+      } 
     
       this.chartDead = {
         labels: this.labelArray,
@@ -74,10 +76,3 @@ export default {
   }
 }
 </script>
-
-<style lang=stylus>
-  .deadChart{
-    width 150%
-    height 30%
-  }
-</style>

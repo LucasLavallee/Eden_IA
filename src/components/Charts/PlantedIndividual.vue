@@ -24,9 +24,8 @@ export default {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
-              /* stepSize: 2,
-              maxTicksLimit: 10 */
+              beginAtZero: true,
+              maxTicksLimit: 10
             }
           }],
           xAxes: [{
@@ -46,14 +45,17 @@ export default {
   },
   methods: {
     generateData: function () {
-      if(this.plantedArray.length >= 11){
-          this.plantedArray.shift()
-        }
+      if(this.getNumberOfPlanted.length >= 11){
+        this.plantedArray.shift()
+      } else {
         this.plantedArray.push(store.getters.getNumberOfPlanted)
-        if(this.labelArray.length >= 11){
-          this.labelArray.shift()
-        }
+      }
+
+      if(this.labelArray.length >= 11){
+        this.labelArray.shift()
+      } else {
         this.labelArray.push(store.getters.getCurrentTime)
+      } 
     
       this.chartPlantedInvidividual = {
         labels: this.labelArray,
@@ -74,10 +76,3 @@ export default {
   }
 }
 </script>
-
-<style lang=stylus>
-  .plantedChart{
-    width 150%
-    height 30%
-  }
-</style>

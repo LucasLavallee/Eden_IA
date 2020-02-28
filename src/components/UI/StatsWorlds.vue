@@ -18,6 +18,7 @@
       <PlantedChart/>
       <BornChart/>
       <DeadChart/>
+      <!--<Dead class="chart" :width="200" :height="250" :chart-data="chartDead"></Dead>-->
       <button type="button" class="close" @click="showModal = false">X</button>
     </div>
   </div>
@@ -29,20 +30,21 @@
 import { mapGetters, mapActions } from 'vuex'
 import store from '@/store'
 
+// import PresentSpecies from '@/components/Charts/PresentSpecies.js'
 import PresentSpeciesChart from '@/components/Charts/PresentSpecies.vue'
 import DeadChart from '@/components/Charts/Dead.vue'
 import PlantedChart from '@/components/Charts/PlantedIndividual.vue'
 import BornChart from '@/components/Charts/BornNaturally.vue'
 
 export default {
-  name: 'StatsWorlds',
+	name: 'StatsWorlds',
   components: {
     PresentSpeciesChart,
     DeadChart,
     PlantedChart,
     BornChart
   },
-  data () {
+	data () {
       return {
         showModal: false
       }
@@ -154,6 +156,7 @@ export default {
 
   .chart{
     display inline-block
+    width 40%
   }
 
   .chart:first-child, .chart:nth-child(3) {
