@@ -7,6 +7,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import store from '@/store'
+import constant from 'utils/constant'
 
 import BornNaturally from '@/components/Charts/BornNaturally.js'
 
@@ -55,7 +56,7 @@ export default {
         this.labelArray.shift()
       }
       else {
-        this.labelArray.push(store.getters.getCurrentTime)
+        this.labelArray.push(Math.trunc(store.getters.getCurrentTime / constant.TIME_INFOS.YEAR_TIME))
       }
     
       this.chartBornNaturally = {
