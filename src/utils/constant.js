@@ -167,8 +167,8 @@ export default {
       size: 1.0,
       temperature: [10, 25],
       pollution: 20,
-      brightness: [20, 70],
-      humidity: [30, 70]
+      brightness: [20, 50],
+      humidity: [30, 50]
     },
     PEPPER_TREE: {
       lifeTime: [5, 10], // year / cycle
@@ -185,10 +185,10 @@ export default {
       nbFlowers: [2, 5],
       nbLeaves: 3,
       size: 1.0,
-      temperature: [10, 25],
+      temperature: [60, 70],
       pollution: 20,
-      brightness: [20, 70],
-      humidity: [30, 70]
+      brightness: [60, 70],
+      humidity: [60, 70]
     },
     ZUCCHINI_TREE: {
       lifeTime: [5, 10], // year / cycle
@@ -197,8 +197,8 @@ export default {
       size: 1.0,
       temperature: [10, 25],
       pollution: 20,
-      brightness: [20, 70],
-      humidity: [30, 70]
+      brightness: [50, 70],
+      humidity: [50, 70]
     }
   },
   BUSHES_DATA: { 
@@ -232,7 +232,7 @@ export default {
       birthChance: 8
     },
     ORANGE_TREE: {
-      startingCycle: 0.2,
+      startingCycle: 0.3,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.5,
       reproductionDistance: 10,
@@ -242,7 +242,7 @@ export default {
       birthChance: 2
     },
     TOMATO_TREE: {
-      startingCycle: 0.2,
+      startingCycle: 0.1,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,
@@ -272,17 +272,17 @@ export default {
       birthChance: 4
     },
     PUMPKIN_TREE: {
-      startingCycle: 0.2,
+      startingCycle: 0.35,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,
-      maxFlowers: 5,
+      maxFlowers: 6,
       maxLeaves: 6,
       maxTree: 15,
-      birthChance: 4
+      birthChance: 3
     },
     ZUCCHINI_TREE: {
-      startingCycle: 0.2,
+      startingCycle: 0.25,
       flowerTimeFactor: 0.2,
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,

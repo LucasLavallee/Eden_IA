@@ -93,9 +93,9 @@ export default class GeneticsManager {
     //Affect flower number on existing trees
     if (genome.nbFlowers) {
       if (fitness < 0.6) {
-        genome.nbFlowers = clamp(Math.floor(genome.nbFlowers * 0.8), 1, constant.BUSHES_DATA[entityType].maxFlowers)
+        genome.nbFlowers = clamp(Math.floor(1 + genome.nbFlowers * 0.8), 0, constant.BUSHES_DATA[entityType].maxFlowers)
       } else {
-        genome.nbFlowers = clamp(Math.ceil(genome.nbFlowers * 1.2), 1, constant.BUSHES_DATA[entityType].maxFlowers)
+        genome.nbFlowers = clamp(Math.ceil(genome.nbFlowers * 1.2), 0, constant.BUSHES_DATA[entityType].maxFlowers)
       }
     }
   }
