@@ -27,7 +27,7 @@ export default class GeneticsManager {
     })
   }
 
-  makeGeneticsAppend (first, second) {
+  makeGeneticsAppend (first, second, entityType) {
     //Get parent genomes
     const genome = first.parentGenome
     const targetGenome = second.parentGenome
@@ -35,7 +35,7 @@ export default class GeneticsManager {
     const childrens = this.getNewChildrens(genome, targetGenome)
     const bestChildren = this.getTheBest(childrens, 1)
 
-    this.mutate(bestChildren.genome)
+    this.mutate(bestChildren.genome, false, entityType)
     second.parentGenome = bestChildren.genome
     second.fecondate()
   }
@@ -81,6 +81,8 @@ export default class GeneticsManager {
       const rand = randomInt(0, 3) === 1
       if(!rand) return
 
+      console.log("1", entityType)
+      console.log("2", constant.BUSHES_DATA[entityType])
       if (fitness < 0.6) {
         genome.nbLeaves = clamp(genome.nbLeaves-1, 1, constant.BUSHES_DATA[entityType].maxLeaves)
       } else if(fitness > 0.8){
@@ -188,7 +190,7 @@ export default class GeneticsManager {
         }
 
         //Starting genetic algorithm between the two selected flowers
-        this.makeGeneticsAppend(callingEntity, targetEntity)
+        this.makeGeneticsAppend(callingEntity, targetEntity, entityType)
         break
       }
     }

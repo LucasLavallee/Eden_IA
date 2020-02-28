@@ -218,6 +218,7 @@ export default {
       reproductionDistance: 5,
       maxFlowers: 2,
       maxTree: 25,
+      maxLeaves: 5,
       birthChance: 4
     },
     PEAR_TREE: {
@@ -227,6 +228,7 @@ export default {
       reproductionDistance: 10,
       maxFlowers: 25,
       maxTree: 15,
+      maxLeaves: 5,
       birthChance: 8
     },
     ORANGE_TREE: {
@@ -246,6 +248,7 @@ export default {
       reproductionDistance: 20,
       maxFlowers: 5,
       maxTree: 20,
+      maxLeaves: 6,
       birthChance: 4
     },
     STRAWBERRY_TREE: {
@@ -255,6 +258,7 @@ export default {
       reproductionDistance: 20,
       maxFlowers: 8,
       maxTree: 20,
+      maxLeaves: 5,
       birthChance: 4
     },
     PEPPER_TREE: {
