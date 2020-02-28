@@ -165,10 +165,10 @@ export default class MiniWorld extends Object3D {
           this.controls.enabled = false
           if (!worldPosition) return
 
-          const entityToRemove = this.getEntitiesInArea(worldPosition, this.removeRadius)
+          /*const entityToRemove = this.getEntitiesInArea(worldPosition, this.removeRadius)
           for (let entity of entityToRemove) {
             this.removeEntity(entity)
-          }
+          }*/
 
           break
         }

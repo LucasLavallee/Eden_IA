@@ -163,7 +163,7 @@ export default {
     TOMATO_TREE: {
       lifeTime: [5, 10], // year / cycle
       nbFlowers: [2, 5],
-      nbLeaves: 5,
+      nbLeaves: 3,
       size: 1.0,
       temperature: [10, 25],
       pollution: 20,
@@ -249,7 +249,7 @@ export default {
       maxFlowers: 5,
       maxTree: 20,
       maxLeaves: 6,
-      birthChance: 4
+      birthChance: 3
     },
     STRAWBERRY_TREE: {
       startingCycle: 0.2,

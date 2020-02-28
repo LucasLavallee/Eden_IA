@@ -81,8 +81,6 @@ export default class GeneticsManager {
       const rand = randomInt(0, 3) === 1
       if(!rand) return
 
-      console.log("1", entityType)
-      console.log("2", constant.BUSHES_DATA[entityType])
       if (fitness < 0.6) {
         genome.nbLeaves = clamp(genome.nbLeaves-1, 1, constant.BUSHES_DATA[entityType].maxLeaves)
       } else if(fitness > 0.8){
