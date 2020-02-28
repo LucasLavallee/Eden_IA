@@ -172,7 +172,7 @@ export default class GeneticsManager {
     for (let i = 0; i < flowers.length; i++) {
       const callingEntity = flowers[i]
 
-      const rand = randomInt(0, 4/*this.getPollutionRatio()*/)
+      const rand = randomInt(0, constant.BUSHES_DATA[entityType].birthChance)
       const fecondate = rand === 1
 
       if (!fecondate) continue

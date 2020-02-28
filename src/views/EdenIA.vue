@@ -9,10 +9,10 @@
     <ModeSelection/>
     <!-- <MiniWorldInfos/> -->
     <EnvironnementGui/>
-    <StatsWorlds/>
     <Time/>
     <Information/>
     <WorldChange/>
+    <StatsWorlds/>
     <router-link to="/">
       <div class="home-button">
         <div class="item icon">

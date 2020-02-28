@@ -133,7 +133,7 @@ export default {
       humidity: [60, 80]
     },
     PEAR_TREE: {
-      lifeTime: [10,20], // year / cycle
+      lifeTime: [5,10], // year / cycle
       nbFlowers: [3, 7],
       size: 1.0,
       temperature: [5, 25],
@@ -142,7 +142,7 @@ export default {
       humidity: [10, 40]
     },
     ORANGE_TREE: {
-      lifeTime: [15,20], // year / cycle
+      lifeTime: [5,10], // year / cycle
       nbFlowers: [5, 7],
       nbLeaves: 3,
       size: 1.0,
@@ -208,7 +208,8 @@ export default {
       fruitTimeFactor: 0.2,
       reproductionDistance: 5,
       maxFlowers: 2,
-      maxTree: 10
+      maxTree: 25,
+      birthChance: 4
     },
     BEET_TREE: {
       startingCycle: 0.5,
@@ -216,7 +217,8 @@ export default {
       fruitTimeFactor: 0.2,
       reproductionDistance: 5,
       maxFlowers: 2,
-      maxTree: 50
+      maxTree: 25,
+      birthChance: 4
     },
     PEAR_TREE: {
       startingCycle: 0.2,
@@ -224,7 +226,8 @@ export default {
       fruitTimeFactor: 0.4,
       reproductionDistance: 10,
       maxFlowers: 25,
-      maxTree: 20
+      maxTree: 15,
+      birthChance: 8
     },
     ORANGE_TREE: {
       startingCycle: 0.2,
@@ -233,7 +236,8 @@ export default {
       reproductionDistance: 10,
       maxFlowers: 7,
       maxLeaves: 5,
-      maxTree: 20
+      maxTree: 10,
+      birthChance: 2
     },
     TOMATO_TREE: {
       startingCycle: 0.2,
@@ -241,7 +245,8 @@ export default {
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,
       maxFlowers: 5,
-      maxTree: 20
+      maxTree: 20,
+      birthChance: 4
     },
     STRAWBERRY_TREE: {
       startingCycle: 0.2,
@@ -249,7 +254,8 @@ export default {
       fruitTimeFactor: 0.4,
       reproductionDistance: 20,
       maxFlowers: 8,
-      maxTree: 20
+      maxTree: 20,
+      birthChance: 4
     },
     PEPPER_TREE: {
       startingCycle: 0.4,
@@ -258,7 +264,8 @@ export default {
       reproductionDistance: 10,
       maxFlowers: 5,
       maxLeaves: 5,
-      maxTree: 30
+      maxTree: 20,
+      birthChance: 4
     },
     PUMPKIN_TREE: {
       startingCycle: 0.2,
@@ -267,7 +274,8 @@ export default {
       reproductionDistance: 20,
       maxFlowers: 5,
       maxLeaves: 6,
-      maxTree: 20
+      maxTree: 15,
+      birthChance: 4
     },
     ZUCCHINI_TREE: {
       startingCycle: 0.2,
@@ -276,7 +284,8 @@ export default {
       reproductionDistance: 20,
       maxFlowers: 5,
       maxLeaves: 4,
-      maxTree: 20
+      maxTree: 15,
+      birthChance: 4
     }
   },
 
