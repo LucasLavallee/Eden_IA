@@ -130,6 +130,9 @@ export default class MiniWorld extends Object3D {
               case 'pumpkin':
                 this.addEntity('PUMPKIN_TREE', new PumpkinBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.PUMPKIN_TREE, true), worldPosition, 'PUMPKIN'))
                 break
+              case 'tomato':
+                this.addEntity('TOMATO_TREE', new TomatoBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.TOMATO_TREE, true), worldPosition, 'TOMATO'))
+                break
               case 'zucchini':
                 this.addEntity('ZUCCHINI_TREE', new ZucchiniBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.ZUCCHINI_TREE, true), worldPosition, 'ZUCCHINI'))
                 break
@@ -150,9 +153,6 @@ export default class MiniWorld extends Object3D {
                 break
               case 'strawberry':
                 this.addEntity('STRAWBERRY_TREE', new StrawberryBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.STRAWBERRY_TREE, true), worldPosition, 'STRAWBERRY'))
-                break
-              case 'tomato':
-                this.addEntity('TOMATO_TREE', new TomatoBush(this.currentTime, new Genome(constant.DEFAULT_BUSH_GENOME.TOMATO_TREE, true), worldPosition, 'TOMATO'))
                 break
               default:
                 break
