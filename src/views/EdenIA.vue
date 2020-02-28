@@ -1,5 +1,8 @@
 <template>
   <div class="edenIA">
+    <figure>
+      <audio autoplay loop src="../../public/Music/world_music.mp3" type="audio/mpeg" id="audio"></audio>
+    </figure>
     <img v-if="getCurrentMode == 'add'" class="cursor-image" id="cursor-image-add" :src="mouseAdd"/>
     <img v-if="getCurrentMode == 'remove'" class="cursor-image" id="cursor-image-remove" :src="mouseRemove"/>
     <img v-if="getCurrentMode == 'navigate'" class="cursor-image" id="cursor-image-navigate" :src="mouseNavigate"/>
@@ -26,7 +29,6 @@
 </template>
 
 <script>
-
 import Webgl from '../webgl/Webgl'
 import loop from 'raf-loop'
 import ModeSelection from '../components/UI/ModeSelection'
@@ -69,6 +71,8 @@ export default {
     ])
   },
   mounted () {
+    const audio = document.getElementById("audio")
+    audio.volume = 0.3
     const self = this
     this.webgl = new Webgl(this.$refs['canvas'])
     this.engine = loop(this.webgl.render)

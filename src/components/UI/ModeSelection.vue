@@ -13,35 +13,45 @@
     </div>
     <transition name="fade">
     <div v-if="pannelShow" v-on:mouseout="mouseOutHandle" class="items-container">
-      <div v-on:mouseover="mouseOverHandle" class="item" id="carrot" :class="getCurrentSelection === 'carrot' ? 'active': ''" @click="changeCurrentSelection('carrot')">
-        <img class="icon-item" :src="carrot"/>
+      <div class="type-items">
+        <span class="type-item" :class="modeSpecie==='fruits' ? 'active': ''" @click="modeSpecie='fruits'" >Fruits</span>
+        <span class="type-item" :class="modeSpecie==='vegetables' ? 'active': ''" @click="modeSpecie='vegetables'">Légumes</span>
       </div>
-      <div v-on:mouseover="mouseOverHandle" class="item" id="beet" :class="getCurrentSelection === 'beet' ? 'active': ''" @click="changeCurrentSelection('beet')">
-        <img class="icon-item" :src="beet"/>
-      </div>
-      <div v-on:mouseover="mouseOverHandle" class="item" id="pepper" :class="getCurrentSelection === 'pepper' ? 'active': ''" @click="changeCurrentSelection('pepper')">
-        <img class="icon-item" :src="pepper"/>
-      </div>
-      <div v-on:mouseover="mouseOverHandle" class="item" id="pumpkin" :class="getCurrentSelection === 'pumpkin' ? 'active': ''" @click="changeCurrentSelection('pumpkin')">
-        <img class="icon-item" :src="pumpkin"/>
-      </div>
-      <div v-on:mouseover="mouseOverHandle" class="item" id="zucchini" :class="getCurrentSelection === 'zucchini' ? 'active': ''" @click="changeCurrentSelection('zucchini')">
-        <img class="icon-item" :src="zucchini"/>
-      </div>
-      <div v-on:mouseover="mouseOverHandle" class="item" id="banana" :class="getCurrentSelection === 'banana' ? 'active': ''" @click="changeCurrentSelection('banana')">
-        <img class="icon-item" :src="banana"/>
-      </div>
-      <div v-on:mouseover="mouseOverHandle" class="item" id="pear" :class="getCurrentSelection === 'pear' ? 'active': ''" @click="changeCurrentSelection('pear')">
-        <img class="icon-item" :src="pear"/>
-      </div>
-      <div v-on:mouseover="mouseOverHandle" class="item" id="tomato" :class="getCurrentSelection === 'tomato' ? 'active': ''" @click="changeCurrentSelection('tomato')">
-        <img class="icon-item" :src="tomato"/>
-      </div>
-      <div v-on:mouseover="mouseOverHandle" class="item" id="strawberry" :class="getCurrentSelection === 'strawberry' ? 'active': ''" @click="changeCurrentSelection('strawberry')">
-        <img class="icon-item" :src="strawberry"/>
-      </div>
-      <div v-on:mouseover="mouseOverHandle" class="item" id="orange" :class="getCurrentSelection === 'orange' ? 'active': ''" @click="changeCurrentSelection('orange')">
-        <img class="icon-item" :src="orange"/>
+      <div class="items">
+        <div class="items-fruits" v-if="modeSpecie==='fruits'">
+          <div v-on:mouseover="mouseOverHandle" class="item" id="banana" :class="getCurrentSelection === 'banana' ? 'active': ''" @click="changeCurrentSelection('banana')">
+            <img class="icon-item" :src="banana"/>
+          </div>
+          <div v-on:mouseover="mouseOverHandle" class="item" id="pear" :class="getCurrentSelection === 'pear' ? 'active': ''" @click="changeCurrentSelection('pear')">
+            <img class="icon-item" :src="pear"/>
+          </div>
+          <div v-on:mouseover="mouseOverHandle" class="item" id="tomato" :class="getCurrentSelection === 'tomato' ? 'active': ''" @click="changeCurrentSelection('tomato')">
+            <img class="icon-item" :src="tomato"/>
+          </div>
+          <div v-on:mouseover="mouseOverHandle" class="item" id="strawberry" :class="getCurrentSelection === 'strawberry' ? 'active': ''" @click="changeCurrentSelection('strawberry')">
+            <img class="icon-item" :src="strawberry"/>
+          </div>
+          <div v-on:mouseover="mouseOverHandle" class="item" id="orange" :class="getCurrentSelection === 'orange' ? 'active': ''" @click="changeCurrentSelection('orange')">
+            <img class="icon-item" :src="orange"/>
+          </div>
+        </div>
+        <div class="items-vegetables" v-if="modeSpecie==='vegetables'">
+          <div v-on:mouseover="mouseOverHandle" class="item" id="carrot" :class="getCurrentSelection === 'carrot' ? 'active': ''" @click="changeCurrentSelection('carrot')">
+            <img class="icon-item" :src="carrot"/>
+          </div>
+          <div v-on:mouseover="mouseOverHandle" class="item" id="beet" :class="getCurrentSelection === 'beet' ? 'active': ''" @click="changeCurrentSelection('beet')">
+            <img class="icon-item" :src="beet"/>
+          </div>
+          <div v-on:mouseover="mouseOverHandle" class="item" id="pepper" :class="getCurrentSelection === 'pepper' ? 'active': ''" @click="changeCurrentSelection('pepper')">
+            <img class="icon-item" :src="pepper"/>
+          </div>
+          <div v-on:mouseover="mouseOverHandle" class="item" id="pumpkin" :class="getCurrentSelection === 'pumpkin' ? 'active': ''" @click="changeCurrentSelection('pumpkin')">
+            <img class="icon-item" :src="pumpkin"/>
+          </div>
+          <div v-on:mouseover="mouseOverHandle" class="item" id="zucchini" :class="getCurrentSelection === 'zucchini' ? 'active': ''" @click="changeCurrentSelection('zucchini')">
+            <img class="icon-item" :src="zucchini"/>
+          </div>
+        </div>
       </div>
     </div>
     </transition>
@@ -77,9 +87,15 @@ export default {
       tomato: tomato,
       zucchini: zucchini,
       pannelShow: false,
-      timerPannel: null
+      timerPannel: null,
+      modeSpecie: ''
     }
   },
+
+  mounted () {
+    this.modeSpecie = 'fruits'
+  },
+
   methods: {
     ...mapActions([
       'changeCurrentMode',
@@ -154,7 +170,7 @@ export default {
 
     .items-container
       display flex
-      flex-direction row
+      flex-direction column
       border solid 2px #212121
       background-color #212121
       border-radius 20px
@@ -162,6 +178,29 @@ export default {
       flex-wrap wrap
       width 400px
       padding 20px
+      .type-items
+        // border solid 3px red
+        display flex
+        justify-content space-around
+        padding 0 20px 
+        .type-item
+          color #F9F9F9
+          margin 0 10px
+          padding 10px 20px
+          border-radius 20px
+          &:hover
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5)
+          &.active
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5)
+      .items 
+        display flex
+        flex-direction row
+        flex-wrap wrap
+        .items-fruits
+        .items-vegetables
+          display flex
+          flex-direction row
+          flex-wrap wrap
       .item
         margin 10px
         padding 10px
